@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.eland</groupId>
+	<artifactId>ngoc.oa</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<parent>
+		<groupId>com.eland</groupId>
+		<artifactId>ngoc</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<spring.aws.version>1.0.3.RELEASE</spring.aws.version>
+	</properties>
+
+	<dependencies>
+		<!-- Eland Log Service -->
+		<dependency>
+			<groupId>eland-logservice</groupId>
+			<artifactId>eland-logservice</artifactId>
+			<version>${fw.version}</version>
+		</dependency>
+		<!-- Eland Log Service -->
+		
+		<!-- tomcat -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- tomcat -->
+		
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>1.1.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft</groupId>
+			<artifactId>sqlserver-jdbc</artifactId>
+			<version>41</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.eland</groupId>
+			<artifactId>ngoc.common</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>ngoc.oa</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

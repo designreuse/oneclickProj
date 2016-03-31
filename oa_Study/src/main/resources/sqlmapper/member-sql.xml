@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eland.ngoc.member.dao.MemberDao">
+
+	<select id="getCustInfoIds" parameterType="HashMap" resultType="com.eland.ngoc.common.model.MemberIds">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.getCustInfoIds */
+				CUST_ID		AS custId
+				, PBP_ID		AS pbpId
+				, WEB_ID		AS webId
+				, CUST_STAT		AS custStat
+		  FROM OC_CUST_INFO
+		 WHERE DEL_YN = 'N'
+		 <if test="webId != null and webId != ''">
+		   AND WEB_ID = #{webId}
+		 </if>
+		 <if test="custId != null and custId != ''">
+		   AND CUST_ID = #{custId}
+		 </if>
+	</select>
+	
+	<select id="getCustOutCancelCanYn" parameterType="HashMap" resultType="String">
+		SELECT	CASE WHEN SYSDATE &lt; UPD_DATE+30 
+					 THEN 'Y'
+					 ELSE 'N'
+					 END		AS cancelCanYn
+		  FROM 	OC_CUST_INFO
+		 WHERE 	CUST_ID = #{custId}
+		   AND 	DEL_YN = 'N'
+		   AND 	CUST_STAT = '50'
+	</select>
+	
+	<select id="getMemberInfo" parameterType="HashMap" resultType="Map">
+		SELECT	WEB_ID									AS webId
+			  , TO_CHAR(PWD_CHNG_DATE, 'YYYYMMDD')		AS webPwdCDate
+			  , (SELECT TO_CHAR(LAST_LOGIN_DTM, 'YYYYMMDD') FROM OC_CUST_LAST_LOGIN WHERE CUST_ID = CI.CUST_ID)		AS lastLoginDate
+		  FROM 	OC_CUST_INFO CI
+		 WHERE 	CUST_ID = #{custId}
+		   AND 	DEL_YN = 'N'
+	</select>
+	
+	<select id="getMemberSiteInfo" parameterType="HashMap" resultType="Map">
+		SELECT	EMAIL_RCPTN_YN		AS emailRcptnYn
+			  , SMS_RCPTN_YN		AS smsRcptnYn
+			  , DM_RCPTN_YN			AS dmRcptnYn
+			  , DEL_YN				AS delYn
+		  FROM 	OC_CUST_SITE_INFO
+		 WHERE 	CUST_ID = #{custId}
+		   AND 	SITE_CODE = #{siteCode}
+	</select>
+	
+	<update id="updateMemberInfo" parameterType="com.eland.ngoc.member.model.MemberUpdOc">
+		UPDATE	OC_CUST_INFO
+		   SET	MBER_INFO_UPD_DATE = SYSDATE
+			  , UPD_DATE = SYSDATE
+			  , UPD_USER = #{updUser}
+		 WHERE	CUST_ID = #{custId}
+		   AND	DEL_YN = 'N'
+	</update>
+	
+	<update id="updateMemberSiteInfo" parameterType="com.eland.ngoc.member.model.MemberUpdOc">
+		UPDATE	OC_CUST_SITE_INFO
+		   SET	UPD_DATE = SYSDATE
+			  , UPD_USER = #{updUser}
+		   <if test="emailYn eq 'N'.toString() or emailYn eq 'Y'.toString()">
+		   	  , EMAIL_RCPTN_YN = #{emailYn}
+		   </if>
+		   <if test="smsYn eq 'N'.toString() or smsYn eq 'Y'.toString()">
+		   	  , SMS_RCPTN_YN = #{smsYn}
+		   </if>
+		   <if test="updateRoute eq '20'.toString()">
+		      <if test="dmYn eq 'N'.toString() or dmYn eq 'Y'.toString()">
+		   	  , DM_RCPTN_YN = #{dmYn}
+		   	  </if>
+		   </if>
+		 WHERE	CUST_ID = #{custId}
+		   AND	SITE_CODE = #{updateRoute}
+	</update>
+	
+	<update id="updateMemberState" parameterType="HashMap">
+		UPDATE	OC_CUST_INFO
+		   SET	CUST_STAT = #{custStat}
+		   <if test="custStat eq '10'.toString()">
+		   	  , TEMP_PWD_YN = 'N'
+		   	  , PWD_CHNG_DATE = SYSDATE
+		   </if>
+		   <if test="noPrchsYn eq 'Y'.toString() or noPrchsYn eq 'N'.toString()">
+		   	  , NO_PRCHS_YN = #{noPrchsYn}
+		   </if>
+			  , UPD_DATE = SYSDATE
+			  , UPD_USER = #{updUser}
+		 WHERE	CUST_ID = #{custId}
+		   AND	DEL_YN = 'N'
+	</update>
+	
+	<select id="getCustSiteInfoList" parameterType="HashMap" resultType="String">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.getCustSiteInfoList  */ 
+				SITE_CODE
+		  FROM OC_CUST_SITE_INFO
+		 WHERE CUST_ID = #{custId}
+		   AND DEL_YN = 'N'
+	</select>
+	
+	<select id="getMaxOutOrderNo" parameterType="com.eland.ngoc.member.model.MemberOut" resultType="Integer">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.getMaxOutOrderNo  */ 
+				NVL(MAX(OUT_SEQ), 0)
+		  FROM OC_CUST_OUT_DTLS
+		 WHERE CUST_ID = #{custId}
+		   AND SITE_CODE = #{siteCode}
+	</select>
+
+	<insert id="insertOcCustOutDtls" parameterType="com.eland.ngoc.member.model.MemberOut">
+		INSERT INTO OC_CUST_OUT_DTLS
+			(  CUST_ID
+			 , SITE_CODE
+			 , OUT_SEQ
+			 , PBP_ID
+		<if test="outDesc != null and outDesc != ''">
+			 , OUT_DESC
+		</if>
+			 , OUT_DIV_CODE
+			 , INS_DATE
+			 , INS_USER
+			)
+		VALUES
+			(  #{custId}
+			 , #{siteCode}
+			 , #{outSeq}
+			 , #{pbpId}
+		<if test="outDesc != null and outDesc != ''">
+			 , #{outDesc}
+		</if>
+			 , #{outDiv}
+			 , SYSDATE
+			 , #{insUser}
+			)
+	</insert>
+	
+	<insert id="insertOcCustOutRson" parameterType="HashMap">
+		INSERT INTO OC_CUST_OUT_RSON
+			(  CUST_ID
+			 , SITE_CODE
+			 , OUT_SEQ
+			 , OUT_RSON_CODE
+			 , INS_DATE
+			)
+		VALUES
+			(  #{custId}
+			 , #{siteCode}
+			 , #{outSeq}
+			 , #{outRsonCode}
+			 , SYSDATE
+			)
+	</insert>
+	
+	<update id="updateOcCustSiteInfo" parameterType="HashMap">
+		UPDATE 	OC_CUST_SITE_INFO
+		   SET	DEL_YN = #{delYn}
+		      , UPD_DATE = SYSDATE
+		      , UPD_USER = #{updUser}
+		 WHERE CUST_ID = #{custId}
+	</update>
+
+	<update id="updateOcCustLastLogin" parameterType="HashMap">
+		UPDATE 	OC_CUST_LAST_LOGIN
+		   SET	LAST_LOGIN_DTM = SYSDATE
+		      , LOGIN_SITE_CODE = #{siteCode}
+		 WHERE CUST_ID = #{custId}
+	</update>
+	
+	<select id="selectMemberInfoByWebId" parameterType="string" resultType="com.eland.ngoc.member.model.Member">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectMemberInfoByWebId  */
+				  CI.CUST_ID						AS custId
+				, CI.WEB_ID							AS webId
+				, CI.WEB_PWD						AS webPwd
+				, CI.CUST_NAME						AS membName
+				, RETAIL.EMAIL_RCPTN_YN				AS retailMallEmailYn
+				, RETAIL.SMS_RCPTN_YN				AS retailMallSmsYn
+				, CORE.EMAIL_RCPTN_YN				AS coreEmailYn
+				, CORE.SMS_RCPTN_YN					AS coreSmsYn
+				, CORE.DM_RCPTN_YN					AS coreDmYn
+		 FROM
+		 		OC_CUST_INFO CI
+		 	LEFT OUTER JOIN (SELECT
+				 				CSI.CUST_ID
+				 				, CSI.EMAIL_RCPTN_YN
+				 				, CSI.SMS_RCPTN_YN
+				 			 FROM
+				 				(SELECT CUST_ID FROM OC_CUST_INFO WHERE WEB_ID = #{webId}) CUST
+				 				, OC_CUST_SITE_INFO CSI
+				 			WHERE
+				 				CUST.CUST_ID = CSI.CUST_ID
+				 				AND CSI.SITE_CODE = '10'
+				 				AND CSI.DEL_YN = 'N') RETAIL
+				 ON CI.CUST_ID = RETAIL.CUST_ID
+		 	LEFT OUTER JOIN (SELECT
+				 		 		CSI.CUST_ID
+				 		 		, CSI.EMAIL_RCPTN_YN
+				 		 		, CSI.SMS_RCPTN_YN
+				 		 		, CSI.DM_RCPTN_YN
+				 		 	 FROM
+				 		 	 	(SELECT CUST_ID FROM OC_CUST_INFO WHERE WEB_ID = #{webId}) CUST
+				 				, OC_CUST_SITE_INFO CSI
+				 			WHERE
+				 				CUST.CUST_ID = CSI.CUST_ID
+				 				AND CSI.SITE_CODE = '20'
+				 				AND CSI.DEL_YN = 'N') CORE
+				 ON CI.CUST_ID = CORE.CUST_ID
+		WHERE
+				CI.WEB_ID = #{webId}
+	</select> 
+
+	<!-- 자동 로그인 토큰 삭제 -->
+	<delete id="deleteAutoLoginToken" parameterType="String">
+		DELETE /* com.eland.ngoc.member.dao.MemberDao.deleteAutoLoginToken */
+		  FROM OC_AUTO_LOGIN_TOKEN
+		 WHERE WEB_ID = #{webId}
+	</delete>
+	
+	<!-- 최종 로그인 정보 조회 -->
+	<select id="selectLastLoginHistory" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+		  FROM OC_CUST_LAST_LOGIN
+		 WHERE CUST_ID = #{custId}
+	</select>
+	
+	<!-- 최종 로그인 날짜, 사이트코드 수정 -->
+	<update id="updateLastLoginHistory" parameterType="map">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updateLastLogin  */
+				OC_CUST_LAST_LOGIN
+		   SET  LAST_LOGIN_DTM = SYSDATE
+		   	  , LOGIN_SITE_CODE = #{siteCode}
+		 WHERE CUST_ID = #{custId} 
+	</update>
+	
+	<!-- 최종 로그인 날짜, 사이트코드 저장 -->
+	<insert id="insertLastLoginHistory" parameterType="map">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertLastLogin  */ 
+		  INTO OC_CUST_LAST_LOGIN (
+		  		  CUST_ID
+		  		, LAST_LOGIN_DTM
+		  		, LOGIN_SITE_CODE)
+		VALUES (  #{custId}
+				, SYSDATE	
+				, #{siteCode})
+	</insert>
+	
+	<!-- 회원 상태 조회 -->
+	<select id="selectCustStateInfo" parameterType="map" resultType="com.eland.ngoc.member.model.CustInfo">
+		SELECT  /* com.eland.ngoc.member.dao.MemberDao.selectCustStateInfo  */
+				CUST_ID
+		      , WEB_ID
+		      , CUST_NAME
+		      , CUST_STAT
+		      , CASE WHEN PWD_CHNG_DATE + 90 &lt; SYSDATE THEN 'Y'
+		             ELSE 'N'
+		             END AS longTermPwdYn
+		      , DECODE(TEMP_PWD_YN, null, 'N', TEMP_PWD_YN) tempPwdYn
+		      , DECODE('30', #{siteCode} , CUST_STAT, CASE CUST_STAT WHEN '10' THEN (CASE WHEN (DECODE((SELECT 1 FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}), null, 0, 1 )) = 0 THEN '80'  
+                                                          						   WHEN (SELECT DEL_YN FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}) = 'N' THEN '10'                  
+                                                          						   ELSE '40'                                                                                                              
+                                                          							END 
+		                                      								  ) 
+		                       								  WHEN '40' THEN (CASE WHEN (DECODE((SELECT 1 FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}), null, 0, 1 )) = null THEN '80'
+		                                            							   WHEN (SELECT DEL_YN FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}) = 'N' THEN '10'                  
+		                                            							   ELSE '40'                                                                                                              
+		                                            								END 
+		                                      								  )
+		                      								  ELSE CUST_STAT
+		                      								   END) AS membState
+		FROM OC_CUST_INFO
+		WHERE CUST_ID = #{custId}
+	
+	</select>
+	
+	<!-- 자동 로그인 토큰 업데이트 -->
+	<update id="updateAutoLoginToken" parameterType="com.eland.ngoc.member.model.AutoLoginToken">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.udpateAutoLoginToken  */
+				OC_AUTO_LOGIN_TOKEN 
+		   SET
+		   		LOGIN_TOKEN = #{loginToken}
+			  , EXPR_DATE = SYSDATE + 90
+			  , UPD_DATE = SYSDATE
+		 WHERE WEB_ID = #{webId}
+		   AND AL_UID = #{alUid}
+	</update>
+	
+	<!-- 자동 로그인 토큰 조회 -->
+	<select id="selectAutoLoginToken" parameterType="map" resultType="com.eland.ngoc.member.model.AutoLoginToken">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectAutoLoginToken  */
+				  AL_UID				AS alUid
+				, LOGIN_TOKEN			AS loginToken
+				, WEB_ID				AS webId
+				, EXPR_DATE				AS exprDate
+				, INS_DATE				AS insDate
+				, UPD_DATE				AS updDate
+		  FROM OC_AUTO_LOGIN_TOKEN
+		 WHERE EXPR_DATE &gt; SYSDATE
+		   AND AL_UID = #{alUid}
+		   <if test="loginToken != null">
+			   AND LOGIN_TOKEN = #{loginToken}
+		   </if>
+	</select>
+</mapper>
