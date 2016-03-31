@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+</head>
+
+<body>
+
+<div class="fullPopup"><!-- data-role="popup" id="pagePopup2" data-url="pagePopup2" data-overlay-theme="a" -->
+
+	<div class="popWrap fix max"><!-- // 2016-03-25 class  fix,max 추가 -->
+
+		<div class="popHeader">
+			<div class="heads">
+				<h1>장기간 비밀번호 미변경 안내</h1>
+				<a href="#dvwrap" data-rel="back" class="btn_head popClose"><span class="blind">닫기</span></a>
+			</div>
+		</div>
+
+		<div class="container pop">
+			
+			<div class="popContent popGuide">
+				
+				<div class="taC">
+					<p class="cntGuide3 f_point"><strong>90일 동안 비밀번호를<br />변경하지 않으셨습니다.</strong></p>
+					<p class="cntGuide mt15">지금 변경하시겠습니까?</p>
+				</div>
+				<div class="popGuideBox mt20">
+					<dl class="desc w1"><!-- 2016-03-21 w1 class 추가 -->
+						<dt class="f_point">* 비밀번호 변경시 참고하세요!</dt>
+						<dd><span class="bl">&middot;</span> 연속적인 숫자나 생일, 전화번호 등 추측하기 쉬운 개인정보 및 아이디와 비슷한 비밀번호 사용을 피하시기 바랍니다.</dd>
+						<dd><span class="bl">&middot;</span> 비밀번호는 영대문자, 영소문자, 숫자, 특수문자 중 3종류 이상을 조합하여, 총 8~16자리로 구성하셔야 합니다.</dd>
+					</dl>
+				</div>
+				<div class="btnDiv mt40 ui-grid-a taC">
+					<div class="ui-block-a"><a href="#" class="btn white pop" data-rel="back"><span>90일 후에 변경</span></a></div>
+					<div class="ui-block-b"><a href="#" class="btn blue pop" data-rel="back"><span>지금 변경</span></a></div>
+				</div><!-- // btnDiv -->
+
+			</div><!-- // content -->
+
+		</div><!-- // container -->
+
+	</div><!-- // popWrap -->
+
+</div><!-- // pagePopup2 :: 팝업 page 끝 -->
+
+
+</body>
+</html>

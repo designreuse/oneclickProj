@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+
+
+
+</head>
+
+<body>
+
+<div><!-- data-role="popup" id="pagePopup1" data-url="pagePopup1" data-overlay-theme="a" -->
+
+	<div class="popWrap">
+
+		<div class="popHeader">
+			<div class="heads">
+				<h1>주소검색</h1>
+				<a href="#dvwrap" data-rel="back" class="btn_head popClose"><span class="blind">닫기</span></a>
+			</div>
+		</div>
+
+		<div class="container pop">
+			
+			<div class="srchTabMenu" data-role="navbar">
+				<ul>
+					<li><h2><a href="#" rel="external">지번 주소로 찾기</a></h2></li>
+					<li><h2><a href="#" rel="external" class="ui-btn-active current">도로명 주소로 찾기</a></h2></li>
+				</ul>
+			</div><!-- // srchTabMenu -->
+
+			<div id="popContent1" class="popContent">
+				<h3 class="guideTxt">검색된 주소</h3>
+				<div class="boardList mt10">
+					<table cellspacing="0"  summary="우편번호, 주소">
+						<caption>목록</caption>
+						<colgroup>
+							<col width="110px" />
+							<col width="*" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>우편번호</th>
+								<th>주소</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><span>00001</span></td>
+								<td class="taL"><span>서울 서초구 잠원동 70-2</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- // boardList -->
+
+				<p class="guideTxt mt15">저장할 주소를 선택해 주세요.</p>
+				<div class="addrList">
+					<ul>
+						<li>
+							<div class="slct"><input type="radio" id="radio-item-1" name="radio-item" class="radioBtn" data-role="none"><label for="radio-item-1" class="label_txt">입력주소</label></div>
+							<div class="addr"><span class="post">00000</span><p>서울 서초구 잠원동 70-2 ABC아파트 101동 1001호</p></div>
+						</li>
+						<li>
+							<div class="slct"><input type="radio" id="radio-item-2" name="radio-item" class="radioBtn" data-role="none"><label for="radio-item-2" class="label_txt">표준지번주소</label></div><!-- 2016-03-15 수정 -->
+							<div class="addr"><span class="post">00000</span><p>서울 서초구 잠원동 70-2 ABC아파트 101동 1001호</p></div>
+						</li>
+						<li>
+							<div class="slct"><input type="radio" id="radio-item-3" name="radio-item" class="radioBtn" data-role="none"><label for="radio-item-3" class="label_txt">도로명주소</label></div>
+							<div class="addr"><span class="post">00000</span><p>서울 서초구 잠원동 70-2 ABC아파트 101동 1001호</p></div>
+						</li>
+					</ul>
+				</div><!-- addrList -->
+				
+				<div class="btnDiv taC mt10 ui-grid-a">
+					<div class="ui-block-a"><button type="button" class="btn white pop"><span>다시검색</span></button></div>
+					<div class="ui-block-b"><button type="button" class="btn blue pop"><span>확인</span></button></div>
+				</div>
+
+				<!--<div class="btnDiv taC mt10" data-role="controlgroup" data-type="horizontal">
+					<button type="button" class="btn white pop"><span>다시검색</span></button>
+					<button type="button" class="btn blue pop"><span>확인</span></button>
+					<button type="button" class="btn blue pop"><span>확인</span></button>
+				</div>-->
+
+			</div><!-- // popContent :: popContent1 -->
+
+		</div><!-- // container -->
+
+	</div><!-- // popWrap -->
+
+</div><!-- // pagePopup1 :: 팝업 page 끝 -->
+
+</body>
+</html>

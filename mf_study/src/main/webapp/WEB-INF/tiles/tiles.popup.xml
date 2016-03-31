@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE tiles-definitions PUBLIC
+           "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+           "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="popupTemplate" template="/WEB-INF/tiles/layout/popuplayout.jsp">
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<!-- 지번 주소찾기 팝업 -->
+	<definition name="/searchAddrPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/address/popup/searchAddrPopup.jsp" />
+	</definition>
+	
+	<!-- 도로명 주소찾기 팝업 -->
+	<definition name="/searchRoadAddrPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/address/popup/searchRoadAddrPopup.jsp" />
+	</definition>
+	
+	<!-- 상세 주소 입력 팝업 -->
+	<definition name="/inputAddrDetailPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/address/popup/inputAddrDetailPopup.jsp" />
+	</definition>
+	
+	<!-- 상세 주소 입력 팝업 -->
+	<definition name="/selectAddrPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/address/popup/selectAddrPopup.jsp" />
+	</definition>
+	
+	<!-- ID 찾기 결과 팝업 -->
+	<definition name="/idScResultPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/popup/idScResultPopup.jsp" />
+	</definition>
+	
+	<!-- ID 찾기 결과 팝업 -->
+	<definition name="/pwdScResultPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/popup/pwdScResultPopup.jsp" />
+	</definition>
+	
+	<!-- 회원가입 인증 팝업 -->
+	<definition name="/authResultPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/popup/authResultPopup.jsp" />
+	</definition>
+	
+	<!-- 회원가입 인증 팝업 -->
+	<definition name="/infoPopup" extends="popupTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/popup/infoPopup.jsp" />
+	</definition>
+</tiles-definitions>

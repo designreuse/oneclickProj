@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+</head>
+
+<body>
+
+<div class="fullPopup"><!-- data-role="popup" id="pagePopup2" data-url="pagePopup2" data-overlay-theme="a" -->
+
+	<div class="popWrap fix"><!-- // 2016-03-25 class  fix 추가 -->
+
+		<div class="popHeader">
+			<div class="heads">
+				<h1>추가정보 입력요청 안내</h1>
+				<a href="#dvwrap" data-rel="back" class="btn_head popClose"><span class="blind">닫기</span></a>
+			</div>
+		</div>
+
+		<div class="container pop">
+			
+			<div class="popContent popGuide">
+				
+				<div class="taC">
+					<p class="cntGuide3 f_point"><strong>E:LAND MALL 사용을 위해<br />추가 입력하실 필수정보가 있습니다.</strong></p>
+					<p class="cntGuide mt15">회원정보 수정화면으로 이동합니다.</p>
+				</div>
+
+				<div class="btnDiv mt40 ui-grid-a taC">
+					<a href="#" class="btn blue pop" data-rel="back"><span>확인</span></a>
+				</div><!-- // btnDiv -->
+
+			</div><!-- // content -->
+
+		</div><!-- // container -->
+
+	</div><!-- // popWrap -->
+
+</div><!-- // pagePopup2 :: 팝업 page 끝 -->
+
+
+</body>
+</html>

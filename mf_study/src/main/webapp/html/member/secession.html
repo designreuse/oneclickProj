@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+
+<script>
+
+	$(document).on("pageinit", "#dvwrap", function(event) {
+		
+		// 사이트 모두 선택
+		$("#check_site").click(function(){
+			if (!$(this).hasClass("on")) {
+				$(this).addClass("on").children().text("전체해제");
+				$("input[name=check1]").prop("checked", true).parent().addClass("selected");
+			} else {
+				$(this).removeClass("on").children().text("전체선택");
+				$("input[name=check1]").prop("checked", false).parent().removeClass("selected");
+			}
+		});
+	
+	});
+
+</script>
+
+</head>
+
+<body>
+<div id="dvwrap" data-role="page">
+
+	<header data-role="header" data-position="fixed" data-tap-toggle="false">
+		<div class="heads">
+			<h1><a href="#" rel="external">E:LAND RETAIL OneClick</a></h1>
+			<a href="#leftpanel" class="btn_head open hdMenu"><span class="blind">전체메뉴보기</span></a>
+		</div>
+	</header>
+
+	<!-- left menu :: 왼쪽 슬라이드 gnb 영역 시작 -->
+	<div id="leftpanel" class="leftMenu" data-role="panel" data-position="left" data-display="overlay" data-dismissible="false">
+		<div class="menuWrap">
+
+			<div class="leftTop">
+				<h2>E:LAND RETAIL OneClick</h2>
+				<a href="javascript:;" class="btn_head close" data-rel="close"><span class="blind">전체메뉴닫기</span></a>
+			</div><!-- // leftTop -->
+
+			<div class="tabWrap" >
+				<div id="leftMenu1" class="scroller">
+					<nav class="left_list_cont">
+						<ul class="leftList">
+							<li>
+								<a href="#" rel="external" class="tit">이랜드리테일 원클릭 소개</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 원클릭이란?</a></li>
+									<li><a href="#" rel="external">회원 가입/탈퇴 안내</a></li>
+									<li><a href="#" rel="external">이랜드리테일 멤버십 소개</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">약관</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 멤버십 이용약관</a></li>
+									<li><a href="#" rel="external">온라인 서비스 이용약관</a></li>
+									<li><a href="#" rel="external">개인정보 취급방침</a></li>
+									<li><a href="#" rel="external">영상정보처리기기운영, 관리방침</a></li>
+									<li><a href="#" rel="external">입점상담 동의사항</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">회원정보</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">아이디/비밀번호 찾기</a></li>
+									<li><a href="#" rel="external">회원가입</a></li>
+									<li><a href="#" rel="external">회원정보 수정</a></li>
+									<li><a href="#" rel="external">회원탈퇴</a></li>
+								</ul>							
+							</li>	
+							<li>
+								<a href="#" rel="external" class="tit">고객센터</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">공지사항</a></li>
+									<li><a href="#" rel="external">자주묻는 질문</a></li>
+								</ul>							
+							</li>	
+						</ul><!--  // leftList -->
+					</nav><!--  // left_list_cont -->
+				</div><!-- // leftMenu1 :: 스크롤영역 -->
+				
+				<!-- 2016-03-15 수정 -->
+				<div class="customerBox">
+					<div class="tit"><span>고객센터</span></div>
+					<div class="telBox">
+						<a href="tel:1899-9500" rel="external"><span class="txt">통합몰</span><span class="tel">1899-9500</span></a>
+						<a href="tel:1588-0001" rel="external"><span class="txt">통합홈페이지</span><span class="tel">1588-0001</span></a>
+					</div>
+					<span class="f_small">상담시간 오전 9시~오후 6시</span>
+				</div><!-- // customerBox :: 고객센터 -->
+				<!-- // 2016-03-15 수정 -->
+
+			</div><!-- // tabWrap -->
+
+		</div><!-- // menuWrap -->
+	</div><!-- // left menu :: 왼쪽 슬라이드 gnb 끝 -->
+
+	<div class="container">
+		<section class="cntDiv">
+
+			<div class="lineMap">
+				<div class="path">
+					<span class="home">HOME</span>
+					<span>회원정보</span>
+					<span class="current">회원탈퇴</span>
+				</div>
+			</div><!-- // lineMap -->
+			
+			<div class="pageTitle">
+				<h2>회원탈퇴</h2>
+			</div>
+
+			<div class="content inner">
+
+				<p class="taC pageGuide2 mt10">사이트를 이용하시면서 불편한 점이나 어려웠던 점이 있으시면<br />고객님의 의견을 들려주세요. <br />더 나은 이랜드리테일 원클릭이 되도록 노력하겠습니다.</p>
+
+				<!-- 탈퇴 사이트 선택 -->
+				<div class="fieldDiv mt15">
+					<fieldset>
+						<legend class="tit_bl">탈퇴하시려는 사이트를 선택해 주세요.</legend>
+						<div class="allCheckLine">
+							<span class="chk fl">
+								<input type="checkbox" id="select_site1" name="check1" class="checkBox readonly" data-role="none"><label for="select_site1" class="label_txt">E:LAND MALL</label>
+							</span>
+							<button type="button" class="btn white w60" id="check_site"><span>전체선택</span></button>
+						</div><!-- // allCheckLine -->
+						<div class="checkArea">
+							<span class="chk"><input type="checkbox" id="select_site1-1" name="check1" class="checkBox" data-role="none"  /><label for="select_site1-1" class="label_txt">E&middot;LAND RETAIL</label></span>
+							<span class="chk"><input type="checkbox" id="select_site1-2" name="check1" class="checkBox" data-role="none" /><label for="select_site1-2" class="label_txt">사이트 A</label></span>
+						</div><!-- // checkArea -->
+					</fieldset>
+				</div><!-- // fieldDiv :: 탈퇴 사이트 선택 -->
+
+				<!-- 사이트를 이용하시면서 어떤 점이 불편하셨나요? -->
+				<div class="fieldDiv mt15">
+					<fieldset>
+						<legend class="tit_bl"><span>사이트를 이용하시면서 어떤 점이 불편하셨나요?</span></legend>
+						<div class="discontent">
+							<ul>
+								<li><input type="checkbox" id="dis_1" name="" class="checkBox" data-role="none" /><label for="dis_1" class="label_txt">자주 방문하지 않음</label></li>
+								<li><input type="checkbox" id="dis_2" name="" class="checkBox" data-role="none" /><label for="dis_2" class="label_txt">상품 품질 및 가격 불만족</label></li>
+								<li><input type="checkbox" id="dis_3" name="" class="checkBox" data-role="none" /><label for="dis_3" class="label_txt">개인정보 유출 우려</label></li>
+								<li><input type="checkbox" id="dis_4" name="" class="checkBox" data-role="none" /><label for="dis_4" class="label_txt">배송/교환/환불/반품 불만족</label></li>
+								<li><input type="checkbox" id="dis_5" name="" class="checkBox" data-role="none" /><label for="dis_5" class="label_txt">정보가 부족하여 기능을 사용하기 어려움</label></li>
+								<li><input type="checkbox" id="dis_6" name="" class="checkBox" data-role="none" /><label for="dis_6" class="label_txt">이벤트 활성화 부족</label></li>
+								<li><input type="checkbox" id="dis_7" name="" class="checkBox" data-role="none" /><label for="dis_7" class="label_txt">시스템에러, 속도등 불만</label></li>
+							</ul>
+						</div>
+					</fieldset>
+				</div><!-- // fieldDiv :: 사이트를 이용하시면서 어떤 점이 불편하셨나요? -->
+
+				<!-- 기타 불편사항 -->
+				<div class="fieldDiv mt30">
+					<fieldset>
+						<legend class="tit_bl"><span>위의 항목외에 기타 불편사항이나 건의 사항이 있으시면 의견을 들려주세요.</span></legend>
+						<div class="textareaBox mt10">
+							<textarea id="" name="" data-role="none"></textarea>
+						</div>
+					</fieldset>
+				</div><!-- // fieldDiv :: 기타 불편사항 -->
+
+				<div class="warningBox mt15">
+					<ul>
+						<li><span class="bl">&middot;</span> 회원탈퇴를 하시면, 고객님의 포인트가 모두 소멸될 수도 있으니 주의하세요.</li>
+						<li><span class="bl">&middot;</span> 30일 이내에 고객센터를 통해 탈퇴 철회하실 수 있습니다.</li>
+						<!-- 2016-03-23 수정 -->
+						<li><span class="bl">&middot;</span> 일부 사이트 탈퇴시, 이랜드리테일 원클릭 회원은 유지되며 계속 서비스를 받으실 수 있습니다.</li>
+						<li><span class="bl">&middot;</span> 전체 사이트 탈퇴시, 30일간 다시 가입하실 수 없습니다.</li>
+						<!-- // 2016-03-23 수정 -->
+						 
+						<!-- 2016-03-23 삭제
+						<li><span class="bl">&middot;</span> 전체 사이트 탈퇴시 30일간 다시 가입하실 수 없습니다.</li>
+						<li><span class="bl">&middot;</span> 현재 사이트를 탈퇴하셔도, 이랜드 원클릭 회원은 유지되며 계속 서비스를 받으실 수 있습니다.</li>
+						-->
+					</ul>
+				</div><!-- // warningBox -->
+				
+				<div class="btnDiv taC mt10 ui-grid-a mt20">
+					<div class="ui-block-a"><button type="button" class="btn white large"><span>취소</span></button></div>
+					<div class="ui-block-b"><button type="button" class="btn blue large"><span>회원탈퇴</span></button></div>
+				</div>
+
+			</div><!-- // content -->
+
+		</section>
+	</div><!-- // container -->
+
+	<!-- goTop button -->
+	<button type="button" class="btn_goTop" data-role="none"><span class="blind">맨위로</span></button>
+	<!-- // goTop button -->
+
+</div><!-- // dvwrap -->
+
+
+</body>
+</html>

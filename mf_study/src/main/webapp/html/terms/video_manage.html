@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+
+</head>
+
+<body>
+<div id="dvwrap" data-role="page">
+
+	<header data-role="header" data-position="fixed" data-tap-toggle="false">
+		<div class="heads">
+			<h1><a href="#" rel="external">E:LAND RETAIL OneClick</a></h1>
+			<a href="#leftpanel" class="btn_head open hdMenu"><span class="blind">전체메뉴보기</span></a>
+		</div>
+	</header>
+
+	<!-- left menu :: 왼쪽 슬라이드 gnb 영역 시작 -->
+	<div id="leftpanel" class="leftMenu" data-role="panel" data-position="left" data-display="overlay" data-dismissible="false">
+		<div class="menuWrap">
+
+			<div class="leftTop">
+				<h2>E:LAND RETAIL OneClick</h2>
+				<a href="javascript:;" class="btn_head close" data-rel="close"><span class="blind">전체메뉴닫기</span></a>
+			</div><!-- // leftTop -->
+
+			<div class="tabWrap" >
+				<div id="leftMenu1" class="scroller">
+					<nav class="left_list_cont">
+						<ul class="leftList">
+							<li>
+								<a href="#" rel="external" class="tit">이랜드리테일 원클릭 소개</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 원클릭이란?</a></li>
+									<li><a href="#" rel="external">회원 가입/탈퇴 안내</a></li>
+									<li><a href="#" rel="external">이랜드리테일 멤버십 소개</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">약관</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 멤버십 이용약관</a></li>
+									<li><a href="#" rel="external">온라인 서비스 이용약관</a></li>
+									<li><a href="#" rel="external">개인정보 취급방침</a></li>
+									<li><a href="#" rel="external">영상정보처리기기운영, 관리방침</a></li>
+									<li><a href="#" rel="external">입점상담 동의사항</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">회원정보</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">아이디/비밀번호 찾기</a></li>
+									<li><a href="#" rel="external">회원가입</a></li>
+									<li><a href="#" rel="external">회원정보 수정</a></li>
+									<li><a href="#" rel="external">회원탈퇴</a></li>
+								</ul>							
+							</li>	
+							<li>
+								<a href="#" rel="external" class="tit">고객센터</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">공지사항</a></li>
+									<li><a href="#" rel="external">자주묻는 질문</a></li>
+								</ul>							
+							</li>	
+						</ul><!--  // leftList -->
+					</nav><!--  // left_list_cont -->
+				</div><!-- // leftMenu1 :: 스크롤영역 -->
+				
+				<!-- 2016-03-15 수정 -->
+				<div class="customerBox">
+					<div class="tit"><span>고객센터</span></div>
+					<div class="telBox">
+						<a href="tel:1588-0000" rel="external"><span class="txt">통합몰</span><span class="tel">1588-0000</span></a>
+						<a href="tel:1588-0001" rel="external"><span class="txt">통합홈페이지</span><span class="tel">1588-0001</span></a>
+					</div>
+					<span class="f_small">상담시간 오전 9시~오후 6시</span>
+				</div><!-- // customerBox :: 고객센터 -->
+				<!-- // 2016-03-15 수정 -->
+
+			</div><!-- // tabWrap -->
+
+		</div><!-- // menuWrap -->
+	</div><!-- // left menu :: 왼쪽 슬라이드 gnb 끝 -->
+
+	<div class="container">
+		
+		<div class="lineMap">
+			<div class="path">
+				<span class="home">HOME</span>
+				<span>약관</span>
+				<span class="current">영상정보처리기기운영, 관리방침</span>
+			</div>
+		</div><!-- // lineMap -->
+		
+		<section class="terms">
+			<div class="pageTitle">
+				<h2>영상정보처리기기운영, 관리방침</h2>
+			</div>
+
+			<nav class="toolbar">
+				<ul class="toolList">
+					<li>
+						<a href="javascript:;" class="link_tab" rel="external">목록보기</a>
+						<div class="list" id="termList1">
+							<ul class="termsList">
+								<li><a href="#t01" rel="external"><span class="num">제 1조</span><span class="txt">영상정보처리기기의 설치근거 및 설치목적</span></a></li>
+								<li><a href="#t02" rel="external"><span class="num">제 2조</span><span class="txt">설치대수, 설치위치 및 촬영범위</span></a></li>
+								<li><a href="#t03" rel="external"><span class="num">제 3조</span><span class="txt">관리책임자 및 접근 권한자</span></a></li>
+								<li><a href="#t04" rel="external"><span class="num">제 4조</span><span class="txt">영상정보의 촬영시간, 보관기간, 보관장소 및 방법</span></a></li>
+								<li><a href="#t05" rel="external"><span class="num">제 5조</span><span class="txt">영상정보처리기기 설치 및 관리 등의 위탁에 관한 사항</span></a></li>
+								<li><a href="#t06" rel="external"><span class="num">제 6조</span><span class="txt">개인영상정보의 확인 방법 및 장소에 관한 사항</span></a></li>
+								<li><a href="#t07" rel="external"><span class="num">제 7조</span><span class="txt">정보주체의 영상정보 열람 등 요구에 대한 조치</span></a></li>
+								<li><a href="#t08" rel="external"><span class="num">제 8조</span><span class="txt">영상정보의 안전성 확보조치</span></a></li>
+								<li><a href="#t09" rel="external"><span class="num">제 9조</span><span class="txt">개인정보 처리방침 변경에 관한 사항</span></a></li>
+							</ul>
+						</div><!-- // list -->
+					</li>
+				</ul>
+			</nav><!-- // toolbar -->
+
+			<div class="content termsView">
+				<h3>영상정보처리기기운영, 관리방침 약관 세부 내용 </h3>
+				<p class="first">㈜이랜드리테일(이하 당사라 함)는 영상정보처리기기 운영, 관리 방침을 통해 당사에서 처리하는 영상정보가 어떠한 용도와 방식으로 이용, 관리되고 있는지 알려드립니다.</p>
+				<p class="adden">공고일자: 2013년 01월01일<br />시행일자: 2013년 01월15일</p>
+				<h4 id="t01">제 1장 (영상정보처리기기의 설치근거 및 설치목적)</h4>
+				<div>
+					<p>당사는 개인정보보호법 제25조 제1항에 따라 다음과 같은 목적으로 영상정보처리기기를 설치, 운영합니다.</p>
+					<ol>
+						<li>① 시설안전 및 화재예방</li>
+						<li>② 고객의 안전을 위한 범죄예방</li>
+						<li>③ 차량도난 및 파손방지</li>
+					</ol>
+					<p>※ 주차대수 30대를 초과하는 규모의 경우 「주차장법 시행규칙」제6조제1항을 근거로 설치.운영 가능</p>
+				</div>
+
+				<h4 class="mt5" id="t02">제 2 장 (설치 대수, 설치 위치 및 촬영범위)</h4>
+				<div>전 지점
+					<div  class="termsTable mt5">
+						<table cellspacing="0"  summary="설치대수, 설치 위치 및 촬영범위">
+							<colgroup>
+								<!-- 2016-03-21 수정 -->
+								<col class="w30" />
+								<col class="w70" />
+								<!-- // 2016-03-21 수정 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>설치대수</th>
+									<th>설치 위치 및 촬영범위</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>6419대</td>
+									<td>건물 내 주요시설물, 주차장 등 전층</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<h4 class="mt5" id="t03">제 3 장 (관리책임자 및 접근 권한자)</h4>
+				<div>
+					귀하의 영상정보를 보호하고 개인영상정보와 관련한 불만을 처리하기 위하여 아래와 같이 개인영상 정보 보호책임자를 두고 있습니다.
+					<div  class="termsTable type2 mt5"><!-- // 2016-03-21 class type2 추가 -->
+						<table cellspacing="0"  summary="이름, 직책, 소속, 연락처">
+							<colgroup>
+								<!-- 2016-03-21 수정 -->
+								<col class="w10" />
+								<col class="w15" />
+								<col class="w30" />
+								<col class="w25" />
+								<col class="w20" />
+								<!-- // 2016-03-21 수정 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th></th>
+									<th>이름</th>
+									<th>직책</th>
+									<th>소속</th>
+									<th>연락처</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>관리책임자</th>
+									<td>정무종 외</td>
+									<td>각 지점 총무팀장<br />각 지점 지원실장</td>
+									<td>이랜드서비스 <br />이랜드리테일</td>
+									<td>02-2029-3700 <br />02-530-5000</td>
+								</tr>
+								<!-- 2016-03-21 수정 -->
+								<tr>
+									<th>접근권한자</th>
+									<td colspan="3">각 지점 보안팀 및 일부 지점 주차팀<br />관련 업무 담당자</td>
+									<td>www.elandretail.com</td>
+								</tr>
+								<!-- // 2016-03-21 수정 -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<h4 class="mt5" id="t04">제 4 장 (개인정보의 보유. 이용기간 및 파기)</h4>
+				<div>
+					<div class="termsTable mt5">
+						<table cellspacing="0"  summary="촬영시간, 보관기간, 보관장소">
+							<colgroup>
+								<!-- 2016-03-21 수정 -->
+								<col class="w20" />
+								<col class="w45" />
+								<col class="w35" />
+								<!-- // 2016-03-21 수정 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>촬영시간</th>
+									<th>보관기간</th>
+									<th>보관장소</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>24시간</td>
+									<td>촬영일로부터 90일 이내</td>
+									<td>보안 사무실, 주차팀</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<p class="mt5">- 처리방법 : 개인영상정보의 목적외 이용, 제3자 제공, 파기, 열람 등 요구에 관한 사항을 기록.관리하고, 보관기간 만료시 복원이 불가능한 방법으로 영구 삭제(출력물의 경우 파쇄 또는 소각)합니다. </p>
+				</div>
+
+				<h4 class="mt5" id="t05">제 5 장 (영상정보처리기기 설치 및 관리 등의 위탁에 관한 사항)</h4>
+				<div>본 점은 아래와 같이 영상정보처리기기 설치 및 관리 등을 위탁하고 있으며, 관계 법령에 따라 위탁계약시 개인정보가 안전하게 관리될 수 있도록 필요한 사항을 규정하고 있습니다.
+					<div class="termsTable mt5">
+						<table cellspacing="0"  summary="수탁 업체, 담당자, 연락처">
+							<colgroup>
+								<!-- 2016-03-21 수정 -->
+								<col class="w33" />
+								<col class="w33" />
+								<col class="w33" />
+								<!-- // 2016-03-21 수정 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>수탁 업체</th>
+									<th>담당자</th>
+									<th>연락처</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>태진자산관리</td>
+									<td>안형주 부장</td>
+									<td>02-458-7517~8</td>
+								</tr>
+								<tr>
+									<td>㈜오성 아이엔티</td>
+									<td>최정준 과장</td>
+									<td>031-225-3114</td>
+								</tr>
+								<tr>
+									<td>㈜세이프티에스</td>
+									<td>(5월31일 계약해지 예정)</td>
+									<td>011-9005-1976</td>
+								</tr>
+								<tr>
+									<td>㈜더맨</td>
+									<td>김유인 과장</td>
+									<td>02-723-1212</td>
+								</tr>
+								<tr>
+									<td>LK보안</td>
+									<td>김재현 이사</td>
+									<td>02-971-5599</td>
+								</tr>
+								<tr>
+									<td>㈜IPLC</td>
+									<td>권범성 부장</td>
+									<td>02-856-6955-</td>
+								</tr>
+								<tr>
+									<td>EST서비스</td>
+									<td>신야철 이사</td>
+									<td>031-701-4088</td>
+								</tr>
+								<tr>
+									<td>삼대원</td>
+									<td>김상우 과장</td>
+									<td>02-795-1971</td>
+								</tr>
+								<tr>
+									<td>㈜정오개발</td>
+									<td>김석종 대표</td>
+									<td>051)816-8316~7</td>
+								</tr>
+								<tr>
+									<td>㈜두잉</td>
+									<td>이수림 부장</td>
+									<td>070-7123-3615</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<h4 class="mt5" id="t06">제 6 장 (개인영상정보의 확인 방법 및 장소에 관한 사항)</h4>
+				<div>- 확인 방법 : 영상정보 관리책임자에게 미리 연락하고 본 점을 방문하시면 확인 가능합니다.<br />
+				- 확인 장소 : 보안팀</div>
+				
+				<h4 class="mt5" id="t07">제 7 장 (정보주체의 영상정보 열람 등 요구에 대한 조치)</h4>
+				<div>귀하는 개인영상정보에 관하여 열람 또는 존재확인 , 삭제를 원하는 경우 언제든지 영상정보처리기기 운영자에게 요구하실 수 있습니다. 단, 귀하가 촬영된 개인영상정보 및 명백히 정보주체의 급박한 생명, 신체, 재산의 이익을 위하여 필요한 개인영상정보에 한정됩니다. 본 점은 개인영상정보에 관하여 열람 또는 존재확인 삭제를 요구한 경우 지체 없이 필요한 조치를 하겠습니다. </div>
+				
+				<h4 class="mt5" id="t08">제 8 장 (영상정보의 안전성 확보조치)</h4>
+				<div>본 점에서 처리하는 영상정보는 암호화 조치 등을 통하여 안전하게 관리되고 있습니다. 또한 본 점은 개인영상정보보호를 위한 관리적 대책으로서 개인정보에 대한 접근 권한을 차등부여하고 있고, 개인영상정보의 위 변조 방지를 위하여 개인영상정보의 생성 일시, 열람시 열람 목적 . 열람자. 열람 일시 등을 기록하여 관리하고 있습니다. 이 외에도 개인영상정보의 안전한 물리적 보관을 위하여 잠금 장치를 설치하고 있습니다. </div>
+				
+				<h4 class="mt5" id="t09">제 9 장 (개인정보 처리방침 변경에 관한 사항)</h4>
+				<div>이 영상정보처리기기 운영관리방침은 2012년 3월 1일에 제정되었으며 법령 . 정책 또는 보안기술의 변경에 따라 내용의 추가 . 삭제 및 수정이 있을 시에는 시행하기 최소 7일전에 본 점 홈페이지를 통해 변경사유 및 내용 등을 공지하도록 하겠습니다. </div>
+
+			</div><!-- // content -->
+
+		</section><!-- // terms -->
+
+	</div><!-- // container -->
+	
+	<!-- goTop button -->
+	<button type="button" class="btn_goTop" data-role="none"><span class="blind">맨위로</span></button>
+	<!-- // goTop button -->
+
+</div><!-- // dvwrap -->
+
+</body>
+</html>
+
+
+
+

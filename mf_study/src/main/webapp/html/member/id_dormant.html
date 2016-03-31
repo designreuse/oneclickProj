@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+<script>
+
+$(document).on("pageinit", "#dvwrap", function(event) {
+	
+	$(".popClose").click(function () {
+		
+		$('#pagePopup1').popup("close");
+
+	});
+
+}); //
+
+</script>
+</head>
+
+<body>
+<div class="fullPopup"><!-- data-role="popup" id="pagePopup2" data-url="pagePopup2" data-overlay-theme="a" -->
+
+	<div class="popWrap fix max"><!-- // 2016-03-25 class  fix,max 추가 -->
+
+		<div class="popHeader">
+			<div class="heads">
+				<h1>휴면 계정 안내</h1>
+				<a href="#dvwrap" data-rel="back" class="btn_head popClose"><span class="blind">닫기</span></a>
+			</div>
+		</div>
+
+		<div class="container pop">
+			
+			<div class="popContent popGuide">
+				
+				<div class="taC">
+					<p class="cntGuide3 f_point"><strong>현재 고객님의 계정은 휴면 계정 입니다.</strong></p>
+					<p class="cntGuide mt15">확인을 누르시면 휴면이 해지되며, <br />원클릭에 입력된 정보로 사용이 가능합니다.</p>
+				</div>
+				<div class="popGuideBox mt20">
+					<dl class="desc">
+						<dt class="f_point">* 휴면계정이란?</dt>
+						<dd><span class="bl">&middot;</span> 1년동안 로그인이나 구매를 하지 않아 휴면상태로 전환된 계정입니다.</dd>
+						<!-- 2016-03-21 수정 -->
+						<dd><span class="bl">&middot;</span> 휴면계정 전환시 아래 개인정보가 별도 관리됩니다.<br />- 회원가입시 입력한 모든 정보<br /><span class="space">이름/아이디/비밀번호/휴대폰번호/주소/이메일</span></dd>
+						<!-- // 2016-03-21 수정 -->
+
+						<!-- 2016-03-18 삭제
+						<dd><span class="bl">&middot;</span> 휴면계정 전환시 아래 개인정보가 별도 관리됩니다.<br />- 회원가입시 입력한 모든 정보 : 이름/아이디/비밀번호/휴대폰번호/주소/이메일</dd>
+						-->
+					</dl>
+				</div>
+
+				<div class="btnDiv mt40 ui-grid-a taC">
+					<div class="ui-block-a"><a href="#" class="btn white pop"><span>취소</span></a></div>
+					<div class="ui-block-b"><a href="#" class="btn blue pop"><span>확인</span></a></div>
+				</div><!-- // btnDiv -->
+
+			</div><!-- // content -->
+
+		</div><!-- // container -->
+
+	</div><!-- // popWrap -->
+
+</div><!-- // pagePopup2 :: 팝업 page 끝 -->
+
+</body>
+</html>

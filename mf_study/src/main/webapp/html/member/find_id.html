@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+</head>
+
+<body>
+<div id="dvwrap" data-role="page">
+
+	<header data-role="header" data-position="fixed" data-tap-toggle="false">
+		<div class="heads">
+			<h1><a href="#" rel="external">E:LAND RETAIL OneClick</a></h1>
+			<a href="#leftpanel" class="btn_head open hdMenu"><span class="blind">전체메뉴보기</span></a>
+		</div>
+	</header>
+
+	<!-- left menu :: 왼쪽 슬라이드 gnb 영역 시작 -->
+	<div id="leftpanel" class="leftMenu" data-role="panel" data-position="left" data-display="overlay" data-dismissible="false">
+		<div class="menuWrap">
+
+			<div class="leftTop">
+				<h2>E:LAND RETAIL OneClick</h2>
+				<a href="javascript:;" class="btn_head close" data-rel="close"><span class="blind">전체메뉴닫기</span></a>
+			</div><!-- // leftTop -->
+
+			<div class="tabWrap" >
+				<div id="leftMenu1" class="scroller">
+					<nav class="left_list_cont">
+						<ul class="leftList">
+							<li>
+								<a href="#" rel="external" class="tit">이랜드리테일 원클릭 소개</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 원클릭이란?</a></li>
+									<li><a href="#" rel="external">회원 가입/탈퇴 안내</a></li>
+									<li><a href="#" rel="external">이랜드리테일 멤버십 소개</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">약관</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 멤버십 이용약관</a></li>
+									<li><a href="#" rel="external">온라인 서비스 이용약관</a></li>
+									<li><a href="#" rel="external">개인정보 취급방침</a></li>
+									<li><a href="#" rel="external">영상정보처리기기운영, 관리방침</a></li>
+									<li><a href="#" rel="external">입점상담 동의사항</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">회원정보</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">아이디/비밀번호 찾기</a></li>
+									<li><a href="#" rel="external">회원가입</a></li>
+									<li><a href="#" rel="external">회원정보 수정</a></li>
+									<li><a href="#" rel="external">회원탈퇴</a></li>
+								</ul>							
+							</li>	
+							<li>
+								<a href="#" rel="external" class="tit">고객센터</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">공지사항</a></li>
+									<li><a href="#" rel="external">자주묻는 질문</a></li>
+								</ul>							
+							</li>	
+						</ul><!--  // leftList -->
+					</nav><!--  // left_list_cont -->
+				</div><!-- // leftMenu1 :: 스크롤영역 -->
+				
+				<!-- 2016-03-15 수정 -->
+				<div class="customerBox">
+					<div class="tit"><span>고객센터</span></div>
+					<div class="telBox">
+						<a href="tel:1899-9500" rel="external"><span class="txt">통합몰</span><span class="tel">1899-9500</span></a>
+						<a href="tel:1588-0001" rel="external"><span class="txt">통합홈페이지</span><span class="tel">1588-0001</span></a>
+					</div>
+					<span class="f_small">상담시간 오전 9시~오후 6시</span>
+				</div><!-- // customerBox :: 고객센터 -->
+				<!-- // 2016-03-15 수정 -->
+
+			</div><!-- // tabWrap -->
+
+		</div><!-- // menuWrap -->
+	</div><!-- // left menu :: 왼쪽 슬라이드 gnb 끝 -->
+
+	<div class="container">
+		<section class="cntDiv">
+
+			<div class="lineMap">
+				<div class="path">
+					<span class="home">HOME</span>
+					<span>회원정보</span>
+					<span class="current">아이디 찾기</span>
+				</div>
+			</div><!-- // lineMap -->
+			
+			<div class="pageTitle">
+				<h2>아이디/비밀번호 찾기</h2>
+			</div>
+
+			<div class="tabMenu" data-role="navbar">
+				<ul>
+					<li><h3><a href="#" rel="external" class="ui-btn-active current">아이디 찾기</a></h3></li>
+					<li><h3><a href="#" rel="external">비밀번호 찾기</a></h3></li>
+				</ul>
+			</div><!-- // tabMenu -->
+			
+			<div class="content member">
+
+				<!-- 2016-03-21 수정 -->
+				<p class="taC pageGuide2 w1">회원님의 소중한 개인정보 보호를 위하여<br />본인확인이 필요합니다.<br />원하시는 본인확인 방법을 선택해주세요.</p><!-- 2016-03-15 :: .w1 클래스 추가-->
+				<!-- // 2016-03-21 수정 -->
+
+				<div class="certiBox mt15">
+					<div class="box b1">
+						<a href="#" target="_blank">
+							<span class="ir_ico mobile"></span>
+							<strong class="tit">휴대폰 인증</strong><span class="desc mt5">공인된 인증기관을 통해<br />휴대폰 인증을<br />받을 수 있습니다 </span>
+						</a>
+					</div><!-- // box :: 휴대폰인증 -->
+					<div class="box b2">
+						<a href="#" target="_blank">
+							<span class="ir_ico ipin"></span>
+							<strong class="tit">아이핀 인증</strong><span class="desc mt5">공인된 인증기관을 통해<br />아이핀 실명인증을<br />받을 수 있습니다 </span>
+						</a>
+					</div><!-- // box :: 아이핀인증 -->
+				</div><!-- // certiBox -->
+					
+				<div class="warningBox mt15">
+					<ul>
+						<li><span class="bl">&middot;</span> 아이디/비밀번호 관리의 책임은 본인에게 있습니다.</li>
+						<li><span class="bl">&middot;</span> 타인에게 알려줄 경우 불이익을 당할 수 있으므로 관리에 주의하여 주십시오.</li>
+						<li><span class="bl">&middot;</span> 아이디/비밀번호 관리 소홀로 인한 피해는 본 사이트에서 책임지지 않습니다.</li>
+					</ul>
+				</div><!-- // warningBox -->
+
+			</div><!-- // content -->
+
+		</section>
+	</div><!-- // container -->
+
+	<!-- goTop button -->
+	<button type="button" class="btn_goTop" data-role="none"><span class="blind">맨위로</span></button>
+	<!-- // goTop button -->
+
+</div><!-- // dvwrap -->
+
+</body>
+</html>

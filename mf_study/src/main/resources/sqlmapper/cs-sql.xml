@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eland.ngoc.cs.dao.CsDao">
+
+	<select id="selectNotice" resultType="com.eland.ngoc.cs.model.Notice">
+		SELECT /* com.eland.ngoc.cs.dao.csDao.selectNotice  */ 
+				NTCE_NO				AS ntceNo
+				, NTCE_SEQ			AS ntceSeq
+				, NTCE_TYPE_DIV		AS typeDiv
+				, NTCE_TITLE		AS ntceTitle
+				, NTCE_CONT			AS ntceCont
+				, INS_DATE			AS insDate
+				, INS_USER			AS insUser
+				, UPD_DATE			AS updDate
+				, UPD_USER  		AS updUser
+				, MAIN_NTCE_YN  	AS mainNtceYn
+		  FROM 
+		  		( SELECT ROWNUM AS NTCE_NO
+		  				 , NTCE_SEQ
+		  				 , NTCE_TYPE_DIV
+		  				 , NTCE_TITLE
+		  				 , NTCE_CONT
+		  				 , INS_DATE
+		  				 , INS_USER
+		  				 , UPD_DATE
+		  				 , UPD_USER
+		  				 , MAIN_NTCE_YN
+		  			FROM OC_NTCE
+		  		   WHERE NTCE_TYPE_DIV = '20'
+		  		   AND MAIN_NTCE_YN = 'Y'
+		 		  ORDER BY INS_DATE DESC
+		 		 ) notice
+		 	WHERE ROWNUM = 1		 	 
+	</select>
+	
+	<select id="selectNoticeCount" resultType="int">
+		SELECT /* com.eland.ngoc.cs.dao.csDao.selectNoticeCount  */
+				COUNT(NTCE_SEQ)
+		 FROM
+		 		OC_NTCE
+		WHERE
+				NTCE_TYPE_DIV = '30'	
+	</select>
+	
+	<select id="selectNoticeList" resultType="com.eland.ngoc.cs.model.Notice">
+		<include refid="com.eland.ngoc.common.beginPage"/>
+		SELECT /* com.eland.ngoc.cs.dao.csDao.selectNoticeList  */
+				(#{ntceCnt} - ROWNUM) + 1		AS ntceNo
+				, NTCE.*
+		  FROM
+		  	(SELECT
+			  		NTCE_SEQ		AS ntceSeq
+					, NTCE_TITLE		AS ntceTitle
+					, TO_CHAR(INS_DATE, 'YYYY.MM.DD')			AS insDate
+					, INS_USER		AS insUser
+			  FROM
+			  		OC_NTCE
+			 WHERE
+			 		NTCE_TYPE_DIV = '30'
+	 		 ORDER BY
+	 		  		INS_DATE DESC, NTCE_SEQ DESC
+		  	) NTCE	
+		 <include refid="com.eland.ngoc.common.endPage"/>
+	 	 
+	</select>
+	
+	<select id="selectNoticeDetail" parameterType="string" resultType="com.eland.ngoc.cs.model.Notice">
+		SELECT /* com.eland.ngoc.cs.dao.csDao.selectNoticeDetail  */
+				NTCE_SEQ		AS ntceSeq
+				, NTCE_TITLE		AS ntceTitle
+				, NTCE_CONT			AS ntceCont
+				, TO_CHAR(INS_DATE, 'YYYY.MM.DD')			AS insDate
+				, INS_USER		AS insUser
+		 FROM
+		 		OC_NTCE
+		WHERE
+				NTCE_TYPE_DIV = '30'
+				AND NTCE_SEQ = #{ntceSeq}
+	</select>
+	
+	<select id="selectFaqTop5" resultType="com.eland.ngoc.cs.model.FaqTop5">
+		SELECT /* com.eland.ngoc.cs.dao.csDao.selectFaqTop5  */
+				FAQ.FAQ_SEQ		AS faqSeq
+				, FAQ.FAQ_TITLE		AS faqTitle
+				, FAQ.FAQ_CONT		AS faqCont
+				, FAQ.CTGR_CODE		AS ctgrCode
+				, CODES.CODE_NAME		AS ctgrName
+		 FROM
+		 		OC_FAQ FAQ
+		 		, (SELECT CODE, CODE_NAME
+		 			 FROM OC_CODE
+		 			WHERE CODE_GROUP_ID = 'faqCateg'
+		 		  )	CODES
+		WHERE
+				FAQ.CTGR_CODE = CODES.CODE
+			AND FAQ.TOP5_YN = 'Y'
+		ORDER BY 
+				FAQ.SORT		
+	</select>
+	
+	<select id="selectFaqCategories" resultType="com.eland.ngoc.cs.model.FaqCategory">
+		SELECT /* com.eland.ngoc.cs.dao.csDao.selectFaqCategories  */
+				CATEINFO.code
+				, CATEINFO.codeName
+		  FROM
+		  		(SELECT
+		  				'all'		AS code
+		  				, '전체보기'		AS codeName
+		  				, 0		AS cateSort
+		  		  FROM dual
+				 UNION ALL
+				  SELECT
+				  		CODE		AS code
+						, CODE_NAME			AS codeName
+						, SORT		AS cateSort
+				   FROM
+				   		OC_CODE
+				  WHERE
+				  		CODE_GROUP_ID = 'faqCateg'
+					AND USE_YN = 'Y'
+		  		 ) CATEINFO
+		 ORDER BY
+		 		CATEINFO.cateSort		
+	</select>
+	
+	<select id="selectFaqCount" parameterType="map" resultType="int">
+		SELECT
+				COUNT(FAQ_SEQ)
+		  FROM
+		  		OC_FAQ
+		 WHERE
+		 		1=1
+		 		<if test='ctgrCode != null and ctgrCode != ""'>
+					<if test='ctgrCode != "all"'>
+						AND CTGR_CODE = #{ctgrCode}	
+					</if>
+				</if>
+	</select>
+	
+	<select id="selectFaqList" parameterType="map" resultType="com.eland.ngoc.cs.model.Faq">
+		<include refid="com.eland.ngoc.common.beginPage"/>
+		SELECT /* com.eland.ngoc.cs.dao.csDao.selectFaqList  */
+				FAQ.FAQ_SEQ		AS faqSeq
+				, FAQ.FAQ_TITLE		AS faqTitle
+				, FAQ.FAQ_CONT		AS faqCont
+				, CODES.CODE_NAME		AS ctgrName
+		 FROM
+		 		OC_FAQ FAQ
+		 		, (SELECT CODE, CODE_NAME
+		 			 FROM OC_CODE
+		 			WHERE CODE_GROUP_ID = 'faqCateg'
+		 		  )	CODES
+		WHERE
+				FAQ.CTGR_CODE = CODES.CODE
+				<if test='ctgrCode != null and ctgrCode != ""'>
+					<if test='ctgrCode != "all"'>
+						AND FAQ.CTGR_CODE = #{ctgrCode}	
+					</if>
+				</if>
+		<include refid="com.eland.ngoc.common.endPage"/>		
+	</select>
+
+</mapper>

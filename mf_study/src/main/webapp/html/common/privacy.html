@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>E-land OneClick</title>
+<link rel="stylesheet" href="../../css/oneclick.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easing.1.3.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<script src="../../js/common.js"></script><!-- 공통 스크립트 -->
+<script src="../../js/jquery.modalLayer.js"></script><!-- 모달팝업 -->
+
+<style>
+@import url("http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css");
+body{color:#666; font-size:14px; font-family:"Nanum Barun Gothic",dotum; font-weight:normal;}
+html,body{width:100%; height:100%; }
+ul,ol,li{list-style:none; margin:0; padding:0;}
+a{text-decoration:none; color:#666; color:inherit;}
+.taC{text-align:center;}
+.errorDiv{margin:45px 0;}
+.errorDiv .errorMessage{text-align:center;}
+.errorMessage .tit{display:block; color:#1971b8; font-size:26px; margin:70px 0 0}
+.errorMessage .tit.m1{margin-top:0;}
+.errorMessage .txt{font-size:18px; line-height:22px; margin:28px 0 35px;}
+.warningBox{background:#f3f3f3; padding:17px 20px 14px;}
+.warningBox.w1{width:770px; margin:0 auto;}
+.warningBox ul li{line-height:23px;}
+.btn{display:inline-block; border:1px solid #ccc; background:#fff; min-width:140px; height:30px; line-height:28px; vertical-align:top; text-align:center; color:#333; cursor:pointer}
+.btn.large{min-width:220px; max-width:220px; height:50px; font-size:16px; line-height:48px;}
+.btn span{display:block; padding:0 15px;}
+.btn.white{border-color:#ccc; background:#fff;}
+.btn.blue{border-color:#1971b8; background:#1971b8; color:#fff;}
+.mt70{margin-top:70px}
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="header">
+		<div class="topHead" style="">
+			<!--<h1><a href="">E.LAND OneClick</a></h1>-->
+		</div><!-- // topHead -->
+	</div><!-- // header -->
+
+	<div id="container">
+		<!-- <div class="lineMap">
+			<div class="path">
+				<span class="home">HOME</span>
+				<span class="current">회원가입</span>
+			</div>
+		</div> // lineMap -->
+		
+
+		<!-- 내용 시작 -->
+		<div class="errorDiv">
+			<div class="errorMessage">
+				<strong class="tit m1">개인정보 이관 거부 신청</strong>
+				<p class="txt">회원님의 개인정보를 이랜드리테일 원클릭으로 이관하는 것을 거부하시겠습니까?</p>
+			</div>
+			<div class="warningBox w1">
+				<ul>
+					<li><span class="bl">-</span>하단의 이관 거부 신청(탈퇴) 버튼을 누르시면, 이관 시점(2016년 1월 10일)에 탈퇴 처리됩니다.</li>
+					<li><span class="bl">-</span>이관을 거부하시면, 더 이상 이랜드리테일 온라인 서비스를 이용하실 수 없습니다.</li>
+				</ul>
+			</div>
+			<div class="btnDiv taC mt70">
+				<a href="#" class="btn white large"><span>취소</span></a>
+				<a href="#" class="btn blue large"><span>이관 거부 신청(탈퇴)</span></a>
+			</div>
+		</div><!-- // errorDiv -->
+		<!-- // 내용 시작 -->
+
+	</div><!-- // container -->
+	
+	<div id="footer">
+		<div style="height:80px; background:#f9f9f9"></div>
+	</div><!-- // footer -->
+
+</div><!-- // wrapper -->
+</body>
+</html>

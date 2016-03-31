@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE tiles-definitions PUBLIC
+           "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+           "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="defaultTemplate" template="/WEB-INF/tiles/layout/layout.jsp">
+		<put-attribute name="head" value="/WEB-INF/tiles/layout/head.jsp" />
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/tiles/layout/left.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="mainTemplate" template="/WEB-INF/tiles/layout/mainLayout.jsp">
+		<put-attribute name="head" value="/WEB-INF/tiles/layout/head.jsp" />
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/tiles/layout/left.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp" />
+	</definition>
+	
+	<!-- 메인 -->
+	<definition name="/main" extends="mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
+	</definition>
+	
+	<!-- 이랜드리테일 원클릭 소개_ 이랜드리테일 원클릭이란? -->
+	<definition name="/intro" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/introduction/intro.jsp" />
+	</definition>
+	
+	<!-- 이랜드리테일 원클릭 소개_ 회원 가입/탈퇴 안내 -->
+	<definition name="/guide" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/introduction/guide.jsp" />
+	</definition>
+			
+	<!-- 이랜드리테일 원클릭 소개_ 이랜드리테일 멤버십 소개 -->
+	<definition name="/membershipInfo" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/introduction/membershipInfo.jsp" />
+	</definition>
+	
+	<!-- 약관_ 이랜드리테일 멤버십 이용약관 -->
+	<definition name="/memberShipClubTerms" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/terms/memberShipClubTerms.jsp" />
+	</definition>
+	
+	<!-- 약관_ 온라인서비스 이용약관 -->
+	<definition name="/onlineServiceTerms" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/terms/onlineServiceTerms.jsp" />
+	</definition>
+	
+	<!-- 약관_ 개인정보 취급 방침 -->
+	<definition name="/privacyTerms" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/terms/privacyTerms.jsp" />
+	</definition>
+	
+	<!-- 약관_영상정보처리기기운영,관리방침 -->
+	<definition name="/mediaTerms" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/terms/mediaTerms.jsp" />
+	</definition>
+	
+	<!-- 약관_ 입점 동의 사항 -->
+	<definition name="/entryCounselAgree" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/terms/entryCounselAgree.jsp" />
+	</definition>	
+			
+	<!-- 고객센터_ 공지사항 -->
+	<definition name="/noticeList" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/cs/noticeList.jsp" />
+	</definition>	
+
+	<!-- 고객센터_ 공지사항 상세 -->
+	<definition name="/noticeDetail" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/cs/noticeDetail.jsp" />
+	</definition>
+			
+	<!-- 고객센터_ 자주묻는 질문 -->
+	<definition name="/faqList" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/cs/faqList.jsp" />
+	</definition>
+	
+	<!-- 사이트맵 -->
+	<definition name="/siteMap" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/cs/siteMap.jsp" />
+	</definition>
+	
+	<!-- Error -->
+	<definition name="/errors/*">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/tiles/layout/left.jsp" />
+	    <put-attribute name="body" value="/error/error404.jsp" />
+	</definition>
+	
+	<!-- 회원정보_아이디 찾기 -->
+	<definition name="/findId" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/findId.jsp" />
+	</definition>
+	
+	<!-- 회원정보_패스워드 찾기 -->
+	<definition name="/findPwd" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/findPwd.jsp" />
+	</definition>
+	
+	<!-- 회원정보 수정 -->
+	<definition name="/updateMember" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/member/modifyMemberInfo.jsp"></put-attribute>	
+	</definition>
+	
+	<!-- 회원정보 수정_ 완료 -->
+	<definition name="/updateMemberSuccess" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/member/modifyInfoSuccess.jsp"></put-attribute>	
+	</definition>	
+	
+	<!-- 회원 탈퇴_ step1 -->
+	<definition name="/secession_step1" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/member/secession_step1.jsp"></put-attribute>	
+	</definition>
+	
+	<!-- 회원 탈퇴_ step2 -->
+	<definition name="/secession_step2" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/member/secession_step2.jsp"></put-attribute>	
+	</definition>
+	
+	<!-- 회원 탈퇴_ 완료 -->
+	<definition name="/secessionSuccess" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/member/secessionSuccess.jsp"></put-attribute>	
+	</definition>
+	
+	<!-- 회원가입 step1 -->
+	<definition name="/join_step1" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/join_step1.jsp" />
+	</definition>
+	
+	<!-- 회원가입 step2 -->
+	<definition name="/join_step2" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/join_step2.jsp" />
+	</definition>
+	
+	<!-- 회원가입 step3 -->
+	<definition name="/join_step3" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/join_step3.jsp" />
+	</definition>
+	
+	<!-- 회원가입 완료 -->
+	<definition name="/joinMemberSuccess" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/view/member/joinMemberSuccess.jsp" />
+	</definition>
+	
+	<!-- 로그인 -->
+	<definition name="/login" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/member/login.jsp" />
+	</definition>
+</tiles-definitions>

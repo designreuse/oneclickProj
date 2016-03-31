@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+
+<script>
+
+	$(document).on("pageinit", "#dvwrap", function(event) {
+
+		// 팝업 열기
+
+		
+		// 팝업 닫기
+		$(".popClose").click(function () {
+			$('#pagePopup1').popup("close");
+		});
+		
+		// 아이디 중복체크
+		$(".elemWrap .valid").hide();
+
+		var checkID = $('#idCheck');
+
+		$(".btn_idCheck").click(function() { 
+			if ($(checkID).val() == "") {
+				$(this).siblings(".valid").fadeIn().text("이미 사용하고 있는 아이디입니다.");
+				checkID.focus();
+				//return false;
+			}
+		});
+
+		// 비밀번호 재입력
+		var checkPW = $("#pwCheck");
+		var checkPW_re = $("#pwCheck_re");
+		
+		checkPW_re.focusout(function(){
+			if ($(checkPW).val()!=$(checkPW_re).val()) {
+				$(this).siblings(".valid").fadeIn().text("비밀번호가 맞지 않습니다.");
+				//checkPW_re.focus();
+				checkPW_re.addClass("focusLine");
+			}
+			if ($(checkPW).val()==$(checkPW_re).val()) {
+				$(this).siblings(".valid").fadeOut();
+				checkPW_re.removeClass("focusLine");
+			}
+		});
+
+		// 제휴사이트 모두 선택
+		$("#check_site").click(function(){
+			if (!$(this).hasClass("on")) {
+				$(this).addClass("on").children().text("전체해제");
+				$("input[name=check1]").prop("checked", true).parent().addClass("selected");
+			} else {
+				$(this).removeClass("on").children().text("전체선택");
+				$("input[name=check1]").prop("checked", false).parent().removeClass("selected");
+			}
+		});
+		
+		// 이메일 수신 모두 선택
+		$("#check_email").click(function(){
+			if (!$(this).hasClass("on")) {
+				$(this).addClass("on").children().text("전체해제");
+				$("input[name=check2]").prop("checked", true).parent().addClass("selected");
+			} else {
+				$(this).removeClass("on").children().text("전체선택");
+				$("input[name=check2]").prop("checked", false).parent().removeClass("selected");
+			}
+		});
+		
+		// 문자 수신 모두 선택
+		$("#check_sms").click(function(){
+			if (!$(this).hasClass("on")) {
+				$(this).addClass("on").children().text("전체해제");
+				$("input[name=check3]").prop("checked", true).parent().addClass("selected");
+			} else {
+				$(this).removeClass("on").children().text("전체선택");
+				$("input[name=check3]").prop("checked", false).parent().removeClass("selected");
+			}
+		});
+
+		// placeholder :: input type=date일 경우 placeholder 기능
+		var placeholderTarget = $(".placeholderBox input");
+		placeholderTarget.each(function(){
+			if(!$(this).val() == ""){
+				$(this).siblings("label").hide();
+			}
+		});
+
+		placeholderTarget.focus(function(){
+			$(this).siblings("label").fadeOut("100");
+		//	$(this).parent().addClass("focusLine");
+		});
+
+		placeholderTarget.focusout(function(){
+			if($(this).val() == ""){
+				$(this).siblings("label").fadeIn("100");
+			}
+			//$(this).parent().removeClass("focusLine");
+		});
+		
+		// 자녀정보 추가
+		$(".childWrap").on("click",".childAdd",function() {
+			addDiv();
+		});
+		// 삭제
+		$(".childWrap").on("click",".childRemove",function() {
+			$(this).closest(".childDiv.clone").remove();
+		});
+		
+	}); //
+
+	// 자녀 추가
+	function addDiv(){
+			/*var add = $(".childInfo").html();*/
+
+			var add = '';
+			add += '<div class="childDiv clone">';
+			add += '	<div class="tit">';
+			add += '		<strong>자녀정보</strong><button type="button" class="btn white w40 childRemove"><span>삭제</span></button>';
+			add += '	</div>';
+			add += '	<div class="element">';
+			add += '		<div class="ui-grid-a">';
+			add += '			<div class="ui-block-a w30">';
+			add += '				<select class="selectBox" id="" data-role="none">';
+			add += '					<option value="">선택</option>';
+			add += '				</select>';
+			add += '			</div>';
+			add += '			<div class="ui-block-b w70">';
+			add += '				<input type="text" id="" name="" class="input_text" placeholder="이름" data-role="none" />';
+			add += '			</div>';
+			add += '		</div>';
+			add += '	</div>';
+			add += '	<div class="element">';
+			add += '		<div class="ui-grid-a">';
+			add += '			<div class="ui-block-a w30">';
+			add += '				<select class="selectBox" id="" data-role="none">';
+			add += '					<option value="">선택</option>';
+			add += '				</select>';
+			add += '			</div>';
+			add += '			<div class="ui-block-b w70">';
+			add += '				<div class="placeholderBox">';
+			add += '					<label for="childBirth2" class="placeholder">생년월일</label>';
+			add += '					<input type="date" id="childBirth2" name="" class="input_text" placeholder="생년월일" data-role="none" />';
+			add += '				</div>';
+			add += '			</div>';
+			add += '		</div>';
+			add += '	</div>';
+			add += '</div>';
+
+			$(".childInfo").append(add);
+
+			var placeholderTarget = $(".placeholderBox input");
+		
+			placeholderTarget.each(function(){
+				if(!$(this).val() == ""){
+					$(this).siblings("label").hide();
+				}
+			});
+
+			placeholderTarget.focus(function(){
+				$(this).siblings("label").fadeOut("100");
+			//	$(this).parent().addClass("focusLine");
+			});
+
+			placeholderTarget.focusout(function(){
+				if($(this).val() == ""){
+					$(this).siblings("label").fadeIn("100");
+				}
+				//$(this).parent().removeClass("focusLine");
+			});
+
+		}
+
+</script>
+
+</head>
+
+<body>
+<div id="dvwrap" data-role="page">
+
+	<header data-role="header" data-position="fixed" data-tap-toggle="false">
+		<div class="heads">
+			<h1><a href="#" rel="external">E:LAND RETAIL OneClick</a></h1>
+			<a href="#leftpanel" class="btn_head open hdMenu"><span class="blind">전체메뉴보기</span></a>
+		</div>
+	</header>
+
+	<!-- left menu :: 왼쪽 슬라이드 gnb 영역 시작 -->
+	<div id="leftpanel" class="leftMenu" data-role="panel" data-position="left" data-display="overlay" data-dismissible="false">
+		<div class="menuWrap">
+
+			<div class="leftTop">
+				<h2>E:LAND RETAIL OneClick</h2>
+				<a href="javascript:;" class="btn_head close" data-rel="close"><span class="blind">전체메뉴닫기</span></a>
+			</div><!-- // leftTop -->
+
+			<div class="tabWrap" >
+				<div id="leftMenu1" class="scroller">
+					<nav class="left_list_cont">
+						<ul class="leftList">
+							<li>
+								<a href="#" rel="external" class="tit">이랜드리테일 원클릭 소개</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 원클릭이란?</a></li>
+									<li><a href="#" rel="external">회원 가입/탈퇴 안내</a></li>
+									<li><a href="#" rel="external">이랜드리테일 멤버십 소개</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">약관</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">이랜드리테일 멤버십 이용약관</a></li>
+									<li><a href="#" rel="external">온라인 서비스 이용약관</a></li>
+									<li><a href="#" rel="external">개인정보 취급방침</a></li>
+									<li><a href="#" rel="external">영상정보처리기기운영, 관리방침</a></li>
+									<li><a href="#" rel="external">입점상담 동의사항</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" rel="external" class="tit">회원정보</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">아이디/비밀번호 찾기</a></li>
+									<li><a href="#" rel="external">회원가입</a></li>
+									<li><a href="#" rel="external">회원정보 수정</a></li>
+									<li><a href="#" rel="external">회원탈퇴</a></li>
+								</ul>							
+							</li>	
+							<li>
+								<a href="#" rel="external" class="tit">고객센터</a> 
+								<ul class="dep2">
+									<li><a href="#" rel="external">공지사항</a></li>
+									<li><a href="#" rel="external">자주묻는 질문</a></li>
+								</ul>							
+							</li>	
+						</ul><!--  // leftList -->
+					</nav><!--  // left_list_cont -->
+				</div><!-- // leftMenu1 :: 스크롤영역 -->
+				
+				<!-- 2016-03-15 수정 -->
+				<div class="customerBox">
+					<div class="tit"><span>고객센터</span></div>
+					<div class="telBox">
+						<a href="tel:1899-9500" rel="external"><span class="txt">통합몰</span><span class="tel">1899-9500</span></a>
+						<a href="tel:1588-0001" rel="external"><span class="txt">통합홈페이지</span><span class="tel">1588-0001</span></a>
+					</div>
+					<span class="f_small">상담시간 오전 9시~오후 6시</span>
+				</div><!-- // customerBox :: 고객센터 -->
+				<!-- // 2016-03-15 수정 -->
+
+			</div><!-- // tabWrap -->
+
+		</div><!-- // menuWrap -->
+	</div><!-- // left menu :: 왼쪽 슬라이드 gnb 끝 -->
+
+	<div class="container">
+		<section class="cntDiv">
+
+			<div class="lineMap">
+				<div class="path">
+					<span class="home">HOME</span>
+					<span>회원정보</span>
+					<span class="current">회원정보 수정</span>
+				</div>
+			</div><!-- // lineMap -->
+			
+			<div class="pageTitle">
+				<h2>E:LAND MALL 회원가입</h2>
+			</div>
+
+			<div class="content inner">
+
+				<div class="stepBox">
+					<ol>
+						<li><span class="num">STEP 01</span><span class="txt">본인확인</span></li>
+						<li><span class="num">STEP 02</span><span class="txt">약관동의</span></li>
+						<li class="on"><span class="num">STEP 03</span><span class="txt">정보입력</span></li>
+						<li><span class="num">STEP 04</span><span class="txt">가입완료</span></li>
+					</ol>
+				</div><!-- // stepBox -->
+				
+				<!-- 기본정보 입력 -->
+				<div class="fieldDiv bLine mt15">
+					<fieldset>
+						<legend class="tit_bl">기본정보</legend>
+						<p class="guide"><span class="ns"></span>필수입력항목</p>
+						<div class="elemWrap">
+							<div class="element">
+								<label for="">이름</label>
+								<input type="text" id="" name="" class="input_text" data-role="none" readonly value="홍길동" />
+							</div><!-- // element -->
+							<div class="element">
+								<label for="">회원아이디</label>
+								<input type="text" id="" name="" class="input_text" data-role="none" readonly value="yourid" />
+							</div><!-- // element -->
+
+							<!-- 비밀번호 변경 -->
+							<div class="passwordDiv">
+								<div class="element">
+									<button type="button" class="btn grey btn_change"><span>비밀번호 변경</span></button>
+								</div><!-- // element -->
+								<div class="change_pw">
+									<div class="element">
+										<span class="ns" title="필수입력"></span>
+										<label for="pw">기존 비밀번호</label>
+										<input type="password" id="pw" name="" class="input_text check" placeholder="기존 비밀번호" data-role="none" />
+									</div><!-- // element -->
+									<div class="element">
+										<span class="ns" title="필수입력"></span>
+										<label for="pwCheck">신규 비밀번호</label>
+										<input type="password" id="pwCheck" name="" class="input_text check" placeholder="신규 비밀번호" data-role="none" />
+									</div><!-- // element -->
+									<div class="element">
+										<span class="ns" title="필수입력"></span>
+										<label for="pwCheck_re">신규 비밀번호 재입력</label>
+										<input type="password" id="pwCheck_re" name="" class="input_text check" placeholder="신규 비밀번호 재입력" data-role="none" />
+										<em class="valid"></em>
+									</div><!-- // element -->
+									<div class="warn">
+										연속적인 숫자나 생일, 전화번호등 추측하기 쉬운 개인정보 및 아이디와 비슷한 비밀번호 사용을 피하시기 바랍니다.<br />비밀번호는 영대문자, 영소문자, 숫자, 특	수문자 중 3종류 이상을 조합하여, 총 8~16자리로 구성하셔야 합니다.
+									</div><!-- // warn -->
+								</div><!-- // pwChange -->
+							</div><!-- // passwordDiv -->
+							<!-- // 비밀번호 변경 -->
+
+							<div class="element">
+								<div class="ui-grid-a">
+									<div class="ui-block-a w30">
+										<span class="ns" title="필수입력"></span>
+										<select class="selectBox check" id="" data-role="none">
+											<option value="">선택</option>
+											<option value="" selected>양력</option>
+											<option value="">음력</option>
+										</select>
+									</div>
+									<div class="ui-block-b w70 placeholderBox">
+										<label for="birth" class="placeholder">생년월일</label>
+										<input type="date" id="birth" name="" class="input_text" value="1983-01-01" data-role="none" />
+									</div>
+								</div>
+							</div><!-- // element -->
+							<div class="element">
+								<span class="ns" title="필수입력"></span>
+								<label for="">핸드폰번호</label>
+								<input type="tel" id="" name="" class="input_text check" value="010-0000-0000" data-role="none" />
+							</div><!-- // element -->
+							<div class="element">
+								<div class="block">
+									<span class="ns" title="필수입력"></span>
+									<label for="">주소</label>
+									<input type="text" id="" name="" class="input_text check" disabled value="서울시 서초구 잠원동" data-role="none" />
+									<button type="button" class="btn grey"><span>주소찾기</span></button>
+								</div>
+								<div class="elem mt10">
+									<span class="ns" title="필수입력"></span>
+									<label for="">상세주소</label>
+									<input type="text" id="" name="" class="input_text check" disabled value="90-2" data-role="none" />
+								</div>
+							</div><!-- // element -->
+							<div class="element">
+								<span class="ns" title="필수입력"></span>
+								<label for="">이메일</label>
+								<input type="email" id="" name="" class="input_text check" value="youremail@address.com" data-role="none" />
+							</div><!-- // element -->
+						</div><!-- // elemWrap -->
+					</fieldset>
+				</div><!-- // fieldDiv :: 기본정보 입력 -->
+				
+				<!-- 이랜드리테일 제휴 사이트 선택 -->
+				<div class="fieldDiv mt15">
+					<fieldset>
+						<legend class="tit_bl">이랜드리테일 제휴 사이트 선택</legend>
+						<div class="allCheckLine">
+							<span class="chk fl">
+								<input type="checkbox" id="select_site1" class="checkBox readonly" onclick="return false;" checked data-role="none"><label for="select_site1" class="label_txt">E:LAND MALL</label>
+							</span>
+							<button type="button" class="btn white w60" id="check_site"><span>전체선택</span></button>
+						</div><!-- // allCheckLine -->
+						<div class="checkArea">
+							<span class="chk"><input type="checkbox" id="select_site1-1" name="check1" class="checkBox" checked data-role="none"  /><label for="select_site1-1" class="label_txt">E&middot;LAND RETAIL</label></span>
+							<span class="chk"><input type="checkbox" id="select_site1-2" name="check1" class="checkBox" data-role="none" /><label for="select_site1-2" class="label_txt">사이트 A</label></span>
+							<span class="chk"><input type="checkbox" id="select_site1-3" name="check1" class="checkBox" data-role="none" /><label for="select_site1-3" class="label_txt">사이트 B</label></span>
+						</div><!-- // checkArea -->
+					</fieldset>
+				</div><!-- // fieldDiv :: 이랜드리테일 제휴 사이트 선택 -->
+
+				<!-- 마케팅 정보 수신동의 -->
+				<div class="fieldDiv mt15">
+					<fieldset>
+						<legend class="tit_bl">마케팅 정보 수신동의</legend>
+						<div class="tit mt5"><strong>이메일 수신</strong></div>
+						<div class="allCheckLine">
+							<span class="chk fl">
+								<input type="checkbox" id="select_site2" class="checkBox" name="check2" checked data-role="none"><label for="select_site2" class="label_txt">E:LAND MALL</label>
+							</span>
+							<button type="button" class="btn white w60" id="check_email"><span>전체선택</span></button>
+						</div><!-- // allCheckLine -->
+						<div class="checkArea">
+							<span class="chk"><input type="checkbox" id="select_site2-1" name="check2" class="checkBox" data-role="none"  /><label for="select_site2-1" class="label_txt">E&middot;LAND RETAIL</label></span>
+							<span class="chk"><input type="checkbox" id="select_site2-2" name="check2" class="checkBox" disabled data-role="none" /><label for="select_site2-2" class="label_txt">사이트 A</label></span>
+						</div><!-- // checkArea -->
+						<!-- // 이메일 수신 -->
+
+						<div class="tit mt5"><strong>문자 수신</strong></div>
+						<div class="allCheckLine">
+							<span class="chk fl">
+								<input type="checkbox" id="select_site3" name="check3" class="checkBox" checked data-role="none"><label for="select_site3" class="label_txt">E:LAND MALL</label>
+							</span>
+							<button type="button" class="btn white w60" id="check_sms"><span>전체선택</span></button>
+						</div><!-- // allCheckLine -->
+						<div class="checkArea">
+							<span class="chk"><input type="checkbox" id="select_site3-1" name="check3"  class="checkBox" data-role="none"  /><label for="select_site3-1" class="label_txt">E&middot;LAND RETAIL</label></span>
+							<span class="chk"><input type="checkbox" id="select_site3-2" name="check3" class="checkBox" data-role="none" /><label for="select_site3-2" class="label_txt">사이트 A</label></span>
+						</div><!-- // checkArea -->
+						<!-- // 문자 수신 -->
+
+						<div class="tit mt5"><strong>DM 수신</strong></div>
+						<div class="radioArea">
+							<div class="chkLine"><input type="radio" id="dm1" name="dm" class="radioBtn" data-role="none" /><label for="dm1" class="label_txt">우편수신</label></div>
+							<div class="chkLine"><input type="radio" id="dm2" name="dm" class="radioBtn" data-role="none" /><label for="dm2" class="label_txt">수신안함</label></div>
+						</div><!-- // radioArea -->
+						<!-- // DM 수신 -->
+					</fieldset>
+				</div><!-- // fieldDiv :: 마케팅 정보 수신동의 -->
+
+
+				<!-- 부가정보 -->
+				<div class="fieldDiv bLine mt15">
+					<fieldset>
+						<legend class="tit_bl">부가정보</legend>
+						<div class="radioArea">
+							<span class="chk"><input type="radio" id="wedding1" name="radio2" class="radioBtn" data-role="none" /><label for="wedding1" class="label_txt">기혼</label></span>
+							<span class="chk"><input type="radio" id="wedding2" name="radio2" class="radioBtn" data-role="none" /><label for="wedding2" class="label_txt">미혼</label></span>
+						</div><!-- // radioArea -->
+						<div class="element m1 placeholderBox">
+							<label for="weddingday" class="placeholder">결혼기념일</label>
+							<input type="date" id="weddingday" name="" class="input_text" data-role="none" placeholder="결혼기념일" />
+						</div><!-- // element -->
+						
+						<!-- 자녀정보 -->
+						<div class="childWrap mt5">
+							<div class="tit">
+								<strong>자녀정보</strong>
+								<button type="button" class="btn white w40 childAdd" title="추가"><span>추가</span></button>
+							</div>
+
+							<div class="childInfo">
+								<div class="childDiv">
+									<div class="tit">
+										<strong>자녀정보</strong><button type="button" class="btn white w40 childRemove"><span>삭제</span></button>
+									</div>
+									<div class="element">
+										<div class="ui-grid-a">
+											<div class="ui-block-a w30">
+												<select class="selectBox" id="" data-role="none">
+													<option value="">선택</option>
+													<option value="">남</option>
+													<option value="">여</option>
+												</select>
+											</div>
+											<div class="ui-block-b w70">
+												<input type="text" id="" name="" class="input_text" placeholder="이름" data-role="none" />
+											</div>
+										</div>
+									</div><!-- // element -->
+									<div class="element">
+										<div class="ui-grid-a">
+											<div class="ui-block-a w30">
+												<select class="selectBox" id="" data-role="none">
+													<option value="">선택</option>
+													<option value="">양력</option>
+													<option value="">음력</option>
+												</select>
+											</div>
+											<div class="ui-block-b w70">
+												<div class="placeholderBox">
+													<label for="childBirth" class="placeholder">생년월일</label>
+													<input type="date" id="childBirth" name="" class="input_text" placeholder="생년월일" data-role="none" />
+												</div>
+											</div>
+										</div>
+									</div><!-- // element -->
+								</div><!-- // childDiv -->
+
+							</div><!-- // childInfo -->
+
+						</div><!-- // childWrap :: 자녀정보 -->
+					</fieldset>
+				</div><!-- // fieldDiv :: 부가정보 -->
+
+				<div class="btnDiv taC mt20 ui-grid-a">
+					<div class="ui-block-a"><a href="#" class="btn white large"><span>취소</span></a></div>
+					<div class="ui-block-b"><button type="button" class="btn blue large"><span>수정완료</span></button></div>
+				</div>
+
+			</div><!-- // content -->
+
+		</section>
+	</div><!-- // container -->
+
+	<!-- goTop button -->
+	<button type="button" class="btn_goTop" data-role="none"><span class="blind">맨위로</span></button>
+	<!-- // goTop button -->
+
+</div><!-- // dvwrap -->
+
+</body>
+</html>

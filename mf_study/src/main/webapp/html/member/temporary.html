@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+</head>
+
+<body>
+
+<div class="fullPopup"><!-- data-role="popup" id="pagePopup2" data-url="pagePopup2" data-overlay-theme="a" -->
+
+	<div class="popWrap fix max"><!-- // 2016-03-25 class  fix,max 추가 -->
+
+		<div class="popHeader">
+			<div class="heads">
+				<h1>임시 비밀번호 로그인 안내</h1>
+				<a href="#dvwrap" data-rel="back" class="btn_head popClose"><span class="blind">닫기</span></a>
+			</div>
+		</div>
+
+		<div class="container pop">
+			
+			<div class="popContent popGuide">
+				
+				<div class="taC">
+					<p class="cntGuide3 f_point"><strong>고객님은 임시 발급된 비밀번호로<br />로그인 하셨습니다.</strong></p>
+					<p class="cntGuide mt15">안전한 비밀번호로 변경해주세요!</p>
+				</div>
+				<div class="popGuideBox mt20">
+
+					<!-- 2016-03-21 클래스 수정 -->
+					<p class="f_small"><span>&middot;</span> 안전한 개인정보 보호를 위해 임시 비밀번호를 변경해주세요.</p>
+					<!-- // 2016-03-21 클래스 수정 -->
+					
+					<!-- 2016-03-18 삭제
+					<p class="f_point">* 안전한 개인정보 보호를 위해 임시 비밀번호를 변경해주세요.</p>
+					-->
+				</div>
+				<div class="btnDiv mt40 ui-grid-a taC">
+					<div class="ui-block-a"><a href="#" class="btn white pop" data-rel="back"><span>다음에 변경</span></a></div>
+					<div class="ui-block-b"><a href="#" class="btn blue pop" data-rel="back"><span>지금 변경</span></a></div>
+				</div><!-- // btnDiv -->
+
+			</div><!-- // content -->
+
+		</div><!-- // container -->
+
+	</div><!-- // popWrap -->
+
+</div><!-- // pagePopup2 :: 팝업 page 끝 -->
+
+
+</body>
+</html>

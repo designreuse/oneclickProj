@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>E:LAND RETAIL OneClick</title>
+<meta charset="utf-8" />
+<meta content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="Viewport" />
+<link rel="stylesheet" href="../../css/oneclick_mobile.css" type="text/css" />
+<!-- ============= JQM=============== -->
+<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	// jquery mobile 사용시 로컬에서 안보일때
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+</script> 
+<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+<!-- // ============= JQM=============== -->
+<script src="../../js/oneclick_mobile.js"></script>
+</head>
+
+<body>
+<div id="dvwrap" data-role="page">
+
+	<header data-role="header" data-position="fixed" data-tap-toggle="false">
+		<div class="heads">
+			<h1><a href="#">E:LAND RETAIL OneClick</a></h1>
+			<a href="#leftpanel" class="btn_head open hdMenu"><span class="blind">전체메뉴보기</span></a>
+		</div>
+	</header>
+
+	<!-- left menu :: 왼쪽 슬라이드 gnb 영역 시작 -->
+	<div id="leftpanel" class="leftMenu" data-role="panel" data-position="left" data-display="overlay" data-dismissible="false">
+		<div class="menuWrap">
+
+			<div class="leftTop">
+				<h2>E:LAND RETAIL OneClick</h2>
+				<a href="javascript:;" class="btn_head close" data-rel="close"><span class="blind">전체메뉴닫기</span></a>
+			</div><!-- // leftTop -->
+
+			<div class="tabWrap" >
+				<div id="leftMenu1" class="scroller">
+					<nav class="left_list_cont">
+						<ul class="leftList">
+							<li>
+								<a href="#" class="tit">이랜드리테일 원클릭 소개</a> 
+								<ul class="dep2">
+									<li><a href="#">이랜드리테일 원클릭이란?</a></li>
+									<li><a href="#">회원 가입/탈퇴 안내</a></li>
+									<li><a href="#">이랜드리테일 멤버십 소개</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" class="tit">약관</a> 
+								<ul class="dep2">
+									<li><a href="#">이랜드리테일 멤버십 이용약관</a></li>
+									<li><a href="#">온라인 서비스 이용약관</a></li>
+									<li><a href="#">개인정보 취급방침</a></li>
+									<li><a href="#">영상정보처리기기운영, 관리방침</a></li>
+									<li><a href="#">입점상담 동의사항</a></li>
+								</ul>							
+							</li>
+							<li>
+								<a href="#" class="tit">회원정보</a> 
+								<ul class="dep2">
+									<li><a href="#">아이디/비밀번호 찾기</a></li>
+									<li><a href="#">회원가입</a></li>
+									<li><a href="#">회원정보 수정</a></li>
+									<li><a href="#">회원탈퇴</a></li>
+								</ul>							
+							</li>	
+							<li>
+								<a href="#" class="tit">고객센터</a> 
+								<ul class="dep2">
+									<li><a href="#">공지사항</a></li>
+									<li><a href="#">자주묻는 질문</a></li>
+								</ul>							
+							</li>	
+						</ul><!--  // leftList -->
+					</nav><!--  // left_list_cont -->
+				</div><!-- // leftMenu1 :: 스크롤영역 -->
+				
+				<!-- 2016-03-15 수정 -->
+				<div class="customerBox">
+					<div class="tit"><span>고객센터</span></div>
+					<div class="telBox">
+						<a href="tel:1899-9500" rel="external"><span class="txt">통합몰</span><span class="tel">1899-9500</span></a><!-- // 2016-03-23 수정 -->
+						<a href="tel:1588-0001" rel="external"><span class="txt">통합홈페이지</span><span class="tel">1588-0001</span></a>
+					</div>
+					<span class="f_small">상담시간 오전 9시~오후 6시</span>
+				</div><!-- // customerBox :: 고객센터 -->
+				<!-- // 2016-03-15 수정 -->
+
+			</div><!-- // tabWrap -->
+
+		</div><!-- // menuWrap -->
+	</div><!-- // left menu :: 왼쪽 슬라이드 gnb 끝 -->
+
+	<div class="container main">
+		<div class="mainWrap">
+			<div class="mainVisual">
+				<h2 class="blind">이랜드원클릭 주요서비스</h2>
+
+				<!-- 슬라이드 시작 :: 2016-03-21 수정 -->
+				<div class="swiper-container-main">
+					<div class="visualArea swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="visualBox v1">
+								<a href="#">
+									<span class="ir_main icon mouse"></span>
+									<strong class="title"><span class="t1">이랜드리테일</span><br /><span class="t2"><em>원클릭</em>이란?</span></strong>
+									<span class="ir_main plus blue"></span>
+									<span class="tit"><em>E:LAND RETAIL OneClick</em>이란,</span>
+									<span class="desc">한 개의 아이디와 패스워드로 이랜드리테일<br />온라인 제휴사이트를 모두 이용하실 수 있는<br />온라인 통합 멤버십입니다.</span>
+								</a>
+							</div><!-- // visualBox -->
+						</div><!-- // swiper-slide :: 이랜드리테일 원클릭이란? -->
+						<div class="swiper-slide">
+							<div class="visualBox v2">
+								<a href="#">
+									<span class="ir_main icon card"></span>
+									<strong class="title"><span class="t1">이랜드리테일</span><br /><span class="t2"><em>멤버십포인트</em>란?</span></strong>
+									<span class="ir_main plus green"></span>
+									<span class="tit"><em>이랜드리테일 멤버십포인트</em>란,</span>
+									<span class="desc">쇼핑시 적립된 포인트를 <br />현금처럼 사용할 수 있는 이랜드 유통의<br />새로운 통합포인트입니다.</span>
+								</a>
+							</div><!-- // visualBox -->
+						</div><!-- // swiper-slide :: 이랜드리테일 멤버십 포인트란? -->
+						<div class="swiper-slide">
+							<div class="visualBox v3">
+								<a href="#">
+									<span class="ir_main icon pen"></span>
+									<strong class="title"><span class="t1">이랜드리테일</span><br /><span class="t2"><em>간편 회원가입</em>하기</span></strong>
+									<span class="ir_main plus yellow"></span>
+									<span class="tit"><em>이랜드리테일 원클릭</em>은</span>
+									<span class="desc">최소한의 정보 입력과 간편한 가입절차를 통해 <br />쉽고 빠르게 이랜드리테일 서비스를<br />이용하실 수 있습니다.</span>
+								</a>
+							</div><!-- // visualBox -->
+						</div><!-- // swiper-slide :: 이랜드리테일 원클릭 간편회원가입하기  -->
+					</div>
+					<div class="swiper-pagination"></div>
+				</div><!-- // swiper-container -->
+				<!-- //  슬라이드 끝 :: 2016-03-21 수정 -->
+
+			</div><!-- // mainVisual -->
+
+			<div class="mainNoticeArea">
+				<div class="mainNotice">
+					<h3>공지</h3>
+					<div class="viewDiv ellipsis"><a href="#">공지사항 내용이 보여집니다. 공지사항 내용이 보여집니다.공지사항 내용이 보여집니다.</a></div>
+				</div>
+			</div><!-- // mainNoticeArea-->
+
+		</div><!-- // mainWrap -->
+	</div>
+
+	<footer id="footer" data-role="footer">
+		<div class="bnrArea">
+			<div class="familySite">
+				<strong>E:LAND FAMILY SITE</strong>
+				<div class="slideBnr">
+					<button type="button" class="btn_slide prev swiper-button-prev" data-role="none" ><span class="blind">이전</span></button>
+					<div class="slideWrap swiper-container-footer">
+						<ul class="slideList swiper-wrapper">
+							<li class="swiper-slide"><a href="#">통합몰</a></li>
+							<!--<li class="swiper-slide"><a href="#">E&middot;LAND RETAIL</a></li>
+							
+							<li class="swiper-slide"><a href="#">FAMILY SITE 1</a></li>
+							<li class="swiper-slide"><a href="#">FAMILY SITE 2</a></li>
+							-->
+						</ul>
+					</div>
+					<button type="button" class="btn_slide next swiper-button-next" data-role="none"><span class="blind">다음</span></button>
+				</div>
+			</div>
+		</div><!-- // bnrArea -->
+		<div class="footerInfo">
+			<div class="infoMenu">
+				<ul>
+					<li><a href="#">서비스이용약관</a></li>
+					<li><a href="#" rel="external" class="f_st">개인정보취급방침</a></li>
+					<li><a href="#">영상정보처리기기 운영, 관리방침</a></li>
+					<li><a href="#">윤리사무국</a></li>
+					<li><a href="#">사이트맵</a></li>
+				</ul>
+				<address><span class="addr">(주)이랜드리테일 서울 서초구 잠원동 70-2</span><span>개인정보보호 책임자 : 대표이사 김연배</span></address>
+				<p class="copy">COPYRIGHT &copy;2016 by E.LAND Group All rights reserved.</p>
+			</div><!-- // infoMenu -->
+		</div><!-- // footerInfo -->
+	</footer><!-- // footer -->
+	
+	<!-- goTop button -->
+	<button type="button" class="btn_goTop" data-role="none"><span class="blind">맨위로</span></button>
+	<!-- // goTop button -->
+
+</div><!-- // dvwrap -->
+
+<script>
+$(document).ready(function(){ 
+
+	// main slide
+	var swiper = new Swiper('.swiper-container-main', {
+		pagination: '.swiper-pagination',
+		paginationClickable: true,
+		loop: true
+	});
+	
+	// footer slide 2016-03-30 수정
+	if( $(".slideList li").length <= 1 ){
+		var swiper = new Swiper('.swiper-container-footer', {
+			autoplay: false,
+			loop: false
+		});
+		$(".btn_slide").hide();
+	} else {
+		var swiper = new Swiper('.swiper-container-footer', {
+			//pagination: '.swiper-pagination',
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			paginationClickable: true,
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoplay: 2500,
+			autoplayDisableOnInteraction: false,
+			loop: true
+		});
+	}
+
+});
+</script>
+</body>
+</html>
+
+
+
+

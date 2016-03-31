@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eland.ngoc.common.dao.EmailDao">
+
+	<!-- 메일 발송 테이블 데이터 Insert -->
+	<insert id="insertDmailInfo" parameterType="com.eland.ngoc.common.model.Email">
+	<![CDATA[
+		INSERT /* com.eland.ngoc.common.dao.EmailDao.insertDmailInfo  */ 
+		  INTO IM_DMAIL_INFO_3 (
+	            SEQIDX
+	          , SUBJECT
+	          , QRY
+	          , REJECT_SLIST_IDX
+	          , BLOCK_GROUP_IDX
+	          , MAILFROM
+	          , MAILTO
+	          , REPLYTO
+	          , ERRORSTO
+	          , HTML
+	          , ENCODING
+	          , CHARSET
+	          , SDATE
+	          , TDATE
+	          , DURATION_SET
+	          , CLICK_SET
+	          , SITE_SET
+	          , ATC_SET
+	          , GUBUN
+	          , RNAME
+	          , MTYPE
+	          , U_IDX
+	          , G_IDX
+	          , MSGFLAG
+	          , MAILIDX, SERVER_ID
+	          , TRAN_DATE
+	          , CONTENT) 
+		VALUES ( 	IM_SEQ_DMAIL_INFO_3.NEXTVAL          
+		          , #{subject}	                         
+		          , #{qry}							       
+		          , 0                                     
+		          , 0                                    
+		          , #{mailFrom}  		                 
+		          , #{mailTo}			                 
+		          , #{replyTo}				              
+		          , #{errorSto}				              
+		          , 1                                      
+		          , 0                                    
+		          , 'utf-8'                              
+		          , to_char(sysdate,'yyyyMMddHHmmss')                              
+		          , to_char(sysdate,'yyyyMMddHHmmss')
+		          , 0                                    
+		          , 0                                    
+		          , 0                                    
+		          , 0                                     
+		          , ''                                   
+		          , #{rname}                             
+		          , 1                                    
+		          , 1                                    
+		          , 1                                    
+		          , 0                                   
+		          , 0                                     
+		          , ''                                    
+		          , ''		                              
+		          , #{content}                           
+		         )
+		         ]]>
+	</insert>
+	
+	<!-- 메일 발송 테이블 데이터 Insert -->
+	<insert id="insertDmailInfoQa" parameterType="com.eland.ngoc.common.model.Email">
+	<![CDATA[
+		INSERT /* com.eland.ngoc.common.dao.EmailDao.insertDmailInfoQa  */ 
+		  INTO IM_DMAIL_INFO_5 (
+	            SEQIDX
+	          , SUBJECT
+	          , QRY
+	          , REJECT_SLIST_IDX
+	          , BLOCK_GROUP_IDX
+	          , MAILFROM
+	          , MAILTO
+	          , REPLYTO
+	          , ERRORSTO
+	          , HTML
+	          , ENCODING
+	          , CHARSET
+	          , SDATE
+	          , TDATE
+	          , DURATION_SET
+	          , CLICK_SET
+	          , SITE_SET
+	          , ATC_SET
+	          , GUBUN
+	          , RNAME
+	          , MTYPE
+	          , U_IDX
+	          , G_IDX
+	          , MSGFLAG
+	          , MAILIDX, SERVER_ID
+	          , TRAN_DATE
+	          , CONTENT) 
+		VALUES ( 	IM_SEQ_DMAIL_INFO_5.NEXTVAL          
+		          , #{subject}	                         
+		          , #{qry}							       
+		          , 0                                     
+		          , 0                                    
+		          , #{mailFrom}  		                 
+		          , #{mailTo}			                 
+		          , #{replyTo}				              
+		          , #{errorSto}				              
+		          , 1                                      
+		          , 0                                    
+		          , 'utf-8'                              
+		          , SYSDATE                              
+		          , SYSDATE                              
+		          , 0                                    
+		          , 0                                    
+		          , 0                                    
+		          , 0                                     
+		          , ''                                   
+		          , #{rname}                             
+		          , 1                                    
+		          , 1                                    
+		          , 1                                    
+		          , 0                                   
+		          , 0                                     
+		          , ''                                    
+		          , ''		                              
+		          , #{content}                           
+		         )
+		         ]]>
+	</insert>
+	
+	<!-- 메일 발송 테이블 데이터 Insert -->
+	<insert id="insertDmailInfoPrd" parameterType="com.eland.ngoc.common.model.Email">
+	<![CDATA[
+		INSERT /* com.eland.ngoc.common.dao.EmailDao.insertDmailInfoPrd  */ 
+		  INTO IM_DMAIL_INFO_5 (
+	            SEQIDX
+	          , SUBJECT
+	          , QRY
+	          , REJECT_SLIST_IDX
+	          , BLOCK_GROUP_IDX
+	          , MAILFROM
+	          , MAILTO
+	          , REPLYTO
+	          , ERRORSTO
+	          , HTML
+	          , ENCODING
+	          , CHARSET
+	          , SDATE
+	          , TDATE
+	          , DURATION_SET
+	          , CLICK_SET
+	          , SITE_SET
+	          , ATC_SET
+	          , GUBUN
+	          , RNAME
+	          , MTYPE
+	          , U_IDX
+	          , G_IDX
+	          , MSGFLAG
+	          , MAILIDX, SERVER_ID
+	          , TRAN_DATE
+	          , CONTENT) 
+		VALUES ( 	IM_SEQ_DMAIL_INFO_5.NEXTVAL          
+		          , #{subject}	                         
+		          , #{qry}							       
+		          , 0                                     
+		          , 0                                    
+		          , #{mailFrom}  		                 
+		          , #{mailTo}			                 
+		          , #{replyTo}				              
+		          , #{errorSto}				              
+		          , 1                                      
+		          , 0                                    
+		          , 'utf-8'                              
+		          , SYSDATE                              
+		          , SYSDATE                              
+		          , 0                                    
+		          , 0                                    
+		          , 0                                    
+		          , 0                                     
+		          , ''                                   
+		          , #{rname}                             
+		          , 1                                    
+		          , 1                                    
+		          , 1                                    
+		          , 0                                   
+		          , 0                                     
+		          , ''                                    
+		          , ''		                              
+		          , #{content}                           
+		         )
+		         ]]>
+	</insert>		
+	
+	<!-- 이메일 템플릿 조회 -->	
+	<select id="selectEmailTemplete" parameterType="map" resultType="com.eland.ngoc.common.model.EmailTemplete">
+		SELECT /* com.eland.ngoc.common.dao.CommonDao.insertAutoLoginToken  */
+				TEMPL_SEQ				AS templSeq
+			  , TEMPL_TYPE				AS templType
+			  , TEMPL_TITLE				AS templTitle
+			  , TEMPL_CONT				AS templCont
+			  , USE_YN					AS useYn
+			  , INS_DATE				AS insDate
+			  , INS_USER				AS insUser
+			  , UPD_DATE				AS updDate
+			  , UPD_USER				AS updUser
+		 FROM OC_EMAIL_TEMPL
+		 WHERE TEMPL_TYPE = #{templType}
+		   AND USE_YN = 'Y' 
+	</select>	
+</mapper>
