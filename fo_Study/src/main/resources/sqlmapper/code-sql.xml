@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eland.ngoc.common.dao.CodeDao">
+
+	<!-- 코드그룹 정보 조회 -->
+	<select id="selectCodeGroup" parameterType="map">
+		SELECT /* com.eland.ngoc.common.dao.CodeDao.selectCodeGroup  */
+				CODE_GROUP_ID			AS codeGroupId
+			  , CODE_GROUP_NAME			AS codeGroupName
+			  , CODE_GROUP_TYPE			AS codeGroupType
+			  , CODE_GROUP_DESC			AS codeGroupDesc
+			  , INS_DATE				AS insDate
+			  , INS_USER				AS insUser
+			  , UPD_DATE				AS updDate
+			  , UPD_USER				AS updUser
+		  FROM OC_CODE_GROUP
+		  WHERE CODE_GORUP_ID = #{codeGroupId}
+	</select>
+	
+	<!-- 코드 정보 조회 -->
+	<select id="selectCode" parameterType="map">
+		SELECT /* com.eland.ngoc.common.dao.CodeDao.selectCode  */
+				CODE_GROUP_ID			AS codeGroupId
+			  , CODE					AS code
+			  , CODE_NAME				AS codeName
+			  , CODE_DESC				AS codeDesc
+			  , SORT					AS sort
+			  , USE_YN					AS useYn
+			  , INS_DATE				AS insDate
+			  , INS_USER				AS insUser
+			  , UPD_DATE				AS updDate
+			  , UPD_USER				AS updUser
+		  FROM OC_CODE
+		  WHERE CODE = #{code}
+	</select>
+	
+	<!-- 코드 정보 조회 -->
+	<select id="selectCodeList" parameterType="map" resultType="java.util.List">
+		SELECT /* com.eland.ngoc.common.dao.CodeDao.selectCodeList  */
+				CODE_GROUP_ID			AS codeGroupId
+			  , CODE					AS code
+			  , CODE_NAME				AS codeName
+			  , CODE_DESC				AS codeDesc
+			  , SORT					AS sort
+			  , USE_YN					AS useYn
+			  , INS_DATE				AS insDate
+			  , INS_USER				AS insUser
+			  , UPD_DATE				AS updDate
+			  , UPD_USER				AS updUser
+		  FROM OC_CODE
+		  WHERE CODE_GROUP_ID = #{codeGroupId}
+	</select>
+	
+</mapper>

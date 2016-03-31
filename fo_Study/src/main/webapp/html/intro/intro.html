@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>E-land OneClick</title>
+<link rel="stylesheet" href="../../css/oneclick.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easing.1.3.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<script src="../../js/common.js"></script><!-- 공통 스크립트 -->
+<script src="../../js/jquery.modalLayer.js"></script><!-- 모달팝업 -->
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="header">
+		<div class="topHead">
+			<h1><a href="">E:LAND RETAIL OneClick</a></h1>
+			<div class="gnb">
+				<ul class="gnbList">
+					<li><a href="#" class="current">이랜드리테일 원클릭 소개</a></li><!-- 2016-02-24 현재 페이지 표시 :: a에 addClass current -->
+					<li><a href="#">약관</a></li>
+					<li><a href="#">회원정보</a></li>
+					<li><a href="#">고객센터</a></li>
+				</ul>
+			</div>
+			<!-- // gnb -->
+		</div><!-- // topHead -->
+	</div><!-- // header -->
+
+	<div id="container">
+		<div class="lineMap">
+			<div class="path">
+				<span class="home">HOME</span>
+				<span>이랜드리테일 원클릭 소개</span><!-- 2016-02-25 수정 -->
+				<span class="current">이랜드리테일 원클릭이란?</span><!-- 2016-02-25 수정 -->
+			</div>
+		</div><!-- // lineMap -->
+
+		<div class="contentWrap">
+			<div class="sideArea">
+				<h2>이랜드리테일<br />원클릭 소개</h2><!-- 2016-02-25 수정 -->
+				<div class="sideMenu">
+					<ul class="menuList">
+						<li class="dep1"><a href="#" class="current">이랜드리테일 원클릭이란?</a></li><!-- 메뉴 활성화시 a에 addClass current :: 2016-02-25 수정 -->
+						<li class="dep1"><a href="#">회원가입/탈퇴안내</a></li>
+						<li class="dep1"><a href="#">이랜드리테일 멤버십소개</a></li><!-- 2016-02-25 수정 -->
+					</ul>
+				</div>
+			</div><!-- // sideArea -->
+			
+			<!-- 컨텐츠 상세 영역 시작 :: 2016-02-25 수정 -->
+			<div class="content">
+				<h3>이랜드리테일 원클릭이란?</h3>
+				<strong class="tit_bl">'이랜드리테일 원클릭'이란?</strong>
+				<p class="taC pageGuide mt35"><strong class="f_point">이랜드리테일 원클릭</strong>(<strong class="f_point f_en">E:LAND RETAIL OneClick</strong>)은 한 개의 아이디와 패스워드로<br />이랜드리테일 온라인 사이트를 모두 이용하실 수 있는 <strong class="f_point">온라인 통합 멤버십</strong>입니다.</p>
+				
+				<div class="introBox">
+					<strong class="tit">E:LAND RETAIL OneClick</strong>
+					<ul class="eland">
+						<li class="e1">E:LAND MALL</li>
+						<li class="e2">E&middot;LAND RETAIL</li>
+					</ul>
+					<div class="partnerList mt30">
+						<ul>
+							<li><img src="../../img/images/bnr_partner01.gif" alt="New Core" /></li>
+							<li><img src="../../img/images/bnr_partner02.gif" alt="Modern House" /></li>
+							<li><img src="../../img/images/bnr_partner03.gif" alt="NC" /></li>
+							<li><img src="../../img/images/bnr_partner04.gif" alt="New Core Outlet" /></li>
+							<li><img src="../../img/images/bnr_partner05.gif" alt="DONGA" /></li>
+							<li><img src="../../img/images/bnr_partner06.gif" alt="2001 Outlet" /></li>
+							<li><img src="../../img/images/bnr_partner07.gif" alt="E:LAND RETAIL" /></li>
+							<li><img src="../../img/images/bnr_partner08.gif" alt="엔씨 백화점 문화센터" /></li>
+							<li><img src="../../img/images/bnr_partner09.gif" alt="Kids Hall" /></li>
+							<li><img src="../../img/images/bnr_partner10.gif" alt="뉴코아아울렛 문화센터" /></li>
+							<li><img src="../../img/images/bnr_partner11.gif" alt="이천일 아울렛 문화센터" /></li>
+							<li><img src="../../img/images/bnr_partner12.gif" alt="동아문화센터" /></li>
+							<li><img src="../../img/images/bnr_partner13.gif" alt="New Core 소극장" /></li>
+						</ul>
+					</div>
+				</div><!-- // introBox -->
+				<div class="btnDiv taC mt30">
+					<a href="#" class="btn blue large"><span>이랜드리테일 원클릭 가입</span></a>
+				</div>
+			</div>
+			<!-- // content :: 컨텐츠 상세 영역 끝 :: 2016-02-25 수정 -->
+
+		</div><!-- // contentWrap -->
+
+	</div><!-- // container -->
+	
+	<div id="footer">
+		<div class="bnrArea">
+			<div class="familySite">
+				<strong>E:LAND FAMILY SITE</strong><!-- // 2016-02-24 수정 -->
+				<div class="slideBnr" id="slider">
+					<button type="button" class="btn_slide prev" id="prev2"><span class="blind">이전</span></button>
+					<div class="slideWrap">
+						<ul class="slideList" id="banner">
+							<li><a href="http://www.elandmall.co.kr" target="_blank">E:LAND MALL</a></li>
+							<li><a href="http://www.ecore.co.kr" target="_blank">E&middot;LAND RETAIL</a></li>
+							<li><a href="">FAMILY SITE 1</a></li>
+							<li><a href="">FAMILY SITE 2</a></li>
+						</ul>
+					</div>
+					<button type="button" class="btn_slide next" id="next2"><span class="blind">다음</span></button>
+				</div>
+			</div>
+		</div><!-- // bnrArea -->
+		<div class="footerInfo">
+			<strong class="f_logo">E:LAND RETAIL OneClick</strong>
+			<div class="infoMenu">
+				<ul>
+					<li class="first"><a href="#">서비스이용약관</a></li>
+					<li><a href="#">개인정보취급방침</a></li>
+					<li><a href="#">영상정보처리기기 운영, 관리방침</a></li>
+					<li><a href="#">윤리사무국</a></li>
+					<li><a href="#">사이트맵</a></li>
+				</ul>
+				<address><span class="addr">(주)이랜드리테일 서울 서초구 잠원동 70-2</span> <span>개인정보보호 책임자 : 대표이사 김연배</span></address>
+				<p class="copy">COPYRIGHT &copy;2016 by E:LAND Group All rights reserved.</p><!-- // 2016-02-24 수정 -->
+			</div><!-- // infoMenu -->
+			<!-- 2016-03-17 수정 -->
+			<div class="customerBox">
+				<div class="tit"><strong>고객센터</strong><span class="f_small">상담시간 오전 9시~오후 6시</span></div>
+				<div class="telBox">
+					<ul>
+						<li><span class="txt">통합몰</span> <span class="tel">1899-9500</span></li>
+						<li><span class="txt">통합홈페이지</span> <span class="tel">1588-0001</span></li>
+					</ul>
+				</div>
+			</div>
+			<!-- // 2016-03-17 수정 -->
+		</div><!-- // footerInfo -->
+	</div><!-- // footer -->
+
+</div><!-- // wrapper -->
+
+<script>
+	$(document).ready(function () {
+		// 제휴사 슬라이드 배너
+		fn_rollToEx('slider', 'banner', 'control', 2, true);
+	});
+</script>
+
+</body>
+</html>

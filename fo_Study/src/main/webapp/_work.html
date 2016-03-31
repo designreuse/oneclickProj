@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>INTUNE - E-land OneClick 작업현황 (WEB)</title>
+<style type="text/css">
+	*{margin:0; padding:0;}
+	body{width:100%; height:100%;  font-family:"Malgun Gothic"; font-size:13px; margin:0; padding:0;}
+	a{color:#9d4e14; text-decoration:underline;}
+	#wrapper{padding:10px 15px 15px;}
+	#wrapper h1{font-size:22px; text-align:center; letter-spacing:-1px; margin-bottom:15px}
+	#wrapper table{width:100%; border-collapse:collapse;}
+	#wrapper table thead th{text-align:center;}
+	#wrapper table th,
+	#wrapper table td{ vertical-align:middle; padding:7px 10px 9px; border:1px solid #d2c8bb;}
+	#wrapper table td.cls{font-size:14px; font-weight:bold;}
+	#wrapper table .title1{font-size:13px; background-color:#fe8820; color:#fff;}
+	#wrapper table .title2{background-color:#f7f7f7; color:#707070;}
+	#wrapper table .title3{background-color:#dfdfdf; color:#707070;}
+	#wrapper table tr.ca th,
+	#wrapper table tr.ca td{border-top:1px solid #887b66;}
+	#wrapper table tbody tr.ok th,
+	#wrapper table tbody tr.ok td{background:#9b9b9b; color:#fff;}
+	#wrapper table tbody tr.ok td a:link,
+	#wrapper table tbody tr.ok td a:visited,
+	#wrapper table tbody tr.ok td a:hover{color:#fff;}
+	#wrapper table tbody tr.ok2 th,
+	#wrapper table tbody tr.ok2 td{background:#dd911a; color:#fff;}
+	#wrapper table tbody tr.ok2 td a:link,
+	#wrapper table tbody tr.ok2 td a:visited,
+	#wrapper table tbody tr.ok2 td a:hover{color:#fff;}
+	#wrapper table tbody tr.ok3 th,
+	#wrapper table tbody tr.ok3 td{background:#d55a00; color:#fff;}/*background:#a66a0b;*/
+	#wrapper table tbody tr.ok3 td a:link,
+	#wrapper table tbody tr.ok3 td a:visited,
+	#wrapper table tbody tr.ok3 td a:hover{color:#fff;}
+	#wrapper table tbody tr td .today{background:#000; color:#fff;}
+	/*#wrapper table tbody tr td.cm{color:#ccc;}*/
+	#wrapper table tbody tr.ok td.cm,#wrapper table tbody tr.ok2 td.cm{color:#fff; vertical-align:top; line-height:16px;}
+	#wrapper table tbody tr.gd td{background:#f2ebe1;}
+	.workGuide{position:relative; overflow:hidden; margin:0 0 10px;}
+	.style{float:left; overflow:hidden;}
+	.style li{float:left; list-style:none; color:#666; font-size:11px; padding:0 15px 0 0;}
+	.style li span{display:inline-block; *display:inline; *zoom:1; width:8px; height:8px;}
+	.style li span.ok{background:#9b9b9b}
+	.style li span.ing{background:#dd911a}
+	.style li span.modi{background:#777}
+	.notify{color:#888; font-size:11px; font-style:italic; margin:0 0 10px; border:1px dotted #d2c8bb; padding:3px 5px 5px 5px;}
+	.by{float:right; color:#9d4e14; font-size:11px; text-decoration:underline;}
+</style>
+</head>
+<body>
+<div id="wrapper">
+	<h1>INTUNE - E-land OneClick 작업현황 (WEB)</h1>
+	<div class="workGuide">
+		<ul class="style">
+			<!--<li><span class="ok"></span> 작업완료</li>-->
+			<li><span class="modi"></span> 내부수정사항</li>
+			<li><span class="ing"></span> 수정 or 이슈발생</li>
+		</ul>
+		<span class="by">* myoung.hyunju@eland.co.kr</span>
+	</div>
+	<div class="notify">
+		<strong> :</strong> - 
+	</div>
+
+	<table border="0" cellpadding="0" cellspacing="0">
+		<colgroup>
+			<col width="15%" />
+			<col width="15%" />
+			<col width="15%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="25%" />
+		</colgroup>
+		<thead>
+			<tr class="title1">
+				<th colspan="4">DEPTH</th>
+				<th colspan="3">작업 현황</th>
+			</tr>
+			<tr class="title2">
+				<th>Label</th>
+				<th>Label</th>
+				<th>Label</th>
+				<th>Folder</th>
+				<th>File</th>
+				<th>Comment</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="gd">
+				<td class="cls" rowspan="4">가이드</td>
+				<td>기본 레이아웃</td>
+				<td></td>
+				<td rowspan="4">_guide</td>
+				<td><a href="html/_guide/layout.html">layout.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr class="gd">
+				<td rowspan="2">팝업</td>
+				<td></td>
+				<td><a href="html/_guide/alert.html">alert.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr class="gd">
+				<td></td>
+				<td><a href="html/_guide/popup.html">popup.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr class="gd">
+				<td>폼 요소</td>
+				<td></td>
+				<td><a href="html/_guide/form.html">form.html</a></td>
+				<td class="cm"></td>
+			</tr>
+
+			<tr class="">
+				<td class="cls" rowspan="2">공통</td>
+				<td>에러</td>
+				<td></td>
+				<td rowspan="2">common</td>
+				<td><a href="html/common/error_blank.html">error_blank.html</a></td>
+				<td class="cm"><!--2016-02-24 아이콘추가, 텍스트 줄바꿈 수정
+				2016-03-15 텍스트 수정(전화번호)<br />-->2016-03-25 전화번호수정</td>
+			</tr>
+			<tr class="">
+				<td>개인정보 이관 거부 신청</td>
+				<td></td>
+				<td><a href="html/common/privacy.html">privacy.html</a></td>
+				<td class="cm"><!--2016-03-07 추가<br />-->2016-03-16 띄어쓰기 수정</td>
+			</tr>
+
+			<tr class="">
+				<td class="cls" rowspan="2">로그인</td>
+				<td>제휴사이트에서 진입</td>
+				<td></td>
+				<td rowspan="2">login</td>
+				<td><a href="html/login/login_family.html">login_family.html</a></td>
+				<td class="cm"><!--2016-02-24 텍스트 수정--></td>
+			</tr>
+			<tr class="">
+				<td>원클릭사이트에서 진입</td>
+				<td></td>
+				<td><a href="html/login/login_onclick.html">login_onclick.html</a></td>
+				<td class="cm"><!--2016-02-24 상단텍스트 삭제, class 추가--></td>
+			</tr>
+
+			<tr class="ok">
+				<td class="cls" rowspan="1">메인</td>
+				<td></td>
+				<td></td>
+				<td rowspan="1"></td>
+				<td><a href="html/main/main.html">main.html</a></td>
+				<td class="cm"><!--메인 비주얼 영역 수정 예정 / 이미지만 적용된 상태<br />
+				2016-02-16 header, footer(공통) - 이랜드리테일 원클릭 텍스트 수정 <br />
+				2016-02-24 메인키비주얼, 푸터 텍스트, gnb수정 (공통)<br />2016-02-26 메인키비주얼 영역 수정
+				2016-03-15 footer 고객센터 수정(공통)<br />2016-03-17 footer 고객센터 수정(공통)<br />-->2016-03-23 통합몰 전화번호 수정(공통)<br />2016-03-25 E:CORE를 E&middot;LAND RETAIL로 수정(공통)</td>
+			</tr>
+
+			<tr class="ok">
+				<td class="cls" rowspan="3">이랜드원클릭소개</td>
+				<td>이랜드 원클릭이란?</td>
+				<td></td>
+				<td rowspan="3">intro</td>
+				<td><a href="html/intro/intro.html">intro.html</a></td>
+				<td class="cm"><!--2016-02-25 lnb(공통), 텍스트 수정-->2016-03-25 E:CORE를 E·LAND RETAIL로 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>회원가입/탈퇴안내</td>
+				<td></td>
+				<td><a href="html/intro/guide.html">guide.html</a></td>
+				<td class="cm"><!--2016-02-19 수정<br />2016-02-25 텍스트 수정<br />-->2016-03-25  E:CORE를 E&middot;LAND RETAIL로 수정</td>
+			</tr>
+			<tr>
+				<td>이랜드 클럽 멤버십소개</td>
+				<td></td>
+				<td><a href="html/intro/membership.html">membership.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트 수정--></td>
+			</tr>
+
+			<tr class="">
+				<td class="cls" rowspan="9">약관</td>
+				<td  rowspan="2">이랜드 멤버쉽 클럽 이용약관</td>
+				<td>현재 (2016년 2월)</td>
+				<td rowspan="9">terms </td>
+				<td><a href="html/terms/member_terms.html">member_terms.html</a></td>
+				<td class="cm"><!--2016-02-24 메뉴 텍스트, gnb수정 (공통)<br />2016-02-25 lnb 수정(공통),텍스트수정--></td>
+			</tr>
+			<tr>
+				<td>이전 (2013년 1월 15일)</td>
+				<td><a href="html/terms/member_terms_old.html">member_terms_old.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트수정--></td>
+			</tr>
+			<tr>
+				<td rowspan="2">온라인 서비스 이용약관</td>
+				<td>현재 (2016년 2월)</td>
+				<td><a href="html/terms/service_terms.html">service_terms.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr>
+				<td>이전 (2013년 1월 15일)</td>
+				<td><a href="html/terms/service_terms_old.html">service_terms_old.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr>
+				<td rowspan="2">개인정보 취급방침</td>
+				<td>현재 (2016년 2월)</td>
+				<td><a href="html/terms/privacy.html">privacy.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr>
+				<td>이전 버전 보기</td>
+				<td><a href="#">-</a></td>
+				<td class="cm">기존사이트 링크 안나옴</td>
+			</tr>
+			<tr>
+				<td>영상정보처리기기운영, 관리방침</td>
+				<td></td>
+				<td><a href="html/terms/video_manage.html">video_manage.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr>
+				<td>고객상담 동의사항</td>
+				<td></td>
+				<td><a href="html/terms/cs_agree.html">cs_agree.html</a></td>
+				<td class="cm"><!--2016-02-25 삭제--></td>
+			</tr>
+			<tr>
+				<td>입점상담 동의사항</td>
+				<td></td>
+				<td><a href="html/terms/branch_agree.html">branch_agree.html</a></td>
+				<td class="cm"></td>
+			</tr>
+
+			<tr class="">
+				<td class="cls" rowspan="10">공통 (주소검색 팝업)</td>
+				<td rowspan="5">지번주소로 찾기</td>
+				<td>[popup] 주소입력</td>
+				<td rowspan="10">addr_pop</td>
+				<td><a href="html/addr_pop/num_input.html">num_input.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/addr_pop/num_input.html','popup','scrollbars=no, resizable=no, width=560,height=700')">팝업으로 뜨기 test</a><!--<br />2016-03-15 placeholder, title 수정--></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 검색결과리스트</td>
+				<td><a href="html/addr_pop/num_result.html">num_result.html</a></td>
+				<td class="cm"><!--2016-02-24 텍스트 수정<br />2016-03-15 placeholder, title 수정--></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 검색결과없음</td>
+				<td><a href="html/addr_pop/num_result_none.html">num_result_none.html</a></td>
+				<td class="cm"><!--2016-02-24 텍스트 수정<br />2016-03-15 placeholder, title 수정--></td>
+			</tr>
+			<tr>
+				<td>[popup] 상세주소입력</td>
+				<td><a href="html/addr_pop/num_input_detail.html">num_input_detail.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 주소선택</td>
+				<td><a href="html/addr_pop/num_select.html">num_select.html</a></td>
+				<td class="cm"><!--2016-02-22 check,radio<br />2016-02-24 텍스트 수정--></td>
+			</tr>
+
+			<tr class="ok">
+				<td rowspan="5">도로명 주소로 찾기</td>
+				<td>[popup] 주소입력</td>
+				<td><a href="html/addr_pop/road_input.html">road_input.html</a></td>
+				<td class="cm">2016-03-23 ui 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>[popup] 검색결과리스트</td>
+				<td><a href="html/addr_pop/road_result.html">road_result.html</a></td>
+				<td class="cm"><!--2016-02-24 텍스트 수정<br />-->2016-03-23 ui 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>[popup] 검색결과없음</td>
+				<td><a href="html/addr_pop/road_result_none.html">road_result_none.html</a></td>
+				<td class="cm"><!--2016-02-24 텍스트 수정</br />2016-03-15 텍스트 수정<br />-->2016-03-23 ui 수정</td>
+			</tr>
+			<tr>
+				<td>[popup] 상세주소입력</td>
+				<td><a href="html/addr_pop/road_input_detail.html">road_input_detail.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 주소선택</td>
+				<td><a href="html/addr_pop/road_select.html">road_select.html</a></td>
+				<td class="cm"><!--2016-02-22 check,radio<br />2016-02-24 텍스트 수정--></td>
+			</tr>
+
+			<tr>
+				<td class="cls" rowspan="25">회원정보</td>
+				<td rowspan="14">아이디/비밀번호 찾기</td>
+				<td>아이디 찾기</td>
+				<td rowspan="25">member</td>
+				<td><a href="html/member/find_id.html">find_id.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr class="">
+				<td>비밀번호 찾기</td>
+				<td><a href="html/member/find_pw.html">find_pw.html</a></td>
+				<td class="cm"><!--2016-02-22 check,radio<br />2016-02-25 버튼 추가--></td>
+			</tr>
+			<tr>
+				<td>[popup] 아이디 찾기 결과</td>
+				<td><a href="html/member/find_id_result.html">find_id_result.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/find_id_result.html','popup','scrollbars=no, resizable=no, width=420,height=220')">팝업으로 뜨기 test</a></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 임시비번 이메일 발송</td>
+				<td><a href="html/member/find_pw_email.html">find_pw_email.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/find_pw_email.html','popup','scrollbars=no, resizable=no, width=420,height=385')">팝업으로 뜨기 test</a><br />2016-03-15 하단 고객센터 수정<br />2016-03-25 전화번호수정</td>
+			</tr>
+			<tr class="">
+				<td>[popup] 임시비번 sms 발송</td>
+				<td><a href="html/member/find_pw_sms.html">find_pw_sms.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/find_pw_sms.html','popup','scrollbars=no, resizable=no, width=420,height=385')">팝업으로 뜨기 test</a><br />2016-03-15 하단 고객센터 수정<br />2016-03-25 전화번호수정</td>
+			</tr>
+			<tr class="ok">
+				<td>[popup] 탈퇴 취소 신청 안내</td>
+				<td><a href="html/member/secession_pop.html">secession_pop.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/secession_pop.html','popup','scrollbars=no, resizable=no, width=420,height=345')">팝업으로 뜨기 test</a><br />2016-03-25 추가</td>
+			</tr>
+
+			<tr class="">
+				<td>[popup] 휴면안내</td>
+				<td><a href="html/member/id_dormant.html">id_d​ormant.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/id_d​ormant.html','popup','scrollbars=no, resizable=no, width=420,height=380')">팝업으로 뜨기 test</a><!-- <br />2016-02-23 텍스트 수정2016-02-25 텍스트 수정--></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 계정잠금안내</td>
+				<td><a href="html/member/id_lock.html">id_lock.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/id_lock.html','popup','scrollbars=no, resizable=no, width=420,height=345')">팝업으로 뜨기 test</a><!--<br />2016-02-25 텍스트수정(띄어쓰기)--><br />2016-03-15 하단 고객센터 수정<br />2016-03-25 전화번호수정</td>
+			</tr>
+			<tr class="">
+				<td>[popup] 장기간비밀번호미변경안내</td>
+				<td><a href="html/member/change_pw.html">change_pw.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/change_pw.html','popup','scrollbars=no, resizable=no, width=420,height=360')">팝업으로 뜨기 test</a><!--<br />2016-02-25 텍스트수정--></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 추가정보 입력요청 안내</td>
+				<td><a href="html/member/request.html">request.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/request.html','popup','scrollbars=no, resizable=no, width=420,height=220')">팝업으로 뜨기 test</a><!--<br />2016-02-25 텍스트수정--></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 사이트 재사용 안내</td>
+				<td><a href="html/member/reuse.html">reuse.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/reuse.html','popup','scrollbars=no, resizable=no, width=420,height=240')">팝업으로 뜨기 test</a><!--<br />2016-02-19 추가2016-02-25 텍스트수정--></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 제휴사이트 추가 이용 안내</td>
+				<td><a href="html/member/partner.html">partner.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/partner.html','popup','scrollbars=no, resizable=no, width=420,height=220')">팝업으로 뜨기 test</a><!--<br />2016-02-23 추가--></td>
+			</tr>
+			<tr class="">
+				<td>[popup] 사이트이용안내</td>
+				<td><a href="html/member/siteguide.html">siteguide.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/siteguide.html','popup','scrollbars=no, resizable=no, width=560,height=505')">팝업으로 뜨기 test</a><!--br />2016-03-02 추가<br />2016-03-07 수정--></td>
+			</tr>
+			<tr class="ok2">
+				<td>[popup] 무실적계정안내</td>
+				<td><a href="html/member/perform.html">perform.html</a></td>
+				<td class="cm"><a href="#" onClick="javascript:window.open('html/member/perform.html','popup','scrollbars=no, resizable=no, width=420,height=410')">팝업으로 뜨기 test</a><br />2016-03-31 추가</td>
+			</tr>
+
+			<tr class="">
+				<td rowspan="6">회원가입</td>
+				<td>본인확인</td>
+				<td><a href="html/member/join_step1.html">join_step1.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트 수정<br />-->2016-03-15 텍스트 추가</td>
+			</tr>
+			<tr class="ok">
+				<td>약관동의</td>
+				<td><a href="html/member/join_step2.html">join_step2.html</a></td>
+				<td class="cm"><!--2016-02-22 check,radio<br />2016-02-25 텍스트 수정<br />2016-03-07 텍스트 수정<br />-->2016-03-25 E:CORE를 E·LAND RETAIL로 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>정보입력</td>
+				<td><a href="html/member/join_step3.html">join_step3.html</a></td>
+				<td class="cm"><!--2016-02-18 주석표시 (부가정보&gt;자녀정보 테이블 추가 수정)<br />2016-02-19 주석표시 (th에 div추가/테이블colgroup수정)<br />2016-02-22 (자녀정보 테이블  ui수정)<br />2016-02-23 DM 수신 ui 수정<br />2016-02-25 텍스트수정<br />2016-03-02 부가정보 전화번호,자녀수 셀렉트박스삭제 및 테이블클래스 제거<br />2016-03-02 생년월일 양/음력 추가<br />2016-03-07 dm 수신 수정 및 삭제<br />-->2016-03-16 입력창오류문구스크립트및태그추가<br />2016-03-16 td에 클래스 추가<br />2016-03-25 E:CORE를 E·LAND RETAIL로 수정</td>
+			</tr>
+			<tr>
+				<td>가입완료 (제휴사이트)</td>
+				<td><a href="html/member/join_step4.html">join_step4.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트수정--></td>
+			</tr>
+			<tr>
+				<td>가입완료 (원클릭사이트)</td>
+				<td><a href="html/member/join_step4_2.html">join_step4_2.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트수정--></td>
+			</tr>
+			<tr>
+				<td>가입완료 (임직원)</td>
+				<td><a href="html/member/join_step4_3.html">join_step4_3.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트수정--></td>
+			</tr>
+
+
+			<tr class="">
+				<td rowspan="2">회원정보 수정</td>
+				<td>회원정보 수정</td>
+				<td><a href="html/member/info_modify.html">info_modify.html</a></td>
+				<td class="cm"><!--2016-02-18 주석표시 (부가정보&gt;자녀정보 테이블 추가 수정)<br />2016-02-19 주석표시 (th에 div추가/테이블colgroup수정)<br />2016-02-22 (자녀정보 테이블  ui수정)<br />2016-02-23 DM 수신 ui 수정<br />2016-02-25 텍스트수정<br />2016-03-02 부가정보 전화번호,자녀수 셀렉트박스삭제 및 테이블클래스 제거<br />2016-03-02 생년월일 양/음력 추가<br />2016-03-07 dm 수신 수정 및 삭제<br />-->2016-03-16 td에 클래스 추가<br />2016-03-25 E:CORE를 E·LAND RETAIL로 수정</td>
+			</tr>
+			<tr>
+				<td>회원정보 수정완료</td>
+				<td><a href="html/member/info_modi_complete.html">info_modi_complete.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트수정--></td>
+			</tr>
+			<tr class="ok">
+				<td rowspan="3">회원탈퇴</td>
+				<td>탈퇴유형선택</td>
+				<td><a href="html/member/secession_type.html">secession_type.html</a></td>
+				<td class="cm"><!--2016-02-25 탈퇴유형추가<br />-->2016-03-15 클래스 수정<br />2016-03-23 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>탈퇴</td>
+				<td><a href="html/member/secession.html">secession.html</a></td>
+				<td class="cm"><!--2016-02-19 주석표시 (th에 div추가/테이블colgroup수정)<br />2016-02-22 check,radio<br />2016-02-25 텍스트 수정 및 추가<br />-->2016-03-16 텍스트 블릿 수정<br />2016-03-23 텍스트 수정<br />2016-03-25 E:CORE를 E·LAND RETAIL로 수정</td>
+			</tr>
+			<tr>
+				<td>탈퇴 완료</td>
+				<td><a href="html/member/secession_complete.html">secession_complete.html</a></td>
+				<td class="cm"><!--2016-02-25 텍스트수정--></td>
+			</tr>
+
+			<tr>
+				<td class="cls" rowspan="4">고객센터</td>
+				<td rowspan="2">공지사항</td>
+				<td>목록</td>
+				<td rowspan="4">customer</td>
+				<td><a href="html/customer/notice_list.html">notice_list.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr>
+				<td>보기</td>
+				<td><a href="html/customer/notice_view.html">notice_view.html</a></td>
+				<td class="cm"></td>
+			</tr>
+			<tr class="">
+				<td>자주 묻는 질문</td>
+				<td></td>
+				<td><a href="html/customer/faq.html">faq.html</a></td>
+				<td class="cm"><!--2016-02-22 tab 추가--></td>
+			</tr>
+			<tr class="">
+				<td>사이트맵</td>
+				<td></td>
+				<td><a href="html/customer/sitemap.html">sitemap.html</a></td>
+				<td class="cm"><!--2016-02-16 content ~ 이랜드리테일 원클릭 텍스트 수정<br /> 2016-02-25 텍스트 수정--></td>
+			</tr>
+
+			<tr class="ok">
+				<td class="cls" rowspan="13">메일</td>
+				<td>회원가입축하</td>
+				<td></td>
+				<td rowspan="13">mail</td>
+				<td><a href="html/mail/mail_join.html">mail_join.html</a></td>
+				<td class="cm"><!--2016-02-29 수정<br />2016-03-15 하단 고객센터 수정(공통)<br />2016-03-17 하단 고객센터,로고 수정(공통)<br />-->2016-03-22 테이블 스타일 수정(공통)<!--<br />2016-03-23 마케팅 정보 수신 동의 테이블 셀 추가/style 수정--><br />2016-03-24 테이블스타일(공통)/셀추가,버튼 수정<br />2016-03-25 텍스트 줄바꿈,td,th 전체 style수정</td>
+			</tr>
+			<tr class="ok">
+				<td>정보변경완료</td>
+				<td></td>
+				<td><a href="html/mail/mail_complete.html">mail_complete.html</a></td>
+				<td class="cm">2016-02-29 수정<!--<br />2016-03-23 마케팅 정보 수신 동의 테이블 셀 추가/style 수정--><br />2016-03-24 테이블스타일(공통)/셀추가,버튼 수정<br />2016-03-25 텍스트 줄바꿈,td,th 전체 style수정</td>
+			</tr>
+			<tr class="ok">
+				<td>임시비번안내</td>
+				<td></td>
+				<td><a href="html/mail/mail_pw.html">mail_pw.html</a></td>
+				<td class="cm">2016-02-29 수정<br />2016-03-24 테이블스타일(공통),버튼 수정</td>
+			</tr>
+			<tr class="">
+				<td>비번변경안내</td>
+				<td></td>
+				<td><a href="html/mail/mail_pw_change.html">mail_pw_change.html</a></td>
+				<td class="cm">2016-03-24 페이지 삭제</td>
+			</tr>
+			<tr class="ok">
+				<td>휴면해지알림</td>
+				<td></td>
+				<td><a href="html/mail/mail_d​ormant_cancel.html">mail_d​ormant_cancel.html</a></td>
+				<td class="cm">2016-02-29 수정<!--<br />2016-03-23 마케팅 정보 수신 동의 테이블 셀 추가/style 수정--><br />2016-03-24 테이블스타일(공통)/셀추가,버튼 수정<br />2016-03-25 텍스트 줄바꿈,td,th 전체 style수정</td>
+			</tr>
+			<tr class="ok">
+				<td>회원탈퇴(온라인부분탈퇴)</td>
+				<td></td>
+				<td><a href="html/mail/mail_secession_online.html">mail_secession_online.html</a></td>
+				<td class="cm">2016-03-24 테이블스타일(공통),버튼 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>회원탈퇴(온라인전체탈퇴)</td>
+				<td></td>
+				<td><a href="html/mail/mail_secession_online_all.html">mail_secession_online_all.html</a></td>
+				<td class="cm">2016-03-24 테이블스타일(공통),버튼 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>회원탈퇴(원클릭전체탈퇴)</td>
+				<td></td>
+				<td><a href="html/mail/mail_secession_onclick.html">mail_secession_onclick.html</a></td>
+				<td class="cm">2016-03-24 테이블스타일(공통),버튼 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>휴면예정알림</td>
+				<td></td>
+				<td><a href="html/mail/mail_d​ormant_ex.html">mail_d​ormant_ex.html</a></td>
+				<td class="cm">2016-03-24 테이블스타일(공통)/셀추가,버튼 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>휴면확정안내</td>
+				<td></td>
+				<td><a href="html/mail/mail_d​ormant_confirm.html">mail_d​ormant_confirm.html</a></td>
+				<td class="cm">2016-03-24 테이블스타일(공통)/셀추가,버튼 수정</td>
+			</tr>
+			<tr class="ok">
+				<td>개인정보이용내역안내</td>
+				<td></td>
+				<td><a href="html/mail/mail_privacy.html">mail_privacy.html</a></td>
+				<td class="cm">2016-03-24 테이블스타일(공통),버튼 수정</td>
+			</tr>
+			<tr class="">
+				<td>회원자동탈퇴안내</td>
+				<td></td>
+				<td><a href="html/mail/mail_secession.html">mail_secession.html</a></td>
+				<td class="cm">2016-03-24 페이지 삭제</td>
+			</tr>
+			<tr class="ok">
+				<td>약관변경</td>
+				<td></td>
+				<td><a href="html/mail/mail_terms.html">mail_terms.html</a></td>
+				<td class="cm">2016-03-24 테이블스타일(공통),버튼 수정</td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

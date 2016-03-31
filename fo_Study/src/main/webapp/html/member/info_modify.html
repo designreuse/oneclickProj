@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>E-land OneClick</title>
+<link rel="stylesheet" href="../../css/oneclick.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easing.1.3.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<script src="../../js/common.js"></script><!-- 공통 스크립트 -->
+<script src="../../js/jquery.modalLayer.js"></script><!-- 모달팝업 -->
+<script>
+$(document).ready(function () {
+
+	// 라디오, 체크박스
+	customCheckbox();
+	customRadio();
+
+	// 비밀번호 변경
+	$(".change_pw").hide();
+	$(".btn_change").click(function () {
+		//$(".change_pw").toggle();
+		 $(this).parent().parent().siblings(".change_pw").toggle().toggleClass("on"); // 2016-02-19 수정
+		if (!$(this).hasClass("on")) {
+			$(this).addClass("on").children().text("비밀번호 변경취소");
+		} else {
+			$(this).removeClass("on").children().text("비밀번호 변경");
+		}
+	});
+
+	// 비밀번호 재입력
+	$(".fieldTable .valid").hide();
+
+	var checkPW = $("#pwCheck");
+	var checkPW_re = $("#pwCheck_re");
+
+	checkPW_re.focusout(function(){
+		if ($(checkPW).val()!=$(checkPW_re).val()) {
+			$(this).siblings(".valid").fadeIn().text("비밀번호가 맞지 않습니다.");
+			//checkPW_re.focus();
+			checkPW_re.addClass("focusLine");
+		}
+		if ($(checkPW).val()==$(checkPW_re).val()) {
+			$(this).siblings(".valid").fadeOut();
+			checkPW_re.removeClass("focusLine");
+		}
+	});
+
+	// 이메일 수신 모두 선택
+	$("#check_email").click(function(){
+		if (!$(this).hasClass("on")) {
+			$(this).addClass("on").children().text("전체해제");
+			$("input[name=check2]").prop("checked", true).parent().addClass("selected");
+		} else {
+			$(this).removeClass("on").children().text("전체선택");
+			$("input[name=check2]").prop("checked", false).parent().removeClass("selected");
+		}
+	});
+	
+	// 문자 수신 모두 선택
+	$("#check_sms").click(function(){
+		if (!$(this).hasClass("on")) {
+			$(this).addClass("on").children().text("전체해제");
+			$("input[name=check3]").prop("checked", true).parent().addClass("selected");
+		} else {
+			$(this).removeClass("on").children().text("전체선택");
+			$("input[name=check3]").prop("checked", false).parent().removeClass("selected");
+		}
+	});
+	
+	// dm 수신 모두 선택
+	$("#check_edm").click(function(){
+		if (!$(this).hasClass("on")) {
+			$(this).addClass("on").children().text("전체해제");
+			$("input[name=check4]").prop("checked", true).parent().addClass("selected");
+		} else {
+			$(this).removeClass("on").children().text("전체선택");
+			$("input[name=check4]").prop("checked", false).parent().removeClass("selected");
+		}
+	});
+
+	// 2016-02-22 자녀정보 추가 삭제
+	$(".innerTable tr td").on("click",".plus",function() {
+	
+		var len = $(".innerTable tr.clone").length;
+		var addElem = $(this).parent().parent().clone(true, true).addClass("clone");
+
+		$(this).parent().parent().parent().append(addElem);
+
+		 $(".innerTable tr.clone").each(function() {
+			$(this).find(".minus").click(function() {
+				$(this).parent().parent().remove();
+			});
+		});
+	});
+
+
+});//
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="header">
+		<div class="topHead">
+			<h1><a href="">E:LAND RETAIL OneClick</a></h1>
+			<div class="gnb">
+				<ul class="gnbList">
+					<li><a href="#">이랜드리테일 원클릭 소개</a></li><!-- 2016-02-24 현재 페이지 표시 :: a에 addClass current -->
+					<li><a href="#">약관</a></li>
+					<li><a href="#" class="current">회원정보</a></li>
+					<li><a href="#">고객센터</a></li>
+				</ul>
+			</div>
+			<!-- // gnb -->
+		</div><!-- // topHead -->
+	</div><!-- // header -->
+
+	<div id="container">
+		<div class="lineMap">
+			<div class="path">
+				<span class="home">HOME</span>
+				<span>회원정보</span>
+				<span class="current">회원정보 수정</span>
+			</div>
+		</div><!-- // lineMap -->
+
+		<div class="contentWrap">
+			<div class="sideArea">
+				<h2>회원정보</h2>
+				<div class="sideMenu">
+					<ul class="menuList">
+						<li class="dep1"><a href="#">아이디/비밀번호 찾기</a></li><!-- 메뉴 활성화시 a에 addClass current -->
+						<li class="dep1"><a href="#">회원가입</a></li>
+						<li class="dep1"><a href="#" class="current">회원정보 수정</a></li>
+						<li class="dep1"><a href="#">회원탈퇴</a></li>
+					</ul>
+				</div>
+			</div><!-- // sideArea -->
+			
+			<!-- 컨텐츠 상세 영역 시작 -->
+			<div class="content">
+				<h3>회원정보 수정</h3>
+
+				<!-- 기본정보 -->
+				<div class="fieldDiv">
+					<fieldset>
+						<legend class="tit_bl">기본정보</legend>
+						<p class="guide">(<span class="ns">*</span>)표시는 필수입력항목입니다.</p>
+						<div class="fieldTable mt10">
+							<table cellspacing="0"  summary="이름, 회원아이디, 비밀번호, 비밀번호재입력, 생년월일, 핸드폰번호, 주소, 이메일">
+									<!-- 2016-02-19 수정 -->
+									<colgroup>
+										<col class="col180" />
+										<col class="col590" />
+									</colgroup>
+									<!-- // 2016-02-19 수정 -->
+									<tbody>
+										<tr>
+											<th scope="row"><div class="tit">이름</div></th><!-- // 2016-02-19 수정 -->
+											<td><span class="txt">홍길동</span></td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="tit">회원아이디</div></th><!-- // 2016-02-19 수정 -->
+											<td><span class="txt">userID</span></td>
+										</tr>
+										<tr class="pwLine">
+											<th scope="row"><div class="tit">비밀번호</div></th><!-- // 2016-02-19 수정 -->
+											<td><button type="button" class="btn grey btn_change"><span>비밀번호 변경</span></button></td>
+										</tr>
+										<!-- 비밀번호 변경 영역 -->
+										<tr class="change_pw">
+											<th scope="row"><div class="tit">기존 비밀번호 <span class="ns" title="필수입력">*</span></div></th><!-- // 2016-02-19 수정 -->
+											<td><input type="password" id="" name="" class="input_text w390" title="기존 비밀번호 입력" /></td>
+										</tr>
+										<tr class="change_pw">
+											<th scope="row"><div class="tit">신규 비밀번호 <span class="ns" title="필수입력">*</span></div></th><!-- // 2016-02-19 수정 -->
+											<td>
+												<input type="password" id="pwCheck" name="" class="input_text w390" title="신규 비밀번호 입력" />
+												<em class="warn">연속적인 숫자나 생일, 전화번호등 추측하기 쉬운 개인정보 및 아이디와 비슷한 전화번호 사용을 피하시기 바랍니다.<br />비밀번호는 영대문자, 영소문자, 숫자, 특수문자 중 3종류 이상을 조합하여, 총 8~16자리로 구성하셔야 합니다.</em>
+											</td>
+										</tr>
+										<tr class="change_pw">
+											<th scope="row"><div class="tit">신규 비밀번호 재입력<span class="ns" title="필수입력">*</span></div></th><!-- // 2016-02-19 수정 -->
+											<td><input type="password" id="pwCheck_re" name="" class="input_text w390" title="신규 비밀번호 재입력" /><em class='valid'></em></td>
+										</tr>
+										<!-- // 비밀번호 변경 영역 -->
+										<tr>
+											<th scope="row"><div class="tit">생년월일 <span class="ns" title="필수입력">*</span></div></th><!-- // 2016-02-19 수정 -->
+											<td>
+												<div class="selectBox">
+													<label for="year">2016</label>
+													<select class="select" id="year">
+														<option value="">2016</option>
+													</select>
+												</div><!-- // selectBox-->
+												<span class="br">년</span>
+												<div class="selectBox">
+													<label for="month">01</label>
+													<select class="select" id="month">
+														<option value="">01</option>
+													</select>
+												</div><!-- // selectBox-->
+												<span class="br">월</span>
+												<div class="selectBox">
+													<label for="day">01</label>
+													<select class="select" id="day">
+														<option value="">01</option>
+													</select>
+												</div><!-- // selectBox-->
+												<span class="br">일</span>
+												<!-- 2016-03-02 추가 -->
+												<div class="birth_select">
+													<input type="radio" id="birth3" name="birth" class="radioBtn" /><label for="birth3" class="label_txt m1">양력</label>
+													<input type="radio" id="birth4" name="birth" class="radioBtn" /><label for="birth4" class="label_txt">음력</label>
+												</div>
+												<!-- // 2016-03-02 추가 -->
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="tit">핸드폰번호 <span class="ns" title="필수입력">*</span></div></th><!-- // 2016-02-19 수정 -->
+											<td>
+												<div class="selectBox">
+													<label for="mobile">010</label>
+													<select class="select" id="mobile" title="핸드폰번호">
+														<option value="">010</option>
+													</select>
+												</div><!-- // selectBox-->
+												<span class="br">-</span>
+												<input type="text" id="" name="" class="input_text w110" title="중간자리" value="0000" />
+												<span class="br">-</span>
+												<input type="text" id="" name="" class="input_text w110" title="뒷자리" value="0000" />
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="tit">주소 <span class="ns" title="필수입력">*</span></div></th><!-- // 2016-02-19 수정 -->
+											<td>
+												<div class="clr"><input type="text" id="" name="" class="input_text w390 disabled" disabled title="주소" /><a href="#" class="btn grey"><span>주소찾기</span></a></div>
+												<div class="mt10"><input type="text" id="" name="" class="input_text w390" title="상세주소" /></div>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="tit">이메일 <span class="ns" title="필수입력">*</span></div></th><!-- // 2016-02-19 수정 -->
+											<td>
+												<input type="text" id="" name="" class="input_text w180" title="이메일주소" />
+												<span class="br m1">@</span>
+												<input type="text" id="" name="" class="input_text w180" />
+												<div class="selectBox m2 w140">
+													<label for="select-item">직접입력</label>
+													<select class="select" id="select-item">
+														<option value="">mail</option>
+													</select>
+												</div><!-- // selectBox-->
+											</td>
+										</tr>
+									</tbody>
+							</table>
+						</div><!-- // fieldTable-->
+					</fieldset>
+				</div><!-- // fieldDiv :: 기본정보 -->
+
+				<!-- 마케팅 정보 수신 동의 -->
+				<div class="fieldDiv mt30">
+					<fieldset>
+						<legend class="tit_bl">마케팅 정보 수신 동의</legend>
+						<div class="fieldTable mt10">
+							<table cellspacing="0"  summary="이메일 수신, 문자수신, DM 수신">
+								<!-- 2016-02-19 수정 -->
+								<colgroup>
+									<col class="col180" />
+									<col class="col590" />
+								</colgroup>
+								<!-- // 2016-02-19 수정 -->
+								<tbody>
+									<tr>
+										<th scope="row"><div class="tit">이메일 수신</div></th><!-- // 2016-02-19 수정 -->
+										<td class="inpd"><!--// 2016-03-16 클래스 추가 -->
+											<div class="allCheckLine">
+												<span class="chk"><input type="checkbox" id="select_site2" name="check2" class="checkBox" checked /><label for="select_site2" class="label_txt">E:LAND MALL</label></span><!-- 2016-02-25 수정 -->
+												<button type="button" class="btn white w95" id="check_email"><span>전체선택</span></button>
+											</div>
+											<div class="checkArea mt10">
+												<input type="checkbox" id="select_site2-1" name="check2" class="checkBox"><label for="select_site2-1" class="label_txt">E&middot;LAND RETAIL</label>
+												<input type="checkbox" id="select_site2-2" class="checkBox" disabled><label for="select_site2-2" class="label_txt">사이트 A</label>
+												<input type="checkbox" id="select_site2-3" name="check2" class="checkBox"><label for="select_site2-3" class="label_txt">사이트 B</label>
+											</div><!-- // checkArea -->
+										</td>
+									</tr>
+									<tr>
+										<th scope="row"><div class="tit">문자수신</div></th><!-- // 2016-02-19 수정 -->
+										<td class="inpd"><!--// 2016-03-16 클래스 추가 -->
+											<div class="allCheckLine">
+												<span class="chk"><input type="checkbox" id="select_site3" name="check3" class="checkBox" checked /><label for="select_site3" class="label_txt">E:LAND  MALL</label></span><!-- 2016-02-25 수정 -->
+												<button type="button" class="btn white w95" id="check_sms"><span>전체선택</span></button>
+											</div>
+											<div class="checkArea mt10">
+												<input type="checkbox" id="select_site3-1" name="check3" class="checkBox"><label for="select_site3-1" class="label_txt">E&middot;LAND RETAIL</label>
+												<input type="checkbox" id="select_site3-2" class="checkBox" disabled><label for="select_site3-2" class="label_txt">사이트 A</label>
+												<input type="checkbox" id="select_site3-3" class="checkBox" disabled><label for="select_site3-3" class="label_txt">사이트 B</label>
+											</div><!-- // checkArea -->
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<div class="tit">
+												DM 수신
+												<!-- 2016-02-23 삭제
+												<ul class="mt30">
+													<li><input type="radio" id="edm" name="radio1" class="radioBtn" checked /><label for="edm" class="label_txt">eDM</label></li>
+													<li class="mt15"><input type="radio" id="dm" name="radio1" class="radioBtn" /><label for="dm" class="label_txt">DM북</label></li>
+												</ul>
+												-->
+											</div>
+										</th><!-- // 2016-02-19 수정 -->
+										<td>
+											<!-- 2016-03-07 수정 -->
+											<div class="chk">
+												<input type="radio" id="post1" name="post" class="radioBtn" checked /><label for="post1" class="label_txt">우편수신</label>
+												<input type="radio" id="post2" name="post" class="radioBtn" /><label for="post2" class="label_txt">수신안함</label>
+											</div>
+											<!-- // 2016-03-07 수정 -->
+
+<!--  ================== 2016-03-07 삭제  ================== -->
+<!--											<div class="allCheckLine">
+<!--												<!--2016-02-23 추가 -->
+<!--												<input type="radio" id="edm" name="radio1" class="radioBtn" checked /><label for="edm" class="label_txt">우편수신 (DM : 종이쿠폰 북)</label>
+<!--												<!-- // 2016-02-23 추가 -->
+<!--
+<!--												<!-- 2016-02-23 삭제
+<!--												<span class="chk"><input type="checkbox" id="select_site4" name="check4" class="checkBox readonly" checked onclick="return false;" /><label for="select_site4" class="label_txt">E:LAND RETAIL MALL</label></span>
+<!--												<button type="button" class="btn white w95" id="check_edm"><span>전체선택</span></button>
+<!--												-->
+<!--											</div>
+<!--											<div class="checkArea mt10">
+<!--												<!-- 2016-02-23 추가 -->
+<!--												<input type="radio" id="dm" name="radio1" class="radioBtn" /><label for="dm" class="label_txt">수신안함 (E:LAND RETAIL 사이트 및 모바일 앱에서 E:DM으로 확인 가능합니다)</label>
+<!--												<!-- // 2016-02-23 추가 -->
+<!-- 
+<!--												<!-- 2016-02-23 삭제
+<!--												<input type="checkbox" id="select_site4-1" name="check4" class="checkBox"><label for="select_site4-1" class="label_txt">E&middot;LAND RETAIL</label>
+<!--												<input type="checkbox" id="select_site4-2" class="checkBox" disabled><label for="select_site4-2" class="label_txt">사이트 A</label>
+<!--												<input type="checkbox" id="select_site4-3" name="check4" class="checkBox"><label for="select_site4-3" class="label_txt">사이트 B</label>
+<!--												-->
+<!--											</div><!-- // checkArea -->
+<!--											<div class="aboutEDM">
+<!--												<em class="f_point">* eDM 수신 시 좋은 점 3가지!</em>
+<!--												<ul>
+<!--													<li>1. 포인트 적립 : eDM을 보시고 난 후 추가 포인트를 받으실 수 있습니다.(회차별 1회 적립) </li>
+<!--													<li>2. 편의성 : 우편보다 빠르고 안전하게 받아보실 수 있습니다.</li>
+<!--													<li>3. 친환경 : DM북 제작에 사용되는 종이를 생산하기 위한 나무를 보호할 수 있습니다.</li>
+<!--												</ul>
+<!--											</div><!-- // aboutEDM -->
+<!-- // ================== 2016-03-07 삭제  ================== -->
+
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- // fieldTable -->
+					</fieldset>
+				</div><!-- // fieldDiv :: 마케팅 정보 수신 동의 -->
+
+				<!-- 부가정보 -->
+				<div class="fieldDiv mt30">
+					<fieldset>
+						<legend class="tit_bl">부가정보</legend>
+						<div class="fieldTable mt10">
+							<table cellspacing="0"  summary="전화번호, 결혼유무, 결혼기념일, 자녀수">
+								<!-- 2016-02-19 수정 -->
+								<colgroup>
+									<col class="col180" />
+									<col class="col590" />
+								</colgroup>
+								<!-- // 2016-02-19 수정 -->
+									<tbody>
+										<!-- 2016-03-02 삭제
+										<tr>
+											<th scope="row"><div class="tit">전화번호</div></th> 2016-02-19 수정 
+											<td>
+												<div class="selectBox">
+													<label for="mobile">02</label>
+													<select class="select" id="mobile" title="전화번호">
+														<option value="">02</option>
+													</select>
+												</div>
+												<span class="br">-</span>
+												<input type="text" id="" name="" class="input_text w110" title="중간자리" />
+												<span class="br">-</span>
+												<input type="text" id="" name="" class="input_text w110" title="뒷자리" />
+											</td>
+										</tr>
+										-->
+										<tr>
+											<th scope="row"><div class="tit">결혼유무</div></th><!-- // 2016-02-19 수정 -->
+											<td>
+												<div class="chk">
+													<input type="radio" id="wedding1" name="radio2" class="radioBtn" checked /><label for="wedding1" class="label_txt">기혼</label>
+													<input type="radio" id="wedding2" name="radio2" class="radioBtn" /><label for="wedding2" class="label_txt">미혼</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="tit">결혼기념일</div></th><!-- // 2016-02-19 수정 -->
+											<td>
+												<div class="selectBox">
+													<label for="year">선택</label>
+													<select class="select" id="m_year">
+														<option value="">2016</option>
+													</select>
+												</div><!-- // selectBox-->
+												<span class="br">년</span>
+												<div class="selectBox">
+													<label for="month">선택</label>
+													<select class="select" id="m_month">
+														<option value="">2016</option>
+													</select>
+												</div><!-- // selectBox-->
+												<span class="br">월</span>
+												<div class="selectBox">
+													<label for="day">선택</label>
+													<select class="select" id="m_day">
+														<option value="">2016</option>
+													</select>
+												</div><!-- // selectBox-->
+												<span class="br">일</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="tit">자녀수</div></th><!-- // 2016-02-19 수정 -->
+											<td class="inpd"><!--// 2016-03-16 클래스 추가 -->
+												<!-- 2016-03-02 삭제
+												<div class="selectBox">
+													<label for="day">자녀수</label>
+													<select class="select" id="child">
+														<option value="">1</option>
+													</select>
+												</div> // selectBox-->
+
+												<!-- 2016-02-22 수정 -->
+												<div  class="innerTable"><!-- 2016-03-02 class mt10 삭제 -->
+													<table cellspacing="0"  summary="성별/이름, 생년월일, 추가/삭제">
+														<colgroup>
+															<col width="137px" />
+															<col width="*" />
+															<col width="80px" />
+														</colgroup>
+														<thead>
+															<tr>
+																<th>성별/이름</th>
+																<th>생년월일</th>
+																<th>추가/삭제</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	<div class="taL">
+																		<input type="radio" id="male" name="gender" class="radioBtn" checked /><label for="male" class="label_txt m1">남</label>
+																		<input type="radio" id="female" name="gender" class="radioBtn" /><label for="female" class="label_txt">여</label>
+																	</div>
+																	<div class="mt10"><input type="text" id="" name="" class="input_text w50" title="이름 입력" /></div>
+																</td>
+																<td>
+																	<div class="taL">
+																		<input type="radio" id="birth1" name="birth" class="radioBtn" /><label for="birth1" class="label_txt m1">양력</label>
+																		<input type="radio" id="birth2" name="birth" class="radioBtn" /><label for="birth2" class="label_txt">음력</label>
+																	</div>
+																	<div class="mt10">
+																		<div class="selectBox w75">
+																			<label for="child_year">선택</label>
+																			<select class="select" id="child_year">
+																				<option value="">2016</option>
+																			</select>
+																		</div><!-- // selectBox-->
+																		<span class="br">년</span>
+																		<div class="selectBox w75">
+																			<label for="child_month">선택</label>
+																			<select class="select" id="child_month">
+																				<option value="">2016</option>
+																			</select>
+																		</div><!-- // selectBox-->
+																		<span class="br">월</span>
+																		<div class="selectBox w75">
+																			<label for="child_day">선택</label>
+																			<select class="select" id="child_day">
+																				<option value="">2016</option>
+																			</select>
+																		</div><!-- // selectBox-->
+																		<span class="br">일</span>
+																	</div>
+																</td>
+																<td>
+																	<button type="button" class="btn_pm plus" title="추가"><span class="blind">추가</span></button>
+																	<button type="button" class="btn_pm minus" title="삭제"><span class="blind">삭제</span></button>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div><!-- // innerTable-->
+												<!-- // 2016-02-22 수정 -->
+
+											</td>
+										</tr>
+									</tbody>
+							</table>
+						</div><!-- // fieldTable-->
+					</fieldset>
+				</div><!-- // fieldDiv :: 부가정보 -->
+
+				<div class="btnDiv taC mt30">
+					<button type="button" class="btn white large"><span>취소</span></button>
+					<button type="button" class="btn blue large"><span>수정 완료</span></button>
+				</div>
+
+			</div>
+			<!-- // content :: 컨텐츠 상세 영역 끝 -->
+
+		</div><!-- // contentWrap -->
+
+	</div><!-- // container -->
+	
+	<div id="footer">
+		<div class="bnrArea">
+			<div class="familySite">
+				<strong>E:LAND FAMILY SITE</strong><!-- // 2016-02-24 수정 -->
+				<div class="slideBnr" id="slider">
+					<button type="button" class="btn_slide prev" id="prev2"><span class="blind">이전</span></button>
+					<div class="slideWrap">
+						<ul class="slideList" id="banner">
+							<li><a href="http://www.elandmall.co.kr" target="_blank">E:LAND MALL</a></li>
+							<li><a href="http://www.ecore.co.kr" target="_blank">E&middot;LAND RETAIL</a></li>
+							<li><a href="">FAMILY SITE 1</a></li>
+							<li><a href="">FAMILY SITE 2</a></li>
+						</ul>
+					</div>
+					<button type="button" class="btn_slide next" id="next2"><span class="blind">다음</span></button>
+				</div>
+			</div>
+		</div><!-- // bnrArea -->
+		<div class="footerInfo">
+			<strong class="f_logo">E:LAND RETAIL OneClick</strong>
+			<div class="infoMenu">
+				<ul>
+					<li class="first"><a href="#">서비스이용약관</a></li>
+					<li><a href="#">개인정보취급방침</a></li>
+					<li><a href="#">영상정보처리기기 운영, 관리방침</a></li>
+					<li><a href="#">윤리사무국</a></li>
+					<li><a href="#">사이트맵</a></li>
+				</ul>
+				<address><span class="addr">(주)이랜드리테일 서울 서초구 잠원동 70-2</span> <span>개인정보보호 책임자 : 대표이사 김연배</span></address>
+				<p class="copy">COPYRIGHT &copy;2016 by E:LAND Group All rights reserved.</p><!-- // 2016-02-24 수정 -->
+			</div><!-- // infoMenu -->
+			<!-- 2016-03-17 수정 -->
+			<div class="customerBox">
+				<div class="tit"><strong>고객센터</strong><span class="f_small">상담시간 오전 9시~오후 6시</span></div>
+				<div class="telBox">
+					<ul>
+						<li><span class="txt">통합몰</span> <span class="tel">1899-9500</span></li>
+						<li><span class="txt">통합홈페이지</span> <span class="tel">1588-0001</span></li>
+					</ul>
+				</div>
+			</div>
+			<!-- // 2016-03-17 수정 -->
+		</div><!-- // footerInfo -->
+	</div><!-- // footer -->
+
+</div><!-- // wrapper -->
+
+<script>
+	$(document).ready(function () {
+		// 제휴사 슬라이드 배너
+		fn_rollToEx('slider', 'banner', 'control', 2, true);
+	});
+</script>
+
+</body>
+</html>

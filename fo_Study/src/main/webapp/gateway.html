@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+
+<script>
+
+$(window).bind("message",function(e){
+
+	var xdr = new XDomainRequest();
+	console.log("iframe called : " + e.originalEvent.data);
+	var event_data = $.parseJSON(e.originalEvent.data);
+	xdr.open(event_data.type, event_data.url);
+	xdr.onprogress = function () { };
+	xdr.ontimeout = function () { };
+	xdr.onerror = function (e) {
+		console.log(e);
+		parent.postMessage( JSON.stringify({
+			status : "500",
+			message : "error",
+			responseText : xdr.responseText
+		}),"*");
+	};
+	xdr.onload = function(e) {
+		console.log("receive : " + xdr.responseText);
+		parent.postMessage( JSON.stringify({
+			status : "200",
+			message : "success",
+			responseText : xdr.responseText
+		}),"*");
+	}
+	setTimeout(function () {
+		console.log("send");
+		xdr.send(event_data.data);
+	}, 0);
+});
+</script>
+</head>
+</html>

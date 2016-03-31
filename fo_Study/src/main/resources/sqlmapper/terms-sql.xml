@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eland.ngoc.terms.dao.TermsDao">
+
+	<select id="selectTerms" resultType="com.eland.ngoc.terms.model.Terms" parameterType="Map">
+		SELECT /* com.eland.ngoc.terms.dao.TermsDao.selectTerms  */ 
+				TERMS_SEQ		AS termsSeq
+			  ,	TERMS_CODE		AS termsCode
+			  , TERMS_VER		AS termsVer
+			  , TERMS_CONT		AS termsCont
+			  , REQD_YN			AS reqdYn
+			  , PBLAN_DATE		AS pblanDate
+			  , OPER_DATE		AS operDate
+			  , USE_YN			AS useYn
+			  , INS_DATE		AS insDate
+			  , INS_USER		AS insUser
+			  , UPD_DATE		AS updDate
+			  , UPD_USER		AS updUser
+			  , TERMS_UPD_DATE  AS termsUpdDate
+		  FROM OC_TERMS_PLCY
+		 WHERE TERMS_CODE = #{termsCode}
+		 <if test="termsSeq != null and termsSeq != ''">
+		 	AND TERMS_SEQ = #{termsSeq}	
+		 </if>
+		 <if test="termsSeq == null or termsSeq == ''">
+		   AND USE_YN = 'Y'
+		 </if>	
+	</select>
+	
+	<select id="selectPreTermsList" resultType="com.eland.ngoc.terms.model.Terms" parameterType="Map">
+		SELECT /* com.eland.ngoc.terms.dao.TermsDao.selectTerms  */ 
+				TERMS_SEQ		AS termsSeq
+			  ,	TERMS_CODE		AS termsCode
+			  , TERMS_VER		AS termsVer
+			  , TERMS_CONT		AS termsCont
+			  , REQD_YN			AS reqdYn
+			  , PBLAN_DATE		AS pblanDate
+			  , OPER_DATE		AS operDate
+			  , USE_YN			AS useYn
+			  , INS_DATE		AS insDate
+			  , INS_USER		AS insUser
+			  , UPD_DATE		AS updDate
+			  , UPD_USER		AS updUser
+			  , TERMS_UPD_DATE  AS termsUpdDate
+		  FROM OC_TERMS_PLCY
+		 WHERE TERMS_CODE = #{termsCode}
+	</select>	
+
+</mapper>

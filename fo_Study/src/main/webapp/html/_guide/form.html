@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>E-land OneClick</title>
+<link rel="stylesheet" href="_guide.css">
+<link rel="stylesheet" href="../../css/oneclick.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easing.1.3.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<!--<script src="../../js/common.js"></script> 공통 스크립트 -->
+<script src="../../js/jquery.modalLayer.js"></script><!-- 모달팝업 -->
+
+<script>
+
+	// 라디오, 체크박스
+	function customCheckbox(){
+		$("input.checkBox").each(function(){
+			$(this).wrap( "<span class='customCheck'></span>" );
+			if($(this).is(":checked")){
+				$(this).parent().addClass("selected");
+			}
+			if($(this).is(":disabled")){
+				$(this).parent().addClass("disabled");
+			}
+			if($(this).hasClass("readonly")){
+				$(this).parent().addClass("readonly");
+			}
+		});
+		 $("input.checkBox").click(function(){
+			if($(this).hasClass("readonly")){
+				$(this).parent().addClass("readonly");
+			}
+			$(this).parent().toggleClass("selected");
+		});
+	}
+
+	function customRadio(){
+		$("input.radioBtn").each(function(){
+			$(this).wrap( "<span class='customRadio'></span>" );
+			if($(this).is(":disabled")){
+				$(this).parent().addClass("disabled");
+			}
+		});
+
+		 $("input.radioBtn").click(function(){
+			if($(this).is(":checked")){
+				$(this).parent().addClass("selected");
+				$(".radioBtn:not(:checked)").parent().removeClass("selected");
+			}
+		});
+
+	}
+
+	$(document).ready(function () {
+
+		// 라디오, 체크박스
+		customCheckbox();
+		customRadio();
+
+		$("#check-item-all").change(function () {
+			var checked = $(this).prop("checked");
+			if ($(this).prop("checked")) {
+				$("input[name='check-item']").prop("checked", checked).parent().addClass("selected");
+			} else{
+				$("input[name='check-item']").prop("checked", false).parent().removeClass("selected");
+			}
+		});
+
+		/*$('#check-item-all').click(function () {
+			var checked = $(this).prop('checked');
+			$('input[name="check-item"]').prop('checked', checked).parent().addClass("selected");
+		});
+
+
+		lv2.find("input[type=checkbox]").click(function () {
+			if ($(this).prop("checked")) {
+				$(this).parent().nextUntil(".lv2").find("input[type=checkbox]").prop("checked",true);
+				$(this).parent().nextUntil(".lv2").find("label").addClass("checkSelected");
+			} else{
+				$(this).parent().nextUntil(".lv2").find("input[type=checkbox]").prop("checked",false);
+				$(this).parent().nextUntil(".lv2").find("label").removeClass("checkSelected");
+			}
+		});*/
+
+
+		// 인풋 포커스
+		function add() {
+			if($(this).val() === ''){
+				$(this).val($(this).attr('placeholder')).addClass('placeholder');
+			}
+		}
+		function remove() {
+			if($(this).val() === $(this).attr('placeholder')){
+				$(this).val('').removeClass('placeholder');
+			}
+		}
+		if (!('placeholder' in $('<input>')[0])) {
+			$('input[placeholder], textarea[placeholder]').blur(add).focus(remove).each(add);
+			$('form').submit(function(){
+				$(this).find('input[placeholder], textarea[placeholder]').each(remove);
+			});
+		}
+
+		/*$('.input_text').each(function () {
+			var placeholder = $(this).attr('placeholder');
+			if ($(this).val() == '') {
+				$(this).val(placeholder).addClass('placeholder');
+			}
+		});
+
+		$('.input_text').bind({
+			
+			'focus': function () {
+				var placeholder = $(this).attr('placeholder');
+				$(this).addClass('focus').removeClass('placeholder');
+
+				if ($(this).val() == placeholder) {
+					$(this).val('');
+				}
+			},
+			'blur': function () {
+				var placeholder = $(this).attr('placeholder');
+				$(this).removeClass('focus');
+
+				if ($(this).val() == '') {
+					$(this).val(placeholder).addClass('placeholder');
+				}
+			}
+		});*/
+
+
+		// 셀렉트박스
+		var select = $("select.select");
+		select.change(function(){
+			var select_name = $(this).children("option:selected").text();
+			$(this).siblings("label").text(select_name);
+		});
+
+
+
+
+	}); //
+
+
+</script>
+
+</head>
+
+<body>
+<div class="pb-guideWrap">
+	<h1><span>&raquo;</span> E-land OneClick PUBLISHING GUIDE</h1>
+	<h2>FORM</h2>
+
+	<div class="pb-guideBox">
+		<h3>BUTTON</h3>
+		<div class="pb-guideDesc">
+			<h4>&middot; type-1 : 테이블 버튼</h4>
+			<div class="pb-guideView">
+				<div>
+					<button type="button" class="btn grey"><span>button</span></button>
+					<button type="button" class="btn black"><span>button</span></button>
+					<button type="button" class="btn white"><span>button</span></button>
+					<button type="button" class="btn blue"><span>button</span></button>
+				</div>
+				<div class="mt5">
+					<a href="#" class="btn grey"><span>anchor</span></a>
+					<a href="#" class="btn black"><span>anchor</span></a>
+					<a href="#" class="btn white"><span>anchor</span></a>
+					<a href="#" class="btn blue"><span>anchor</span></a>
+				</div>
+				<div class="mt5">
+					<input type="button" class="btn grey" value="input" />
+					<input type="button" class="btn black" value="input" />
+					<input type="button" class="btn white" value="input" />
+					<input type="button" class="btn blue" value="input" />
+				</div>
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+
+		<hr />
+
+		<div class="pb-guideDesc">
+			<h4>&middot; type-2 : 페이지내 최종버튼</h4>
+			<div class="pb-guideView">
+				<div>
+					<button type="button" class="btn grey large"><span>button</span></button>
+					<button type="button" class="btn black large"><span>button</span></button>
+					<button type="button" class="btn white large"><span>button</span></button>
+					<button type="button" class="btn blue large"><span>button</span></button>
+				</div>
+				<div class="mt5">
+					<a href="#" class="btn grey large"><span>anchor</span></a>
+					<a href="#" class="btn black large"><span>anchor</span></a>
+					<a href="#" class="btn white large"><span>anchor</span></a>
+					<a href="#" class="btn blue large"><span>anchor</span></a>
+				</div>
+				<div class="mt5">
+					<input type="button" class="btn grey large" value="input" />
+					<input type="button" class="btn black large" value="input" />
+					<input type="button" class="btn white large" value="input" />
+					<input type="button" class="btn blue large" value="input" />
+				</div>
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+
+		<hr />
+
+		<div class="pb-guideDesc">
+			<h4>&middot; type-3 : 팝업 버튼</h4>
+			<div class="pb-guideView">
+				<div>
+					<button type="button" class="btn grey pop"><span>button</span></button>
+					<button type="button" class="btn black pop"><span>button</span></button>
+					<button type="button" class="btn white pop"><span>button</span></button>
+					<button type="button" class="btn blue pop"><span>button</span></button>
+				</div>
+				<div class="mt5">
+					<a href="#" class="btn grey pop"><span>anchor</span></a>
+					<a href="#" class="btn black pop"><span>anchor</span></a>
+					<a href="#" class="btn white pop"><span>anchor</span></a>
+					<a href="#" class="btn blue pop"><span>anchor</span></a>
+				</div>
+				<div class="mt5">
+					<input type="button" class="btn grey pop" value="input" />
+					<input type="button" class="btn black pop" value="input" />
+					<input type="button" class="btn white pop" value="input" />
+					<input type="button" class="btn blue pop" value="input" />
+				</div>
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+
+	</div><!-- // pb-guideBox -->
+
+	<div class="pb-guideBox">
+		<h3>INPUT</h3>
+		<div class="pb-guideDesc">
+			<div class="pb-guideView">
+				<input type="text" id="" name="" class="input_text" placeholder="guidetext" style="width:200px;" />
+				<input type="text" id="" name="" class="input_text disabled" style="width:200px;" disabled />
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+	</div><!-- // pb-guideBox -->
+
+	<div class="pb-guideBox">
+		<h3>SELECT</h3>
+		<div class="pb-guideDesc">
+			<h4>&middot; SELECT type-1</h4>
+			<div class="pb-guideView">
+				<div class="selectBox">
+					<label for="select-item">제목 + 내용</label>
+					<select class="select" id="select-item">
+						<option value="">제목 + 내용</option>
+						<option value="">제목</option>
+						<option value="">내용</option>
+					</select>
+				</div>
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+
+		<hr />
+
+		<div class="pb-guideDesc">
+			<h4>&middot; SELECT type-2 (플러그인)</h4>
+			<div class="pb-guideView">
+				--
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+
+	</div><!-- // pb-guideBox -->
+
+	<div class="pb-guideBox">
+		<h3>CHECKBOX</h3>
+		<div class="pb-guideDesc">
+			<div class="pb-guideView">
+				<!--
+				<input type="checkbox" id="check-item-1" class="checkBox"><label for="check-item-1" class="label_check">CHECKBOX 1</label>
+				<input type="checkbox" id="check-item-2" class="checkBox"><label for="check-item-2" class="label_check">CHECKBOX 2</label>
+				<input type="checkbox" id="check-item-3" class="checkBox"><label for="check-item-3" class="label_check">CHECKBOX 3</label>
+				-->
+				<input type="checkbox" id="check-item-1" name="check1" class="checkBox"><label for="check-item-1" class="label_txt">CHECKBOX 1</label>
+				<input type="checkbox" id="check-item-2" name="check1" class="checkBox"><label for="check-item-2" class="label_txt">CHECKBOX 2</label>
+				<input type="checkbox" id="check-item-3" name="check1" class="checkBox readonly" checked onclick="return false;"><label for="check-item-3" class="label_txt">CHECKBOX 3</label>
+				<input type="checkbox" id="check-item-4" name="check1" class="checkBox" disabled><label for="check-item-4" class="label_txt">disabled</label>
+				<div class="mt5">
+					<input type="checkbox" id="check-item-all" name="check-item" class="checkBox"><label for="check-item-all" class="label_txt">ALL-CHECK</label>
+					<input type="checkbox" id="check-item-11" name="check-item" class="checkBox"><label for="check-item-11" class="label_txt">CHECKBOX 1</label>
+					<input type="checkbox" id="check-item-22" name="check-item" class="checkBox"><label for="check-item-22" class="label_txt">CHECKBOX 2</label>
+				</div>
+			</div>
+			<pre>
+			</pre>
+		</div>
+	</div><!-- // pb-guideBox -->
+
+	<div class="pb-guideBox">
+		<h3>RADIO BUTTON</h3>
+		<div class="pb-guideDesc">
+			<div class="pb-guideView">
+				<input type="radio" id="radio-item-1" name="radio-item" class="radioBtn"><label for="radio-item-1" class="label_txt">radioBtn 1</label>
+				<input type="radio" id="radio-item-2" name="radio-item" class="radioBtn"><label for="radio-item-2" class="label_txt">radioBtn 2</label>
+				<input type="radio" id="radio-item-3" name="radio-item" class="radioBtn"><label for="radio-item-3" class="label_txt">radioBtn 3</label>
+				<input type="radio" id="radio-item-4" name="radio-item" class="radioBtn" disabled><label for="radio-item-4" class="label_txt">disabled</label>
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+	</div><!-- // pb-guideBox -->
+
+	<div class="pb-guideBox">
+		<h3>PAGINATION</h3>
+		<div class="pb-guideDesc">
+			<div class="pb-guideView">
+				<div class="bottomDiv">
+					<div class="pagination">
+						<a href="#" class="btn_page btn_first"><span class="blind">처음으로</span></a>
+						<a href="#" class="btn_page btn_prev"><span class="blind">이전</span></a>
+						<a href="#" class="current"><span>1</span></a><!-- 현재 페이지일 경우 addClass current -->
+						<a href="#"><span>2</span></a>
+						<a href="#"><span>3</span></a>
+						<a href="#"><span>4</span></a>
+						<a href="#"><span>5</span></a>
+						<a href="#"><span>6</span></a>
+						<a href="#"><span>7</span></a>
+						<a href="#"><span>8</span></a>
+						<a href="#"><span>9</span></a>
+						<a href="#"><span>10</span></a>
+						<a href="#" class="btn_page btn_next"><span class="blind">다음</span></a>
+						<a href="#" class="btn_page btn_last"><span class="blind">마지막</span></a>
+					</div>
+				</div>
+			</div>
+			<pre>
+			</pre>
+		</div><!-- // pb-guideDesc -->
+	</div><!-- // pb-guideBox -->
+
+</div>
+</body>
+</html>

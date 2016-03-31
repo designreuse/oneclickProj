@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eland.ngoc.member.dao.MemberDao">
+	<select id="isCheckId" parameterType="map" resultType="int">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.isCheckId  */
+				COUNT(*) 
+		  FROM OC_CUST_INFO
+		 WHERE WEB_ID = #{webId}
+		 AND DEL_YN = 'N'
+		 <if test="custStat != null">
+		 AND CUST_STAT != #{custStat}
+		 </if>
+	</select>
+	
+	<select id="selectMemberInfo" parameterType="string" resultType="com.eland.ngoc.member.model.Member">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectMemberInfo  */
+				  CI.CUST_ID						AS custId
+				, CI.WEB_ID							AS webId
+				, CI.WEB_PWD						AS webPwd
+				, CI.PBP_ID							AS pbpId
+				, CI.CUST_NAME						AS membName
+				, RETAIL.EMAIL_RCPTN_YN				AS retailMallEmailYn
+				, RETAIL.SMS_RCPTN_YN				AS retailMallSmsYn
+				, CORE.EMAIL_RCPTN_YN				AS coreEmailYn
+				, CORE.SMS_RCPTN_YN					AS coreSmsYn
+				, CORE.DM_RCPTN_YN					AS coreDmYn
+		 FROM
+		 		OC_CUST_INFO CI
+		 	LEFT OUTER JOIN (SELECT
+				 				CSI.CUST_ID
+				 				, CSI.EMAIL_RCPTN_YN
+				 				, CSI.SMS_RCPTN_YN
+				 			 FROM
+				 				(SELECT CUST_ID FROM OC_CUST_INFO WHERE WEB_ID = #{webId}) CUST
+				 				, OC_CUST_SITE_INFO CSI
+				 			WHERE
+				 				CUST.CUST_ID = CSI.CUST_ID
+				 				AND CSI.SITE_CODE = '10'
+				 				AND CSI.DEL_YN = 'N') RETAIL
+				 ON CI.CUST_ID = RETAIL.CUST_ID
+		 	LEFT OUTER JOIN (SELECT
+				 		 		CSI.CUST_ID
+				 		 		, CSI.EMAIL_RCPTN_YN
+				 		 		, CSI.SMS_RCPTN_YN
+				 		 		, CSI.DM_RCPTN_YN
+				 		 	 FROM
+				 		 	 	(SELECT CUST_ID FROM OC_CUST_INFO WHERE WEB_ID = #{webId}) CUST
+				 				, OC_CUST_SITE_INFO CSI
+				 			WHERE
+				 				CUST.CUST_ID = CSI.CUST_ID
+				 				AND CSI.SITE_CODE = '20'
+				 				AND CSI.DEL_YN = 'N') CORE
+				 ON CI.CUST_ID = CORE.CUST_ID
+		WHERE
+				CI.WEB_ID = #{webId}
+	</select> 
+	
+	<!-- 회원 정보 조회 및 비밀번호 체크 -->
+	<select id="selectCustInfoCheck" parameterType="map" resultType="com.eland.ngoc.member.model.CustInfo">
+		    SELECT /* com.eland.ngoc.member.dao.MemberDao.selectCustInfo  */
+		     		CI.CUST_ID						AS custId
+				  , CI.WEB_ID						AS webId
+				  , CI.WEB_PWD						AS webPwd
+				  , CI.PBP_ID						AS pbpId
+				  , CI.CUST_NAME					AS custName
+				  , CI.CUST_STAT					AS custStat
+				  , CI.INS_SITE_CODE				AS insSiteCode
+				  , CI.PWD_CHNG_DATE				AS pwdChgDate
+				  , CI.MBER_INFO_UPD_DATE			AS mberInfoUpdDate
+				  , CI.DEL_YN						AS delYn
+				  , CI.BFOR_WEB_PWD					AS bforWebPwd
+				  , CI.TEMP_PWD_YN					AS tempPwdYn
+				  , CI.INS_DATE						AS insDate
+				  , CI.INS_USER						AS insUser
+				  , CI.UPD_DATE						AS updDate
+				  , CI.UPD_USER						AS updUser
+		    	  , DECODE((SELECT 1 
+                              FROM OC_CUST_INFO 
+                             WHERE WEB_ID = #{webId} 
+                               AND LOWER(WEB_PWD) = LOWER(#{webPwd})),  null, 'N', 'Y') AS validPwd
+      		 FROM OC_CUST_INFO CI
+    		 WHERE WEB_ID = #{webId}
+    		   AND DEL_YN = 'N'
+	
+	</select>
+	
+	<!-- 회원정보 저장 -->
+	<insert id="insertCustInfo" parameterType="com.eland.ngoc.member.model.CustInfo">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertCustInfo  */
+		  INTO OC_CUST_INFO (
+   				  CUST_ID
+   				, WEB_ID
+   				, WEB_PWD
+   				, PBP_ID
+   				, CUST_NAME
+   				, CUST_STAT
+   				, INS_SITE_CODE
+   				, PWD_CHNG_DATE
+   				, MBER_INFO_UPD_DATE
+   				, DEL_YN
+   				, INS_DATE
+   				, INS_USER
+   				, UPD_DATE
+   				, UPD_USER
+   				, BFOR_WEB_PWD) 
+		VALUES (  S_CUST_ID_SEQ.NEXTVAL
+				, #{webId}
+				, #{webPwd}
+				, #{pbpId}
+				, #{custName}
+				, '10'
+				, #{insSiteCode}
+				, SYSDATE
+				, SYSDATE
+				, 'N'
+				, SYSDATE
+				, S_CUST_ID_SEQ.CURRVAL
+				, SYSDATE
+				, S_CUST_ID_SEQ.CURRVAL
+				, null )
+		<selectKey keyProperty="custId" resultType="Integer" order="AFTER">
+			SELECT S_CUST_ID_SEQ.CURRVAL FROM DUAL 
+		</selectKey>
+	</insert>
+	
+	<!-- 사이트별 이메일, SMS, DM 수신 여부 저장 -->
+	<insert id="insertCustSiteInfo" parameterType="com.eland.ngoc.member.model.CustSiteInfo">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertCustSiteInfo  */
+		  INTO OC_CUST_SITE_INFO (
+   				  CUST_ID
+   				, SITE_CODE
+   				, EMAIL_RCPTN_YN
+   				, SMS_RCPTN_YN
+   				, DM_RCPTN_YN
+   				, DEL_YN
+   				, INS_DATE
+   				, INS_USER
+   				, UPD_DATE
+   				, UPD_USER) 
+		VALUES (  #{custId}
+				, #{siteCode}
+				, #{emailRcptnYn}
+				, #{smsRcptnYn}
+				, #{dmRcptnYn}
+				, 'N'
+				, SYSDATE
+				, #{custId}
+				, SYSDATE
+				, #{custId} )
+	
+	</insert>
+	
+	<!-- 약관 동의 여부 저장 -->
+	<insert id="insertCustTermsAgree" parameterType="com.eland.ngoc.member.model.CustTermsAgree">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertCustTermsAgree  */
+		  INTO OC_CUST_TERMS_AGREE_INFO (
+   				  CUST_ID
+   				, SITE_CODE
+   				, TERMS_CODE
+   				, TERMS_AGREE_YN
+   				, INS_DATE
+   				, INS_USER
+   				, UPD_DATE
+   				, UPD_USER) 
+		VALUES 
+            	(  #{custId}
+				  , #{siteCode}
+				  , #{termsCode}
+				  , #{termsAgreeYn}
+				  , SYSDATE
+				  , #{insUser}
+				  , SYSDATE
+				  , #{updUser} )
+		
+	</insert>
+	
+	<!-- 본인 인증 내역 저장 -->
+	<insert id="insertAuthDtls" parameterType="com.eland.ngoc.member.model.AuthDtls">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertAuthDtls  */ 
+		  INTO OC_AUTH_DTLS (
+   				  CI
+   				, DI
+   				, CUST_NAME
+   				, SITE_CODE
+   				, AUTH_TYPE_DIV
+   				, INS_DATE
+   				, INS_USER) 
+		VALUES (  #{ci}
+				, #{di}
+				, #{custName}
+				, #{siteCode}
+				, #{authTypeDiv}
+				, SYSDATE
+				, 'sysUser' )
+	</insert>
+	
+	<!-- 회원가입, ID 찾기의 가입여부 확인-->
+	<select id="selectFindMemberInfo" parameterType="map" resultType="com.eland.ngoc.member.model.CustInfo">
+			SELECT /* com.eland.ngoc.member.dao.MemberDao.selectFindMemberInfo  */
+					  custId
+					, webId
+					, custName
+					, custStat
+					, joinYn
+					, pbpId 
+			 FROM (
+					SELECT 
+							  cInfo.CUST_ID			AS custId
+							, cInfo.WEB_ID			AS webId
+							, cInfo.CUST_NAME    	AS custName
+							, cInfo.CUST_STAT    	AS custStat
+							, cInfo.PBP_ID    		AS pbpId
+							, DECODE (cInfo.CUST_STAT,  '50', (CASE WHEN SYSDATE &lt; cInfo.UPD_DATE+30 
+																	THEN 'N' 
+																	ELSE 'Y' 
+																	END), 'Y') AS joinYn
+					  FROM OC_CUST_INFO cInfo 
+					  INNER JOIN OC_AUTH_DTLS aDtls
+						 ON cInfo.CUST_NAME = aDtls.CUST_NAME
+					  WHERE cInfo.CUST_NAME = #{custName}
+						AND ADTLS.CI = #{ci}
+						AND cInfo.DEL_YN = 'N'
+					)
+				GROUP BY custId, webId, custName, custStat, joinYn, pbpId
+	</select>
+	
+	<!-- 비밀번호 변경 시, 기존 비밀번호와 동일여부 체크하기 위해 비밀번호 조회 -->
+	<select id="selectMemberPwd" parameterType="string" resultType="string">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectMemberPwd  */
+				LOWER(WEB_PWD)
+		  FROM OC_CUST_INFO
+		 WHERE
+		 		CUST_ID = #{custId}
+	</select>	
+	
+	<!-- 회원의 이전 비밀번호 조회 -->
+	<select id="selectMemberUsedPwd" parameterType="string" resultType="string">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectMemberUsedPwd  */
+				LOWER(BFOR_WEB_PWD)
+		  FROM OC_CUST_INFO
+		 WHERE
+		 		CUST_ID = #{custId}
+	</select>
+	
+	<!-- 회원 비밀번호 변경 -->
+	<update id="updateMemberInfo" parameterType="com.eland.ngoc.member.model.MemberDTO">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updateMemberInfo  */
+				OC_CUST_INFO
+		  SET
+		  		WEB_PWD = #{password}
+		  		, BFOR_WEB_PWD = #{inputOldPassword}
+		  		, PWD_CHNG_DATE = SYSDATE
+		  		, MBER_INFO_UPD_DATE = SYSDATE
+		  		, UPD_DATE = SYSDATE
+		  		, UPD_USER = #{custId}
+		  		, TEMP_PWD_YN = 'N'
+		 WHERE
+		 		CUST_ID = #{custId}
+		 	AND WEB_ID = #{webId}				
+	</update>
+	
+	<update id="updateMemberSiteInfoRetailMall" parameterType="com.eland.ngoc.member.model.MemberDTO">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updateMemberSiteInfoRetailMall  */
+				OC_CUST_SITE_INFO
+		  SET
+		  		EMAIL_RCPTN_YN = #{retailMallEmailYn}
+		  		, SMS_RCPTN_YN = #{retailMallSmsYn}
+		  		, UPD_DATE = SYSDATE
+		  		, UPD_USER = #{custId}
+		 WHERE
+		 		CUST_ID = #{custId}
+		 	AND SITE_CODE = '10'
+	</update>
+	
+	<update id="updateMemberSiteInfoCore" parameterType="com.eland.ngoc.member.model.MemberDTO">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updateMemberSiteInfoCore  */
+				OC_CUST_SITE_INFO
+		  SET
+		  		EMAIL_RCPTN_YN = #{coreEmailYn}
+		  		, SMS_RCPTN_YN = #{coreSmsYn}
+		  		, DM_RCPTN_YN = #{coreDmYn}
+		  		, UPD_DATE = SYSDATE
+		  		, UPD_USER = #{custId}
+		 WHERE
+		 		CUST_ID = #{custId}
+		 	AND SITE_CODE = '20'
+	</update>
+	
+	<!-- 회원 PBP_ID 조회 -->
+	<select id="selectCustnPbpId" parameterType="string" resultType="map">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectCustnPbpId  */
+				CUST_ID
+				, PBP_ID
+		  FROM OC_CUST_INFO
+		 WHERE
+		 		WEB_ID = #{webId}
+	</select>
+	
+	<!-- 탈퇴 SEQ 조회 -->
+	<select id="selectOutSeq" parameterType="com.eland.ngoc.member.model.MemberOutDTO" resultType="int">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectOutSeq  */
+				NVL(MAX(OUT_SEQ), 0)+1 
+		  FROM OC_CUST_OUT_DTLS 
+		 WHERE CUST_ID = #{custId} 
+		 	AND SITE_CODE = #{siteCode}	
+	</select>
+	
+	<insert id="insertMemberOutDetail" parameterType="com.eland.ngoc.member.model.MemberOutDTO">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertMemberOutDetail  */
+		INTO OC_CUST_OUT_DTLS (
+			CUST_ID
+			, SITE_CODE
+			, OUT_SEQ
+			, PBP_ID
+			, OUT_DESC
+			, OUT_DIV_CODE
+			, INS_DATE
+			, INS_USER
+		) VALUES (
+			#{custId}
+			, #{siteCode}
+			, #{outSeq}
+			, #{pbpId}
+			, #{outDesc, jdbcType=VARCHAR}
+			, #{outDivCode}
+			, SYSDATE
+			, #{custId}
+		)
+	</insert>
+	
+	<insert id="insertMemberOutReason" parameterType="com.eland.ngoc.member.model.MemberOutDTO">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertMemberOutReason  */
+		INTO OC_CUST_OUT_RSON (
+			CUST_ID
+			, SITE_CODE
+			, OUT_SEQ
+			, OUT_RSON_CODE
+			, INS_DATE
+		) VALUES (
+			#{custId}
+			, #{siteCode}
+			, #{outSeq}
+			, (SELECT CODE FROM OC_CODE 
+					WHERE CODE_GROUP_ID = #{outReasonCodeGroupId} AND CODE = #{outRsonCode})
+			, SYSDATE
+		)
+	</insert>
+	
+	<!-- 회원 상태 변경 -->
+	<update id="updateMemberStat" parameterType="map">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updateMemberStat  */
+			   OC_CUST_INFO
+		  SET
+		  	 <if test="custStat != null">	
+	  		   CUST_STAT = #{custStat},
+	  		 </if>
+	  		  MBER_INFO_UPD_DATE = SYSDATE,
+	  		 <if test="tempPwdYn != null">
+	  		 TEMP_PWD_YN = #{tempPwdYn},
+	  		 PWD_CHNG_DATE = SYSDATE,
+	  		 </if>
+	  		 <if test="webPwd != null">
+	  		 WEB_PWD = #{webPwd},
+	  		 </if>
+	 		   UPD_DATE = SYSDATE,
+	 		   UPD_USER = #{custId}
+		WHERE CUST_ID = #{custId}
+	</update>
+	
+	<!-- 회원 가입 사이트 정보 수정 -->
+	<update id="updateMemberSiteInfo" parameterType="com.eland.ngoc.member.model.CustSiteInfo">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updateMemberSiteInfo  */
+				OC_CUST_SITE_INFO
+		  SET
+		  		<if test="emailRcptnYn != null">
+		  		  EMAIL_RCPTN_YN = #{emailRcptnYn} ,
+		  		</if>
+		  		<if test="smsRcptnYn != null">
+		  		  SMS_RCPTN_YN = #{smsRcptnYn} ,
+		  		</if>
+		  		<if test="dmRcptnYn != null">
+		  		  DM_RCPTN_YN = #{dmRcptnYn} ,
+		  		</if>
+		  		<if test="delYn != null">
+		  		  DEL_YN = #{delYn} ,
+		  		</if>
+		  		  UPD_DATE = SYSDATE ,
+		  		  UPD_USER = #{custId}
+		 WHERE
+		 		CUST_ID = #{custId}
+		 	AND SITE_CODE = #{siteCode}
+	</update>
+	
+	<!-- 회원정보 수정 제휴 사이트 추가 및 삭제 -->
+	<update id="mergeMemberSiteInfo" parameterType="com.eland.ngoc.member.model.CustSiteInfo">
+		MERGE /* com.eland.ngoc.member.dao.MemberDao.mergeMemberSiteInfo  */
+			INTO OC_CUST_SITE_INFO SI1
+				USING (SELECT CUST_ID 
+						 FROM OC_CUST_SITE_INFO
+						WHERE CUST_ID = #{custId}
+							  AND SITE_CODE = #{siteCode}) SI2
+				ON (SI1.CUST_ID = SI2.CUST_ID)
+			WHEN MATCHED THEN
+				UPDATE 
+					SET
+				  		<if test="emailRcptnYn != null">
+				  		  EMAIL_RCPTN_YN = #{emailRcptnYn} ,
+				  		</if>
+				  		<if test="smsRcptnYn != null">
+				  		  SMS_RCPTN_YN = #{smsRcptnYn} ,
+				  		</if>
+				  		<if test="dmRcptnYn != null">
+				  		  DM_RCPTN_YN = #{dmRcptnYn} ,
+				  		</if>
+				  		<if test="delYn != null">
+				  		  DEL_YN = #{delYn} ,
+				  		</if>
+				  		  UPD_DATE = SYSDATE ,
+				  		  UPD_USER = #{custId}
+				 WHERE
+				 		CUST_ID = #{custId}
+				 	AND SITE_CODE = #{siteCode}
+			WHEN NOT MATCHED THEN
+				INSERT (CUST_ID
+		   				, SITE_CODE
+		   				, EMAIL_RCPTN_YN
+		   				, SMS_RCPTN_YN
+		   				, DM_RCPTN_YN
+		   				, DEL_YN
+		   				, INS_DATE
+		   				, INS_USER
+		   				, UPD_DATE
+		   				, UPD_USER) 
+				VALUES (  #{custId}
+						, #{siteCode}
+						, #{emailRcptnYn}
+						, #{smsRcptnYn}
+						, #{dmRcptnYn}
+						, #{delYn}
+						, SYSDATE
+						, #{custId}
+						, SYSDATE
+						, #{custId} 
+					   )
+	</update>
+	
+	<!-- 자동로그인 토큰 추가 -->
+	<insert id="insertAutoLoginToken" parameterType="com.eland.ngoc.member.model.AutoLoginToken">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertAutoLoginToken  */ 
+		  INTO OC_AUTO_LOGIN_TOKEN (
+   			 	  AL_UID
+   			    , LOGIN_TOKEN
+   			    , WEB_ID
+   			    , EXPR_DATE
+   			    , INS_DATE
+   			    , UPD_DATE) 
+		VALUES (  #{alUid}
+				, #{loginToken}
+				, #{webId}
+		 		, SYSDATE + 90
+		 		, SYSDATE
+				, SYSDATE)
+	</insert>
+	
+	<!-- 자동 로그인 토큰 업데이트 -->
+	<update id="updateAutoLoginToken" parameterType="com.eland.ngoc.member.model.AutoLoginToken">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.udpateAutoLoginToken  */
+				OC_AUTO_LOGIN_TOKEN 
+		   SET
+		   		LOGIN_TOKEN = #{loginToken}
+			  , EXPR_DATE = SYSDATE + 90
+			  , UPD_DATE = SYSDATE
+		 WHERE WEB_ID = #{webId}
+		   AND AL_UID = #{alUid}
+	</update>
+	
+	<!-- 자동 로그인 토큰 삭제 -->
+		<delete id="deleteAutoLoginToken" parameterType="String">
+			DELETE /* com.eland.ngoc.member.dao.MemberDao.deleteAutoLoginToken */
+			  FROM OC_AUTO_LOGIN_TOKEN
+			 WHERE WEB_ID = #{webId}
+		</delete>
+		
+	
+	<!-- 자동 로그인 토큰 조회 -->
+	<select id="selectAutoLoginToken" parameterType="map" resultType="com.eland.ngoc.member.model.AutoLoginToken">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectAutoLoginToken  */
+				  AL_UID				AS alUid
+				, LOGIN_TOKEN			AS loginToken
+				, WEB_ID				AS webId
+				, EXPR_DATE				AS exprDate
+				, INS_DATE				AS insDate
+				, UPD_DATE				AS updDate
+		  FROM OC_AUTO_LOGIN_TOKEN
+		 WHERE EXPR_DATE &gt; SYSDATE
+		   AND AL_UID = #{alUid}
+		   <if test="loginToken != null">
+			   AND LOGIN_TOKEN = #{loginToken}
+		   </if>
+	</select>
+	
+	<!-- 최종 로그인 날짜, 사이트코드 저장 -->
+	<insert id="insertLastLoginHistory" parameterType="map">
+		INSERT /* com.eland.ngoc.member.dao.MemberDao.insertLastLogin  */ 
+		  INTO OC_CUST_LAST_LOGIN (
+		  		  CUST_ID
+		  		, LAST_LOGIN_DTM
+		  		, LOGIN_SITE_CODE)
+		VALUES (  #{custId}
+				, SYSDATE	
+				, #{siteCode})
+	</insert>
+	
+	<!-- 최종 로그인 날짜, 사이트코드 수정 -->
+	<update id="updateLastLoginHistory" parameterType="map">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updateLastLogin  */
+				OC_CUST_LAST_LOGIN
+		   SET  LAST_LOGIN_DTM = SYSDATE
+		   	  , LOGIN_SITE_CODE = #{siteCode}
+		 WHERE CUST_ID = #{custId} 
+	</update>
+	
+	<!-- 최종 로그인 정보 조회 -->
+	<select id="selectLastLoginHistory" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+		  FROM OC_CUST_LAST_LOGIN
+		 WHERE CUST_ID = #{custId}
+	</select>
+	
+	<!-- 회원 상태 조회 -->
+	<select id="selectCustStateInfo" parameterType="map" resultType="com.eland.ngoc.member.model.CustInfo">
+		SELECT  /* com.eland.ngoc.member.dao.MemberDao.selectCustStateInfo  */
+				CUST_ID
+		      , WEB_ID
+		      , CUST_NAME
+		      , CUST_STAT
+		      , CASE WHEN PWD_CHNG_DATE + 90 &lt; SYSDATE THEN 'Y'
+		             ELSE 'N'
+		             END AS longTermPwdYn
+		      , DECODE(TEMP_PWD_YN, null, 'N', TEMP_PWD_YN) tempPwdYn
+		      , DECODE('30', #{siteCode} , CUST_STAT, CASE CUST_STAT WHEN '10' THEN (CASE WHEN (DECODE((SELECT 1 FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}), null, 0, 1 )) = 0 THEN '80'  
+                                                          						   WHEN (SELECT DEL_YN FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}) = 'N' THEN '10'                  
+                                                          						   ELSE '40'                                                                                                              
+                                                          							END 
+		                                      								  ) 
+		                       								  WHEN '40' THEN (CASE WHEN (DECODE((SELECT 1 FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}), null, 0, 1 )) = 0 THEN '80'
+		                                            							   WHEN (SELECT DEL_YN FROM OC_CUST_SITE_INFO WHERE CUST_ID = #{custId} AND SITE_CODE = #{siteCode}) = 'N' THEN '10'                  
+		                                            							   ELSE '40'                                                                                                              
+		                                            								END 
+		                                      								  )
+		                      								  ELSE CUST_STAT
+		                      								   END) AS membState
+		FROM OC_CUST_INFO
+		WHERE CUST_ID = #{custId}
+	
+	</select>
+	
+	
+	<!-- 회원비밀번호 변경 연장 -->
+	<update id="updatePwdChangeDate" parameterType="String">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updatePwdChangeDate  */
+				OC_CUST_INFO
+		   SET PWD_CHNG_DATE = SYSDATE
+		 WHERE WEB_ID = #{webId}
+	</update>
+	
+	<!-- 임시 비밀번호 유지 -->
+	<update id="updateTempPwdYn" parameterType="String">
+		UPDATE /* com.eland.ngoc.member.dao.MemberDao.updatePwdChangeDate  */
+				OC_CUST_INFO
+		   SET TEMP_PWD_YN = 'N'
+		 WHERE WEB_ID = #{webId}
+	</update>
+	
+	<!-- pbpId 조회 -->
+	<select id="selectPbpId" parameterType="String" resultType="String">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectPbpId  */
+				PBP_ID
+		  FROM OC_CUST_INFO
+		 WHERE WEB_ID = #{webId}
+		  AND DEL_YN = 'N'
+	</select>
+	
+	<!-- custId로 회원 정보 조회 -->
+	<select id="selectCustInfoByCustId" parameterType="String" resultType="com.eland.ngoc.member.model.CustInfo">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectCustInfoByCustId  */
+				CI.CUST_ID						AS custId
+			  , CI.WEB_ID						AS webId
+			  , CI.WEB_PWD						AS webPwd
+			  , CI.PBP_ID						AS pbpId
+			  , CI.CUST_NAME					AS custName
+			  , CI.CUST_STAT					AS custStat
+			  , CI.INS_SITE_CODE				AS insSiteCode
+			  , CI.PWD_CHNG_DATE				AS pwdChgDate
+			  , CI.MBER_INFO_UPD_DATE			AS mberInfoUpdDate
+			  , CI.DEL_YN						AS delYn
+			  , CI.BFOR_WEB_PWD					AS bforWebPwd
+			  , CI.TEMP_PWD_YN					AS tempPwdYn
+			  , CI.INS_DATE						AS insDate
+			  , CI.INS_USER						AS insUser
+			  , CI.UPD_DATE						AS updDate
+			  , CI.UPD_USER						AS updUser
+		FROM OC_CUST_INFO CI
+		WHERE CI.CUST_ID = #{custId}
+		  AND CI.DEL_YN = 'N'
+	</select>
+	
+	
+	<select id="getCustInfoCnt" parameterType="String" resultType="int">
+		SELECT /* com.eland.ngoc.member.dao.MemberDao.selectCustInfoByCustId  */
+				COUNT(*)
+		  FROM OC_CUST_INFO
+		 WHERE WEB_ID = #{webId} 
+	</select>
+</mapper>

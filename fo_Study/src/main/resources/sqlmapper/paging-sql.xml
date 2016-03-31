@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eland.ngoc.common">
+	<!-- 페이징 시작 쿼리 -->
+	<sql id="beginPage"> 
+		<![CDATA[
+		SELECT b.*
+		FROM   (SELECT ROWNUM NO ,a.*
+    		FROM   (
+	 	]]>
+	</sql>
+
+	<!-- 페이징 마지막 쿼리 -->
+	<sql id="endPage"> 
+		<![CDATA[
+			) a 
+    			WHERE  ROWNUM <= #{endIndex}) b      
+			WHERE  NO >= #{beginIndex}
+	 	]]>
+	</sql>
+
+		
+
+</mapper>
+

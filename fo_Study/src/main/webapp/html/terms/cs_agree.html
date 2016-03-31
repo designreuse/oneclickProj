@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>E-land OneClick</title>
+<link rel="stylesheet" href="../../css/oneclick.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easing.1.3.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<script src="../../js/common.js"></script><!-- 공통 스크립트 -->
+<script src="../../js/jquery.modalLayer.js"></script><!-- 모달팝업 -->
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="header">
+		<div class="topHead">
+			<h1><a href="">E:LAND RETAIL OneClick</a></h1>
+			<div class="gnb">
+				<ul class="gnbList">
+					<li><a href="">이랜드리테일 원클릭 소개</a></li>
+					<li><a href="">약관</a></li>
+					<li><a href="">회원정보</a></li>
+					<li><a href="">고객센터</a></li>
+				</ul>
+			</div>
+			<!-- // gnb -->
+		</div><!-- // topHead -->
+	</div><!-- // header -->
+
+	<div id="container">
+		<div class="lineMap">
+			<div class="path">
+				<span class="home">HOME</span>
+				<span>약관</span>
+				<span class="current">고객상담 동의사항</span>
+			</div>
+		</div><!-- // lineMap -->
+
+		<div class="contentWrap">
+			<div class="sideArea">
+				<h2>약관</h2>
+				<div class="sideMenu">
+					<ul class="menuList">
+						<li class="dep1"><a href="#">이랜드 멤버십 클럽 이용약관</a></li><!-- 메뉴 활성화시 a에 addClass current -->
+						<li class="dep1"><a href="#">온라인 서비스 이용약관</a></li>
+						<li class="dep1"><a href="#">개인정보 취급방침</a></li>
+						<li class="dep1"><a href="#">영상정보처리기기운영, 관리방침</a></li>
+						<li class="dep1"><a href="#" class="current">고객상담 동의사항</a></li>
+						<li class="dep1"><a href="#">입점상담 동의사항</a></li>
+					</ul>
+				</div>
+			</div><!-- // sideArea -->
+			
+			<!-- 컨텐츠 상세 영역 시작 -->
+			<div class="content">
+				<h3>고객상담 동의사항</h3>
+				<div class="txtBox normal">
+					<h4>1.수집목적</h4>
+					<div class="mt5">이랜드리테일은 고객 문의사항, 개선의견 및 불만 접수를 처리하고, 이를 활용하여 고객에게 최적의 서비스를 제공하기 위한 목적으로 개인정보를 수집, 이용하고 있습니다. </div>
+
+					<h4 class="mt15">2.수집항목</h4>
+					<div class="mt5">① 성명 ② 연락처 ③ 이메일 주소 ④ 상담 내용</div>
+
+					<h4 class="mt15">3.이용기간</h4>
+					<div class="mt5">이랜드리테일은 수집된 개인정보는 '상법' 및 ‘전자상거래등에서의 소비자보호에 관한 법률’ 등 관련 법령의 규정에 따라 수집일로부터 3년 동안 보관 후 파기 합니다. 단, 동의를 철회할 경우 고객정보를 요청일에 삭제 및 파기합니다.</div>
+
+					<h4 class="mt15">4.주의사항</h4>
+					<div class="mt5">개인정보의 수집을 원치 않으시면 작성하지 않으셔도 괜찮습니다만 고객상담이 제한될 수 있습니다. 그리고 허위 정보 입력시 회사의 조치 고객은 자신의 정보에 대해 정확성 및 적법성을 보장해야 합니다. 만약 이를 위반하여 타인의 정보를 도용하는 등 각종 방법으로 허위 정보를 입력할 경우 회사는 관계법령에 따라 신고 할 수 있으며 강제 탈퇴를 시킬 수도 있습니다.</div>
+
+				</div><!-- // txtBox -->
+			</div>
+			<!-- // content :: 컨텐츠 상세 영역 끝 -->
+
+		</div><!-- // contentWrap -->
+
+	</div><!-- // container -->
+	
+	<div id="footer">
+		<div class="bnrArea">
+			<div class="familySite">
+				<strong>FAMILY SITE</strong>
+				<div class="slideBnr" id="slider">
+					<button type="button" class="btn_slide prev" id="prev2"><span class="blind">이전</span></button>
+					<div class="slideWrap">
+						<ul class="slideList" id="banner">
+							<li><a href="http://www.elandmall.co.kr" target="_blank">E:LAND RETAIL MALL</a></li>
+							<li><a href="http://www.ecore.co.kr" target="_blank">E&middot;LAND RETAIL</a></li>
+							<li><a href="">FAMILY SITE 1</a></li>
+							<li><a href="">FAMILY SITE 2</a></li>
+						</ul>
+					</div>
+					<button type="button" class="btn_slide next" id="next2"><span class="blind">다음</span></button>
+				</div>
+			</div>
+		</div><!-- // bnrArea -->
+		<div class="footerInfo">
+			<strong class="f_logo">E:LAND RETAIL OneClick</strong>
+			<div class="infoMenu">
+				<ul>
+					<li class="first"><a href="#">서비스이용약관</a></li>
+					<li><a href="#">개인정보취급방침</a></li>
+					<li><a href="#">영상정보처리기기 운영, 관리방침</a></li>
+					<li><a href="#">윤리사무국</a></li>
+					<li><a href="#">사이트맵</a></li>
+				</ul>
+				<address><span class="addr">(주)이랜드리테일 서울 서초구 잠원동 70-2</span> <span>개인정보보호 책임자 : 대표이사 김연배</span></address>
+				<p class="copy">COPYRIGHT &copy;2016 by E.LAND Group All rights reserved.</p>
+			</div><!-- // infoMenu -->
+			<!-- 2016-03-17 수정 -->
+			<div class="customerBox">
+				<div class="tit"><strong>고객센터</strong><span class="f_small">상담시간 오전 9시~오후 6시</span></div>
+				<div class="telBox">
+					<ul>
+						<li><span class="txt">통합몰</span> <span class="tel">1899-9500</span></li>
+						<li><span class="txt">통합홈페이지</span> <span class="tel">1588-0001</span></li>
+					</ul>
+				</div>
+			</div>
+			<!-- // 2016-03-17 수정 -->
+		</div><!-- // footerInfo -->
+	</div><!-- // footer -->
+
+</div><!-- // wrapper -->
+</body>
+</html>
